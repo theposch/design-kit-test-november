@@ -1,0 +1,132 @@
+/* Comments (comments.js), in the viewer's own colours: dark by default, light
+   on body.page-light, purple (#6d4aff) for what's yours and what's on. */
+
+/* the switch, one of the round buttons top left */
+.top-left .comments-switch {
+  position: relative; width: 30px; height: 30px; border-radius: 50%; padding: 0;
+  display: grid; place-items: center; color: rgba(255, 255, 255, .6);
+  background: #15171c; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1);
+  transition: background .3s, color .3s, box-shadow .3s;
+}
+.top-left .comments-switch[aria-checked="true"] { background: #6d4aff; color: #fff; box-shadow: none; }
+body.page-light .top-left .comments-switch:not([aria-checked="true"]) {
+  background: #fff; color: rgba(0, 0, 0, .5); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1), 0 4px 16px rgba(0, 0, 0, .06);
+}
+.cm-count {
+  position: absolute; right: -5px; top: -5px; min-width: 16px; height: 16px; padding: 0 4px;
+  border-radius: 8px; display: grid; place-items: center;
+  font-size: 10px; font-weight: 700; line-height: 1; color: #fff; background: #6d4aff;
+}
+.comments-switch[aria-checked="true"] .cm-count { background: #fff; color: #6d4aff; }
+.cm-count[hidden] { display: none; }
+@media (max-width: 500px) { html:not(.embed) .top-left .comments-switch { display: grid !important; } }
+
+/* over the phone's screen: off until comment mode */
+.cm-layer { position: absolute; inset: 0; z-index: 5; pointer-events: none; display: none; }
+body.comment-mode .cm-layer { display: block; }
+body.rotated .cm-layer, body.zoom-open .cm-layer { display: none; }
+.cm-catch { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: auto; cursor: crosshair; background: none; }
+.cm-catch:focus-visible { outline: 2px solid #6d4aff; outline-offset: -2px; }
+
+/* a pin: a speech bubble whose point sits on the spot */
+/* (kept the same size however small the phone is drawn: --fit is its scale) */
+.cm-pin {
+  position: absolute; z-index: 1; pointer-events: auto;
+  transform-origin: 0 100%; transform: translate(0, -100%) scale(calc(1 / var(--fit, 1)));
+  width: 30px; height: 30px; padding: 0; border-radius: 15px 15px 15px 2px;
+  display: grid; place-items: center;
+  font-size: 11px; font-weight: 700; letter-spacing: -.02em; color: #fff;
+  background: #15171c; box-shadow: 0 0 0 2px #fff, 0 6px 16px rgba(0, 0, 0, .25);
+  transition: transform .2s cubic-bezier(.22, 1, .36, 1), background .2s;
+  animation: cm-pin-in .35s cubic-bezier(.22, 1, .36, 1);
+}
+.cm-pin:hover { transform: translate(0, -100%) scale(calc(1.08 / var(--fit, 1))); }
+.cm-pin.active { background: #6d4aff; }
+.cm-pin[hidden] { display: none; }
+@keyframes cm-pin-in { from { opacity: 0; transform: translate(0, -80%) scale(calc(.6 / var(--fit, 1))); } }
+
+/* the card */
+.cm-pop {
+  position: fixed; z-index: 450; width: 300px; max-height: min(480px, calc(100vh - 24px));
+  display: flex; flex-direction: column; overflow: hidden;
+  border-radius: 14px; font-size: 13px; line-height: 1.45; color: #fff;
+  background: #1a1c21; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 18px 48px rgba(0, 0, 0, .35);
+  animation: cm-pop-in .25s cubic-bezier(.22, 1, .36, 1);
+}
+.cm-pop[hidden] { display: none; }
+@keyframes cm-pop-in { from { opacity: 0; transform: translateY(4px); } }
+body.page-light .cm-pop { color: #111317; background: #fff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08), 0 18px 48px rgba(0, 0, 0, .14); }
+
+.cm-head { display: flex; align-items: center; gap: 4px; padding: 10px 10px 6px 16px; }
+.cm-head b { flex: 1; font-size: 12px; font-weight: 700; }
+.cm-pop.cm-new .cm-head b::after { content: ' · new'; font-weight: 500; opacity: .5; }
+.cm-head button, .cm-form button, .cm-del {
+  display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border-radius: 50%;
+  color: inherit; opacity: .6; transition: background .2s, opacity .2s;
+}
+.cm-head button:hover { opacity: 1; background: rgba(255, 255, 255, .08); }
+body.page-light .cm-head button:hover { background: rgba(0, 0, 0, .05); }
+.cm-head button[hidden] { display: none; }
+
+.cm-msgs { overflow: hidden auto; padding: 0 16px; }
+.cm-msgs:empty { display: none; }
+.cm-msg { display: grid; grid-template-columns: 24px 1fr; gap: 10px; padding: 8px 0 10px; }
+.cm-msg + .cm-msg { border-top: 1px solid rgba(255, 255, 255, .07); }
+body.page-light .cm-msg + .cm-msg { border-top-color: rgba(0, 0, 0, .06); }
+.cm-av {
+  width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+  font-style: normal; font-size: 9.5px; font-weight: 700; color: #fff; background: #6d4aff;
+}
+.cm-meta { display: flex; align-items: baseline; gap: 6px; }
+.cm-meta b { font-size: 12.5px; font-weight: 700; }
+.cm-meta time { font-size: 11.5px; opacity: .5; }
+.cm-del {
+  width: auto; height: auto; margin-left: auto; padding: 0; border-radius: 0;
+  font-size: 11.5px; opacity: 0; transition: opacity .2s;
+}
+.cm-msg:hover .cm-del, .cm-del:focus-visible { opacity: .55; }
+.cm-del:hover { opacity: 1 !important; }
+.cm-body p { margin: 2px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* reactions: a chip per emoji, yours in purple */
+.cm-reacts { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 6px; }
+.cm-chip {
+  height: 24px; padding: 0 8px; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; color: inherit; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+  transition: background .2s, box-shadow .2s;
+}
+.cm-chip:hover { background: rgba(255, 255, 255, .1); }
+.cm-chip[aria-pressed="true"] { background: rgba(109, 74, 255, .22); box-shadow: inset 0 0 0 1px rgba(150, 125, 255, .6); }
+body.page-light .cm-chip { background: rgba(0, 0, 0, .04); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .07); }
+body.page-light .cm-chip:hover { background: rgba(0, 0, 0, .07); }
+body.page-light .cm-chip[aria-pressed="true"] { background: rgba(109, 74, 255, .1); box-shadow: inset 0 0 0 1px rgba(109, 74, 255, .45); }
+.cm-add { width: 24px; padding: 0; justify-content: center; opacity: .55; }
+.cm-msg:hover .cm-add, .cm-add:focus-visible { opacity: 1; }
+.cm-picker {
+  flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 1px; padding: 3px; margin-top: 2px; border-radius: 12px;
+  background: rgba(255, 255, 255, .06);
+}
+body.page-light .cm-picker { background: rgba(0, 0, 0, .04); }
+.cm-picker button { width: 26px; height: 28px; border-radius: 8px; font-size: 16px; transition: background .15s, transform .15s; }
+.cm-picker button:hover { background: rgba(255, 255, 255, .1); transform: scale(1.12); }
+body.page-light .cm-picker button:hover { background: rgba(0, 0, 0, .06); }
+
+/* writing */
+.cm-form {
+  display: flex; align-items: flex-end; gap: 6px; margin: 8px 10px 10px; padding: 6px 6px 6px 12px; border-radius: 12px;
+  background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
+body.page-light .cm-form { background: rgba(0, 0, 0, .035); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .07); }
+.cm-form:focus-within { box-shadow: inset 0 0 0 1.5px #6d4aff; }
+.cm-form textarea {
+  flex: 1; min-height: 22px; max-height: 120px; padding: 3px 0; border: 0; resize: none;
+  font: inherit; color: inherit; background: none; outline: none;
+}
+.cm-form textarea::placeholder { color: inherit; opacity: .45; }
+.cm-form button { width: 26px; height: 26px; color: #fff; background: #6d4aff; opacity: 1; }
+.cm-form button:disabled { opacity: .3; }
+
+/* on a phone: the card sits along the bottom */
+@media (max-width: 500px) {
+  .cm-pop { left: 8px !important; right: 8px; top: auto !important; bottom: 8px; width: auto; max-height: 60vh; }
+}

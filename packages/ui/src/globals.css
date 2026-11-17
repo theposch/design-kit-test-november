@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/geist';
+
+@import './theme/breakpoints.css';
+@import './theme/effects.css';
+@import './theme/font.css';
+@import './theme/motion.css';
+@import './theme/palette.css';
+@import './theme/radii.css';
+@import './theme/scrollbar.css';
+@import './theme/spacing.css';
+@import './theme/typography.css';
+
+/*
+ * Re-points Tailwind's built-in media-query `dark:` variant at the `.dark`
+ * class so the one mode switch drives everything. Components never use it —
+ * `dark:` is lint-banned there; modes live at the token level (palette.css).
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Redefines `hover:` so a disabled control never reacts to the pointer, in
+ * every component at once instead of each one remembering. The `(hover:
+ * hover)` guard matches Tailwind's default: touch screens get no sticky hover.
+ * The guard sits in `:where()` so it adds no specificity: hover must stay as
+ * weak as Tailwind's own, or it beats state classes like `data-pressed:`.
+ */
+@custom-variant hover {
+  @media (hover: hover) {
+    &:hover:where(:not(:disabled, [data-disabled], [aria-disabled='true'])) {
+      @slot;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  /*
+   * `isolation: isolate` gives Base UI's portaled popups (dialogs, menus,
+   * tooltips) a stacking context above the page, so no consumer `z-index`
+   * can land on top of them.
+   */
+  body {
+    @apply bg-background text-foreground;
+    isolation: isolate;
+  }
+  /*
+   * Grayscale smoothing matches how design tools draw type on macOS; without it
+   * text renders a weight heavier. No synthesis: a brand font missing a weight
+   * shows up in review instead of being faked. A word too long for its column
+   * (a translated compound, a URL) breaks instead of spilling out of it.
+   */
+  html {
+    @apply font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis-weight: none;
+    overflow-wrap: break-word;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}

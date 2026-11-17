@@ -1,0 +1,61 @@
+name: Explorations
+
+# Explorations are verified and deployed in isolation from the library
+# pipeline (docs/adr/0007): this workflow only runs when explorations
+# change, builds only the ones that changed, and deploys them to Metalab
+# Sites on push to main.
+on:
+  push:
+    branches: [main]
+    paths: ['explorations/**']
+  pull_request:
+    paths: ['explorations/**']
+
+jobs:
+  explorations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Full history so turbo's changed-since filter can diff any ref.
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: actions/cache@v6
+        with:
+          path: .turbo/cache
+          key: turbo-explorations-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-explorations-${{ runner.os }}-
+
+      # The changed-since ref: the PR base branch, or the pre-push SHA on
+      # main (all zeros on a brand-new branch — fall back one commit).
+      - id: since
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "ref=origin/${{ github.base_ref }}" >> "$GITHUB_OUTPUT"
+          elif echo "${{ github.event.before }}" | grep -qE '^0+$'; then
+            echo "ref=HEAD^" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=${{ github.event.before }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      # typecheck only runs for explorations that define the script.
+      - run: pnpm turbo run build typecheck --filter='{./explorations/*}[${{ steps.since.outputs.ref }}]'
+
+      - if: github.event_name == 'push'
+        run: curl https://sites.metalab.com/install.sh | sh
+
+      - if: github.event_name == 'push'
+        env:
+          SITES_TOKEN: ${{ secrets.SITES_PROJECT_TOKEN }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          node scripts/explorations/ci-deploy.mjs '${{ steps.since.outputs.ref }}'

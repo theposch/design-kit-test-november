@@ -1,0 +1,97 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cover</title>
+    <style>
+      body {
+        margin: 0;
+        background: var(--background);
+        font-family: var(--body-font);
+      }
+      .wrap {
+        position: relative;
+        width: 960px;
+        height: 288px;
+        overflow: hidden;
+        background: var(--background);
+      }
+      .primary {
+        fill: var(--primary);
+      }
+      .secondary {
+        fill: var(--secondary);
+      }
+      .ink {
+        fill: var(--foreground);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .line {
+        fill: none;
+        stroke: var(--border);
+        stroke-width: 1;
+      }
+      .tile {
+        rx: var(--radius-lg);
+      }
+      .card {
+        rx: var(--radius-xl);
+      }
+      .pill {
+        rx: 12px;
+      }
+      .name {
+        position: absolute;
+        left: 40px;
+        bottom: 64px;
+        max-width: 440px;
+        margin: 0;
+        font-size: 64px;
+        line-height: 0.95;
+        font-weight: var(--heading-weight);
+        letter-spacing: -0.02em;
+        color: var(--foreground);
+      }
+      .tag {
+        position: absolute;
+        left: 40px;
+        bottom: 36px;
+        max-width: 440px;
+        margin: 0;
+        font-size: 14px;
+        color: var(--muted-foreground);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <svg
+        width="960"
+        height="288"
+        viewBox="0 0 960 288"
+        aria-hidden="true"
+        style="position: absolute; inset: 0"
+      >
+        <!-- blocks: primary 200×136, secondary 136×112, foreground 112×104, muted card 240×88 (radius-xl, radius-lg)
+     arrangement: modular grid of components, bleeding off the top and right
+     pattern: geometric, modular, dense UI -> control-shaped tiles (button 120×40, inputs, a switch pill) cut by the radius tokens
+     steps: 8px grid (gaps 16, 24), radii radius-lg 10, radius-xl 14, pill 12 -->
+        <rect class="card secondary" x="520" y="-14" width="200" height="136" />
+        <rect class="card primary" x="736" y="-14" width="240" height="136" />
+        <rect class="tile ink" x="520" y="138" width="112" height="104" />
+        <rect class="card muted" x="648" y="138" width="328" height="104" />
+        <rect class="tile primary" x="672" y="162" width="120" height="40" />
+        <rect class="tile secondary" x="808" y="162" width="152" height="40" />
+        <rect class="pill primary" x="672" y="214" width="40" height="24" />
+        <rect class="pill secondary" x="720" y="214" width="40" height="24" />
+        <rect class="tile secondary" x="544" y="40" width="152" height="40" />
+        <line class="line" x1="520" y1="258" x2="960" y2="258" />
+      </svg>
+      <p class="name">{{title}}</p>
+      <p class="tag">MetaLab's real components, straight from code.</p>
+    </div>
+  </body>
+</html>

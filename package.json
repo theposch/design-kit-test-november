@@ -1,0 +1,64 @@
+{
+  "name": "zero-design-kit",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.4",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.15",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^10.33",
+      "onFail": "error"
+    }
+  },
+  "scripts": {
+    "build": "turbo run build --filter='!@explorations/*'",
+    "dev": "turbo run dev --filter='!@explorations/*'",
+    "lint": "turbo run lint --filter='!@explorations/*'",
+    "typecheck": "turbo run typecheck --filter='!@explorations/*'",
+    "test": "turbo run test --filter='!@explorations/*'",
+    "storybook": "turbo run storybook",
+    "addon": "node scripts/addon/cli.mjs",
+    "test:addons": "node --test 'scripts/addon/*.test.mjs'",
+    "starter": "node scripts/starter/cli.mjs",
+    "test:starter": "node --test 'scripts/starter/*.test.mjs'",
+    "palette:convert": "pnpm --filter @repo/ui palette:convert",
+    "tokens": "pnpm --filter @repo/ui tokens",
+    "guide": "pnpm --filter @repo/ui guide",
+    "template": "node scripts/templates/copy.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky",
+    "design:build": "pnpm --filter @repo/ui design:build",
+    "design:vqa": "pnpm --filter @repo/ui design:vqa",
+    "new-exploration": "node scripts/explorations/new.mjs",
+    "publish-exploration": "node scripts/explorations/publish.mjs",
+    "figma:audit": "pnpm --filter @repo/ui figma:audit",
+    "figma:compare": "pnpm --filter @repo/ui figma:compare",
+    "figma:health": "pnpm --filter @repo/ui figma:health",
+    "figma:screen": "pnpm --filter @repo/ui figma:screen",
+    "figma:snapshot": "pnpm --filter @repo/ui figma:snapshot",
+    "figma:survey": "pnpm --filter @repo/ui figma:survey",
+    "notebook": "node scripts/notebook/find.mjs",
+    "new-prototype": "node scripts/prototypes/new.mjs",
+    "present": "node scripts/prototypes/present.mjs",
+    "taste:shots": "pnpm --filter @repo/ui taste:shots",
+    "look:save": "pnpm --filter @repo/ui look:save",
+    "look:compare": "pnpm --filter @repo/ui look:compare",
+    "look:accept": "pnpm --filter @repo/ui look:accept"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "husky": "^9.1.7",
+    "prettier": "^3.9.10",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "turbo": "^2.11.10",
+    "typescript": "catalog:"
+  }
+}

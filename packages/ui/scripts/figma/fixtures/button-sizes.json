@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "schemaVersion": 3,
+    "slug": "button-sizes",
+    "fileName": "Hand-written test snapshot of the starter's Button sizes",
+    "extractedAt": "2026-11-08T00:00:00Z",
+    "nodes": ["1:1"]
+  },
+  "tokens": {},
+  "warnings": [],
+  "sets": [],
+  "nodes": [
+    {
+      "id": "1:1",
+      "name": "Sizes",
+      "tree": {
+        "name": "Sizes",
+        "type": "FRAME",
+        "w": 253,
+        "h": 48,
+        "sizing": "HUG/HUG",
+        "layout": {
+          "dir": "HORIZONTAL",
+          "gap": 12,
+          "pad": "0,0,0,0",
+          "main": "MIN",
+          "cross": "CENTER"
+        },
+        "children": [
+          {
+            "name": "Small",
+            "type": "INSTANCE",
+            "w": 58,
+            "h": 32,
+            "sizing": "HUG/FIXED",
+            "layout": {
+              "dir": "HORIZONTAL",
+              "gap": 8,
+              "pad": "0,12,0,12",
+              "main": "CENTER",
+              "cross": "CENTER"
+            },
+            "fill": {
+              "token": "Background/Primary",
+              "hex": "#3a5bd9"
+            },
+            "radius": 10,
+            "children": [
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "w": 33,
+                "h": 18,
+                "sizing": "HUG/HUG",
+                "fill": {
+                  "token": "Content/Primary Foreground",
+                  "hex": "#fafafa"
+                },
+                "text": {
+                  "chars": "Small",
+                  "size": 12,
+                  "weight": 500,
+                  "style": "Label/Extra Small",
+                  "lineHeight": "16px"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Medium",
+            "type": "INSTANCE",
+            "w": 86,
+            "h": 40,
+            "sizing": "HUG/FIXED",
+            "layout": {
+              "dir": "HORIZONTAL",
+              "gap": 8,
+              "pad": "0,16,0,16",
+              "main": "CENTER",
+              "cross": "CENTER"
+            },
+            "fill": {
+              "token": "Background/Primary",
+              "hex": "#3a5bd9"
+            },
+            "radius": 10,
+            "children": [
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "w": 53,
+                "h": 21,
+                "sizing": "HUG/HUG",
+                "fill": {
+                  "token": "Content/Primary Foreground",
+                  "hex": "#fafafa"
+                },
+                "text": {
+                  "chars": "Medium",
+                  "size": 14,
+                  "weight": 500,
+                  "style": "Label/Small",
+                  "lineHeight": "20px"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Large",
+            "type": "INSTANCE",
+            "w": 85,
+            "h": 48,
+            "sizing": "HUG/FIXED",
+            "layout": {
+              "dir": "HORIZONTAL",
+              "gap": 8,
+              "pad": "0,20,0,20",
+              "main": "CENTER",
+              "cross": "CENTER"
+            },
+            "fill": {
+              "token": "Background/Primary",
+              "hex": "#3a5bd9"
+            },
+            "radius": 10,
+            "children": [
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "w": 44,
+                "h": 24,
+                "sizing": "HUG/HUG",
+                "fill": {
+                  "token": "Content/Primary Foreground",
+                  "hex": "#fafafa"
+                },
+                "text": {
+                  "chars": "Large",
+                  "size": 16,
+                  "weight": 500,
+                  "style": "Label/Base",
+                  "lineHeight": "24px"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

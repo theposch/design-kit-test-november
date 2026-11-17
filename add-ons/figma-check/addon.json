@@ -1,0 +1,148 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "figma-check",
+  "type": "registry:item",
+  "title": "Figma check",
+  "description": "Shared Figma tools: snapshot a component from Figma, check the built story against it layer by layer in light and dark, and put the two side by side.",
+  "author": "MetaLab",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "files/.claude/skills/figma-check/SKILL.md",
+      "type": "registry:file",
+      "target": ".claude/skills/figma-check/SKILL.md"
+    },
+    {
+      "path": "files/.claude/skills/figma-check/setup.md",
+      "type": "registry:file",
+      "target": ".claude/skills/figma-check/setup.md"
+    },
+    {
+      "path": "files/.claude/skills/figma-check/reference.md",
+      "type": "registry:file",
+      "target": ".claude/skills/figma-check/reference.md"
+    },
+    {
+      "path": "files/.claude/skills/figma-check/extract.js",
+      "type": "registry:file",
+      "target": ".claude/skills/figma-check/extract.js"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/lib.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/lib.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/audit.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/audit.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/compare.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/compare.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/snapshot.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/snapshot.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/lib.test.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/lib.test.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/audit.test.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/audit.test.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/extract.test.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/extract.test.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/fixtures/button-sizes.json",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/fixtures/button-sizes.json"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/fixtures/button-sizes.map.json",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/fixtures/button-sizes.map.json"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/fixtures/figma.json",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/fixtures/figma.json"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/screens.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/screens.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/screens-lib.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/screens-lib.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/figma/screens-lib.test.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/figma/screens-lib.test.mjs"
+    },
+    {
+      "path": "files/figma.json",
+      "type": "registry:file",
+      "target": "figma.json",
+      "project": true
+    }
+  ],
+  "meta": {
+    "version": "1.4.0",
+    "owner": "Christian Poschmann",
+    "packageJson": [
+      {
+        "file": "package.json",
+        "scripts": {
+          "figma:audit": "pnpm --filter @repo/ui figma:audit",
+          "figma:compare": "pnpm --filter @repo/ui figma:compare",
+          "figma:health": "pnpm --filter @repo/ui figma:health",
+          "figma:screen": "pnpm --filter @repo/ui figma:screen",
+          "figma:snapshot": "pnpm --filter @repo/ui figma:snapshot",
+          "figma:survey": "pnpm --filter @repo/ui figma:survey"
+        }
+      },
+      {
+        "file": "packages/ui/package.json",
+        "scripts": {
+          "figma:audit": "node scripts/figma/audit.mjs",
+          "figma:compare": "node scripts/figma/compare.mjs",
+          "figma:snapshot": "node scripts/figma/snapshot.mjs",
+          "test:figma": "node --test 'scripts/figma/*.test.mjs'",
+          "figma:health": "node scripts/figma/screens.mjs health",
+          "figma:screen": "node scripts/figma/screens.mjs check",
+          "figma:survey": "node scripts/figma/screens.mjs survey"
+        },
+        "devDependencies": {
+          "pixelmatch": "^8.0.0",
+          "pngjs": "^7.0.0"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "file": ".gitignore",
+        "comment": "#",
+        "content": ".figma/"
+      },
+      {
+        "file": "CLAUDE.md",
+        "after": "pnpm format      # prettier --write (owns ALL formatting, .tsx included)",
+        "comment": "#",
+        "content": "pnpm figma:snapshot <slug> <file>  # save an extractor run as figma/specs/<slug>.json\npnpm figma:audit <slug>     # check a story against its Figma snapshot, every layer, light and dark\npnpm figma:compare <story>  # Figma picture, code and the differences side by side\npnpm figma:health <slug>   # how tidy a Figma file is (tokens, styles, auto-layout)\npnpm figma:survey <slug>…  # the grid a set of screens follows\npnpm figma:screen <slug>   # a built screen against its frame, at every phone width\n"
+      }
+    ]
+  }
+}

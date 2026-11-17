@@ -1,0 +1,7 @@
+# Components render what they are given; containers own footprint
+
+No hand-authored component carries a `size` prop, with one exception below. A component shows the content whose props it received — pass a `subtitle` and it renders — and it fills whatever box the consumer puts it in. Layout (grid columns, widths, spans) is entirely the consumer's: a featured card is a card in a bigger cell, not a card told it is featured. Size ladders couple two axes that belong to different owners — what a component shows (its props) and how much room it gets (the consumer's layout) — and the glue code needed to rejoin them is pure overhead.
+
+A future component that seems to want a `size` prop is either hiding a presence decision (pass less, get less) or a layout decision (give it a smaller cell) — split it into those before reaching for an enum. Where a "size" would select a real rendering mode, make that mode an explicit, named prop instead.
+
+The exception is interactive controls — Button, inputs, selects, and their kin. Control height is neither a presence decision nor a layout decision: a compact toolbar button and a hero call-to-action show the same content in the same cell and still must differ. Controls may carry a control-height ladder whose values are decided per component (`sm`/`md`/`lg` on Button; `xs` or `xl` only where a component earns them), and the ladder never leaks into non-control components.

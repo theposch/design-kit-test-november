@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "project-notebook",
+  "type": "registry:item",
+  "title": "Project notebook",
+  "description": "Points Claude at this project's notebook (brief, decisions, client feedback, open questions), kept on the computer outside the repo by the project-notebook skill.",
+  "author": "MetaLab",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "files/scripts/notebook/find.mjs",
+      "type": "registry:file",
+      "target": "scripts/notebook/find.mjs"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann",
+    "packageJson": [
+      {
+        "file": "package.json",
+        "scripts": {
+          "notebook": "node scripts/notebook/find.mjs"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "file": "CLAUDE.md",
+        "after": "pnpm format      # prettier --write (owns ALL formatting, .tsx included)",
+        "comment": "#",
+        "content": "pnpm notebook      # where this project's notebook is, if this computer has one\n"
+      },
+      {
+        "file": "CLAUDE.md",
+        "comment": "html",
+        "content": "## Project notebook\n\nWhat we know about the client project (brief, people, decisions, client feedback, open questions) lives in a notebook on the computer, outside this repo, kept up to date from calls and Slack by the `project-notebook` skill. Not everyone has one.\n\n- Before planning product or design work, run `pnpm notebook`. If it finds one, read `brief.md` and `decisions.md`, and `open-questions.md` or `feedback.md` when the work touches them.\n- Refer to decisions by ID (D-014) when they shape the work, and flag work that goes against an active decision instead of quietly overriding it.\n- Never copy notebook content into this repo (code, comments, docs, stories, commits): it holds internal client talk.\n- When something gets decided in a session, offer to note it in the notebook."
+      }
+    ]
+  }
+}

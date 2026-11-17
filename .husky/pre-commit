@@ -1,0 +1,7 @@
+export PATH="${MISE_DATA_DIR:-$HOME/.local/share/mise}/shims:$PATH"
+# Explorations are exempt from library gates (docs/adr/0007).
+pnpm turbo run typecheck lint --filter='!@explorations/*' || exit 1
+# Format check on the files being committed only: a draft you haven't added
+# shouldn't block someone else's commit.
+git diff --cached --name-only --diff-filter=ACMR -z \
+  | xargs -0 -r pnpm exec prettier --check --ignore-unknown --no-error-on-unmatched-pattern

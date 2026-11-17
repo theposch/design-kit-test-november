@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Overview" />
+
+# zero-design-kit
+
+A component library that designers author directly in code. This Storybook is
+the workshop: every component's Story is simultaneously its preview, its
+documentation, and its test.
+
+## Component tiers
+
+Components live in `src/components/`, organized by tier:
+
+| Tier          | What it is                                                                                         |
+| ------------- | -------------------------------------------------------------------------------------------------- |
+| **Atoms**     | The smallest hand-authored components — native markup, or a single Base UI component styled        |
+| **Molecules** | Reusable compositions of Atoms and/or other Molecules                                              |
+| **Organisms** | Complex, distinct areas of the interface; the only tier that may hold app-specific logic and state |
+
+What promotes a component to Organism is app coupling, not composition depth.
+There is no wrapper tier — shared behavior lives in `src/hooks/` or in the
+consuming app. Interactive behavior and accessibility come from Base UI; Atoms
+wrap every part of a Base UI component and export one namespace
+(`Dialog.Root`, `Dialog.Trigger`, …), so consumers never import Base UI
+directly.
+
+## Styling
+
+Components style themselves exclusively with semantic Tokens (`bg-primary`,
+`rounded-lg`, `type-body-base`, …) — never raw values. Light and dark Modes
+exist only at the token level, so components are mode-blind; use the theme
+switcher in the toolbar above to exercise both.
+
+## Stories are the tests
+
+`pnpm test` runs every Story headless in Chromium, including play functions
+and accessibility checks (a11y violations fail the run). A component without
+a Story has zero coverage — a co-located `*.stories.tsx` is part of the
+definition of done.

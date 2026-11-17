@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "screencast",
+  "type": "registry:item",
+  "title": "Screencasts",
+  "description": "A Claude skill that records short narrated walkthroughs of Storybook, the app or the terminal.",
+  "author": "MetaLab",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "files/.claude/skills/screencast/SKILL.md",
+      "type": "registry:file",
+      "target": ".claude/skills/screencast/SKILL.md"
+    },
+    {
+      "path": "files/.claude/skills/screencast/assets/film-helpers.mjs",
+      "type": "registry:file",
+      "target": ".claude/skills/screencast/assets/film-helpers.mjs"
+    },
+    {
+      "path": "files/.claude/skills/screencast/assets/terminal.html",
+      "type": "registry:file",
+      "target": ".claude/skills/screencast/assets/terminal.html"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

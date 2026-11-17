@@ -1,0 +1,11 @@
+/*
+ * Hides a scroll container's scrollbar without disabling scrolling — for
+ * surfaces that hint scrollability another way (e.g. edge fades).
+ */
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "extends": "@repo/typescript-config/react.json",
+  "compilerOptions": {
+    // @repo/ui ships source-only, so this app's tsc compiles its .tsx too — and
+    // TS won't extension-probe the wildcard targets in the ui package.json
+    // `imports` the way Vite/Node do. Mirror the `#` aliases here (as the ui
+    // package does for itself) so the library source typechecks from this side.
+    "paths": {
+      "#lib/*": ["../../packages/ui/src/lib/*"],
+      "#components/*": ["../../packages/ui/src/components/*"],
+      "#hooks/*": ["../../packages/ui/src/hooks/*"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}

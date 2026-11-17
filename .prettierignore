@@ -1,0 +1,16 @@
+pnpm-lock.yaml
+dist/
+storybook-static/
+.turbo/
+
+# Vendored agent skills — not our source to format.
+.claude/
+
+# Add-on catalog copies are checked against their installed copies instead
+# (pnpm addon check), which are formatted where they live.
+add-ons/*/files/
+
+# addon:explorations
+# Explorations are convention-exempt (docs/adr/0007).
+explorations/
+# /addon:explorations

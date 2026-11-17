@@ -1,0 +1,11 @@
+/* Mobile V.1: the flow on the phone, with square-cornered buttons */
+
+/* landing: round tiles, a floating tab bar */
+html[data-set="v2"] .tile-img { border-radius: 50%; }
+html[data-set="v2"] .tile { align-items: center; }
+html[data-set="v2"] .tabbar { left: 20px !important; right: 20px !important; bottom: 22px !important; height: 64px !important; padding-top: 12px !important;
+  border-radius: 32px; border: 0 !important; box-shadow: 0 10px 30px rgba(0, 0, 0, .3); }
+
+/* buttons: rounded squares — the header buttons, the gallery close, "View all" */
+html[data-set="v2"] .a-save, html[data-set="v2"] .a-close, html[data-set="v2"] .a-more, html[data-set="v2"] .fs-close { border-radius: 14px !important; }
+html[data-set="v2"] .view-all { border-radius: 14px !important; }

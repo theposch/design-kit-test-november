@@ -1,0 +1,67 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "taste-review",
+  "type": "registry:item",
+  "title": "Taste review",
+  "description": "A second, fresh Claude critiques a screen from pictures alone (hierarchy, spacing, alignment, type, colour) before a person sees it, and the builder fixes what it found.",
+  "author": "MetaLab",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "files/.claude/skills/taste-review/SKILL.md",
+      "type": "registry:file",
+      "target": ".claude/skills/taste-review/SKILL.md"
+    },
+    {
+      "path": "files/.claude/skills/taste-review/rubric.md",
+      "type": "registry:file",
+      "target": ".claude/skills/taste-review/rubric.md"
+    },
+    {
+      "path": "files/packages/ui/scripts/taste.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/taste.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/taste.test.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/taste.test.mjs"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann",
+    "packageJson": [
+      {
+        "file": "package.json",
+        "scripts": {
+          "taste:shots": "pnpm --filter @repo/ui taste:shots"
+        }
+      },
+      {
+        "file": "packages/ui/package.json",
+        "scripts": {
+          "taste:shots": "node scripts/taste.mjs"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "file": ".gitignore",
+        "comment": "#",
+        "content": ".taste/"
+      },
+      {
+        "file": "CLAUDE.md",
+        "after": "pnpm format      # prettier --write (owns ALL formatting, .tsx included)",
+        "comment": "#",
+        "content": "pnpm taste:shots <story|url>  # photograph a screen (light + dark, every project size) for a taste review\n"
+      },
+      {
+        "file": "CLAUDE.md",
+        "comment": "html",
+        "content": "## Taste review\n\nBefore a screen, page template or prototype goes in front of a designer or a client, a second Claude that hasn't seen it being built looks at pictures of it and critiques the craft: hierarchy, spacing, alignment, type, colour. Load the `taste-review` skill.\n\n- `pnpm taste:shots <story or address>` photographs the screen in light and dark at the project's screen sizes, into `packages/ui/.taste/`.\n- The reviewer is always a fresh agent, given only the pictures, the rubric and one line on what the screen is for. Never the code or the builder's reasoning.\n- Fix what it marks `must fix` and `should fix` with tokens and existing components, photograph again, and stop after two rounds. This file wins over the reviewer.\n- The rubric (`.claude/skills/taste-review/rubric.md`) is a general starting list. The team's own craft rules replace or extend it."
+      }
+    ]
+  }
+}

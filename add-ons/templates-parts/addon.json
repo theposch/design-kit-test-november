@@ -1,0 +1,50 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-parts",
+  "type": "registry:item",
+  "title": "Template parts",
+  "description": "Shared pieces the page templates use: demo images, form fields, the \"or\" divider, sample data and screen-size hooks.",
+  "author": "MetaLab",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/parts/DemoImage.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/parts/DemoImage.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/parts/FormFields.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/parts/FormFields.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/parts/OrDivider.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/parts/OrDivider.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/parts/catalogue.ts",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/parts/catalogue.ts"
+    },
+    {
+      "path": "files/packages/ui/src/templates/parts/formData.ts",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/parts/formData.ts"
+    },
+    {
+      "path": "files/packages/ui/src/templates/parts/useShortcut.ts",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/parts/useShortcut.ts"
+    },
+    {
+      "path": "files/packages/ui/src/templates/parts/useWideScreen.ts",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/parts/useWideScreen.ts"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

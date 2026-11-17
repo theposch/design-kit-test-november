@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-commerce",
+  "type": "registry:item",
+  "title": "Commerce templates",
+  "description": "Shop pages: checkout and product detail.",
+  "author": "MetaLab",
+  "registryDependencies": ["templates-parts"],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/Checkout.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/Checkout.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/Checkout.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/Checkout.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/ProductDetail.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/ProductDetail.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/ProductDetail.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/ProductDetail.stories.tsx"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

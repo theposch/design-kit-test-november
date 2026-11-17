@@ -1,0 +1,129 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    # `closed` only feeds the preview-cleanup job; the rest are the defaults,
+    # which an explicit list would otherwise drop.
+    types: [opened, synchronize, reopened, closed]
+
+# A newer push to a PR supersedes the in-flight run — and its preview deploy,
+# which would otherwise race to overwrite the newer one. Main runs each get
+# their own group and are never cancelled, so the canonical deploy always
+# lands.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  ci:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Turbo task cache, keyed per-commit: exact key never hits twice, so
+      # every run restores the nearest previous cache (restore-keys) and
+      # saves its own, letting unchanged tasks replay instead of re-running.
+      - uses: actions/cache@v6
+        with:
+          path: .turbo/cache
+          key: turbo-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-${{ runner.os }}-
+
+      - run: curl https://sites.metalab.com/install.sh | sh
+
+      # The Storybook build runs ahead of the gate so a PR gets its preview
+      # even while lint or tests are red (docs/adr/0008); turbo replays the
+      # cached build when the gate runs it again below. Preview steps never
+      # fail the run — the required check is about the code, not Sites.
+      - run: pnpm turbo run build --filter=@repo/ui
+
+      - id: preview
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        env:
+          SITES_TOKEN: ${{ secrets.SITES_PROJECT_TOKEN }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          node scripts/deploy-storybook.mjs --pr ${{ github.event.pull_request.number }}
+
+      - if: steps.preview.outputs.deployed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/preview-comment.mjs --pr ${{ github.event.pull_request.number }} --deployed ${{ github.event.pull_request.head.sha }}
+
+      # Chromium for the ui package's Vitest browser-mode story tests.
+      # The ~300MB of browser binaries are cached by Playwright version;
+      # the apt packages (install-deps) can't be cached and run either way.
+      - id: playwright-version
+        run: echo "version=$(pnpm --filter @repo/ui exec playwright --version | cut -d' ' -f2)" >> "$GITHUB_OUTPUT"
+
+      - id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      - if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm --filter @repo/ui exec playwright install chromium --with-deps
+
+      - if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm --filter @repo/ui exec playwright install-deps chromium
+
+      # Explorations are exempt from library gates and have their own
+      # path-filtered workflow (docs/adr/0007).
+      - run: pnpm turbo run lint typecheck test build --filter='!@explorations/*'
+
+      # Every add-on must come out and go back in cleanly, and installed
+      # copies must match the catalog (docs/adr/0009).
+      - run: pnpm test:addons && pnpm addon check
+
+      # The core's own update path (docs/adr/0010).
+      - run: pnpm test:starter
+
+      # Pre-commit only checks the files being committed, and can be skipped.
+      - run: pnpm format:check
+
+      # Every green push to main redeploys the library's Storybook to
+      # Metalab Sites (skipped until the engagement wires Sites up).
+      - if: github.event_name == 'push'
+        env:
+          SITES_TOKEN: ${{ secrets.SITES_PROJECT_TOKEN }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          node scripts/deploy-storybook.mjs
+
+  # Previews are CI-owned sites, so CI also retires them (docs/adr/0008).
+  # Checks out main rather than the PR: the scripts are the only thing needed,
+  # and a merged PR's merge ref may already be gone.
+  preview-cleanup:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - run: curl https://sites.metalab.com/install.sh | sh
+
+      - env:
+          SITES_TOKEN: ${{ secrets.SITES_PROJECT_TOKEN }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          node scripts/delete-preview.mjs --pr ${{ github.event.pull_request.number }}
+
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/preview-comment.mjs --pr ${{ github.event.pull_request.number }} --removed

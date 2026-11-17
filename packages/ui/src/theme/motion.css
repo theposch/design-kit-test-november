@@ -1,0 +1,25 @@
+@theme inline {
+  --default-transition-duration: var(--motion-duration-fast);
+  --ease-default: var(--motion-easing-default);
+  --ease-emphasis: var(--motion-easing-emphasis);
+}
+
+@layer base {
+  :root {
+    --motion-duration-fast: 150ms;
+    --motion-duration-normal: 200ms;
+    --motion-duration-slow: 300ms;
+    --motion-hover-duration: var(--motion-duration-fast);
+    --motion-easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --motion-easing-emphasis: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Every transition reads these tokens, so zeroing them honours the OS setting everywhere at once. */
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --motion-duration-fast: 0ms;
+      --motion-duration-normal: 0ms;
+      --motion-duration-slow: 0ms;
+    }
+  }
+}

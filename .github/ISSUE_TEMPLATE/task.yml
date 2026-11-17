@@ -1,0 +1,14 @@
+name: Task
+description: Anything else — tooling, docs, theme or token changes, chores.
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What needs doing
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why, links, constraints.

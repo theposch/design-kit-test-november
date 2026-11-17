@@ -1,0 +1,81 @@
+{
+  "name": "@repo/ui",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles/*": "./src/*.css"
+  },
+  "imports": {
+    "#lib/*": "./src/lib/*",
+    "#components/*": "./src/components/*",
+    "#hooks/*": "./src/hooks/*",
+    "#storybook/*": "./.storybook/*",
+    "#fixtures/*": "./src/fixtures/*"
+  },
+  "scripts": {
+    "build": "storybook build",
+    "lint": "eslint . --max-warnings 0",
+    "storybook": "storybook dev -p 6006",
+    "test": "vitest run && node --test 'scripts/**/*.test.mjs'",
+    "typecheck": "tsc --noEmit",
+    "palette:convert": "node scripts/palette.mjs",
+    "tokens": "node scripts/tokens.mjs",
+    "guide": "node scripts/guide.mjs",
+    "test:scripts": "node --test 'scripts/*.test.mjs' 'scripts/lib/*.test.mjs'",
+    "design:build": "node scripts/claude-design/build.mjs",
+    "design:vqa": "node scripts/claude-design/vqa.mjs",
+    "figma:audit": "node scripts/figma/audit.mjs",
+    "figma:compare": "node scripts/figma/compare.mjs",
+    "figma:snapshot": "node scripts/figma/snapshot.mjs",
+    "test:figma": "node --test 'scripts/figma/*.test.mjs'",
+    "figma:health": "node scripts/figma/screens.mjs health",
+    "figma:screen": "node scripts/figma/screens.mjs check",
+    "figma:survey": "node scripts/figma/screens.mjs survey",
+    "taste:shots": "node scripts/taste.mjs",
+    "look:save": "node scripts/look.mjs save",
+    "look:compare": "node scripts/look.mjs compare",
+    "look:accept": "node scripts/look.mjs accept"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.9.0",
+    "@fontsource-variable/geist": "^5.2.9",
+    "@tailwindcss/vite": "catalog:",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.69.0",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@storybook/addon-a11y": "^10.6.6",
+    "@storybook/addon-docs": "^10.6.6",
+    "@storybook/addon-mcp": "^10.6.6",
+    "@storybook/addon-themes": "^10.6.6",
+    "@storybook/addon-vitest": "^10.6.6",
+    "@storybook/react-vite": "^10.6.6",
+    "@types/node": "^24.19.2",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "@vitest/browser-playwright": "^5.1.0",
+    "eslint": "catalog:",
+    "pixelmatch": "^8.0.0",
+    "playwright": "1.65.0",
+    "pngjs": "^7.0.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "remark-gfm": "^4.0.1",
+    "storybook": "^10.6.6",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "^5.1.0"
+  }
+}

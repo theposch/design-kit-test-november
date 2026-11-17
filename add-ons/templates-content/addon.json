@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-content",
+  "type": "registry:item",
+  "title": "Content templates",
+  "description": "Docs home and a content library with filters.",
+  "author": "MetaLab",
+  "registryDependencies": ["templates-parts"],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/DocsHome.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/DocsHome.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/DocsHome.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/DocsHome.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/Library.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/Library.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/Library.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/Library.stories.tsx"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

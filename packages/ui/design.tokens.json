@@ -1,0 +1,1029 @@
+{
+  "$description": "Generated from packages/ui/src/theme by `pnpm tokens`. Edit the CSS, never this file.",
+  "Color": {
+    "background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.985, 0, 0],
+        "hex": "#fafafa"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.145, 0, 0],
+              "hex": "#0a0a0a"
+            }
+          }
+        }
+      }
+    },
+    "foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.145, 0, 0],
+        "hex": "#0a0a0a"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.985, 0, 0],
+              "hex": "#fafafa"
+            }
+          }
+        }
+      }
+    },
+    "surface": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [1, 0, 0],
+        "hex": "#ffffff"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.205, 0, 0],
+              "hex": "#171717"
+            }
+          }
+        }
+      }
+    },
+    "surface-foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.145, 0, 0],
+        "hex": "#0a0a0a"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.985, 0, 0],
+              "hex": "#fafafa"
+            }
+          }
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.5, 0.2, 262],
+        "hex": "#1957d2"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.72, 0.14, 262],
+              "hex": "#73a3fc"
+            }
+          }
+        }
+      }
+    },
+    "primary-foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.985, 0, 0],
+        "hex": "#fafafa"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.145, 0, 0],
+              "hex": "#0a0a0a"
+            }
+          }
+        }
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.93, 0.04, 262],
+        "hex": "#dae9ff"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.3, 0.06, 262],
+              "hex": "#1d2d4c"
+            }
+          }
+        }
+      }
+    },
+    "secondary-foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.35, 0.12, 262],
+        "hex": "#143678"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.9, 0.05, 262],
+              "hex": "#ccdfff"
+            }
+          }
+        }
+      }
+    },
+    "muted": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.97, 0, 0],
+        "hex": "#f5f5f5"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.269, 0, 0],
+              "hex": "#262626"
+            }
+          }
+        }
+      }
+    },
+    "muted-foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.54, 0, 0],
+        "hex": "#6f6f6f"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.708, 0, 0],
+              "hex": "#a1a1a1"
+            }
+          }
+        }
+      }
+    },
+    "destructive": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.577, 0.245, 27.325],
+        "hex": "#e7000b"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.704, 0.191, 22.216],
+              "hex": "#ff6467"
+            }
+          }
+        }
+      }
+    },
+    "destructive-foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.985, 0, 0],
+        "hex": "#fafafa"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.145, 0, 0],
+              "hex": "#0a0a0a"
+            }
+          }
+        }
+      }
+    },
+    "success-subtle": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.95, 0.05, 150],
+        "hex": "#d8f9dd"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.29, 0.06, 150],
+              "hex": "#11331b"
+            }
+          }
+        }
+      }
+    },
+    "success-subtle-foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.42, 0.11, 150],
+        "hex": "#0b5d2a"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.84, 0.12, 150],
+              "hex": "#8fe1a1"
+            }
+          }
+        }
+      }
+    },
+    "warning-subtle": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.95, 0.07, 85],
+        "hex": "#ffecb9"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.3, 0.06, 75],
+              "hex": "#3f2903"
+            }
+          }
+        }
+      }
+    },
+    "warning-subtle-foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.45, 0.1, 65],
+        "hex": "#7a4702"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.86, 0.11, 85],
+              "hex": "#f2cc7a"
+            }
+          }
+        }
+      }
+    },
+    "info-subtle": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.94, 0.04, 245],
+        "hex": "#d6efff"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.29, 0.06, 255],
+              "hex": "#152c48"
+            }
+          }
+        }
+      }
+    },
+    "info-subtle-foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.43, 0.14, 255],
+        "hex": "#024e9a"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.84, 0.09, 250],
+              "hex": "#9ed0ff"
+            }
+          }
+        }
+      }
+    },
+    "destructive-subtle": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.95, 0.03, 25],
+        "hex": "#ffe7e4"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.29, 0.07, 25],
+              "hex": "#481b19"
+            }
+          }
+        }
+      }
+    },
+    "destructive-subtle-foreground": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.47, 0.18, 27],
+        "hex": "#a91518"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.84, 0.09, 25],
+              "hex": "#ffb4ad"
+            }
+          }
+        }
+      }
+    },
+    "border": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.922, 0, 0],
+        "hex": "#e5e5e5"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [1, 0, 0],
+              "alpha": 0.1,
+              "hex": "#ffffff"
+            }
+          }
+        }
+      }
+    },
+    "input": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.64, 0, 0],
+        "hex": "#8c8c8c"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.52, 0, 0],
+              "hex": "#696969"
+            }
+          }
+        }
+      }
+    },
+    "ring": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [0.62, 0, 0],
+        "hex": "#868686"
+      },
+      "$extensions": {
+        "figma-console-mcp": {
+          "primaryMode": "Light",
+          "modes": {
+            "Dark": {
+              "colorSpace": "oklch",
+              "components": [0.556, 0, 0],
+              "hex": "#737373"
+            }
+          }
+        }
+      }
+    }
+  },
+  "Typography": {
+    "body-xs": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 12, "unit": "px" },
+        "$description": "0.75rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 12, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.3333,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.3333 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": 0,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 0 }
+          }
+        }
+      }
+    },
+    "body-sm": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 14, "unit": "px" },
+        "$description": "0.875rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 14, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.4286,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.4286 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": 0,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 0 }
+          }
+        }
+      }
+    },
+    "body-base": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 16, "unit": "px" },
+        "$description": "1rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 16, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.5,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.5 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": 0,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 0 }
+          }
+        }
+      }
+    },
+    "body-lg": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 18, "unit": "px" },
+        "$description": "1.125rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 18, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.5556,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.5556 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": 0,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 0 }
+          }
+        }
+      }
+    },
+    "label-xs": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 12, "unit": "px" },
+        "$description": "0.75rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 12, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.3333,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.3333 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": 0,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 0 }
+          }
+        }
+      }
+    },
+    "label-sm": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 14, "unit": "px" },
+        "$description": "0.875rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 14, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.4286,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.4286 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": 0,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 0 }
+          }
+        }
+      }
+    },
+    "label-base": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 16, "unit": "px" },
+        "$description": "1rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 16, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.5,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.5 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": 0,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 0 }
+          }
+        }
+      }
+    },
+    "heading-4": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 18, "unit": "px" },
+        "$description": "1.125rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 18, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.3333,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.3333 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": 0,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 0 }
+          }
+        }
+      }
+    },
+    "heading-3": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 24, "unit": "px" },
+        "$description": "1.5rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 24, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.25,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.25 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": -0.01,
+        "$description": "-0.01em in code: a share of the font size, which a Figma variable can't hold.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": -0.01 }
+          }
+        }
+      }
+    },
+    "heading-2": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 30, "unit": "px" },
+        "$description": "1.875rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 36, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.15,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.15 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": -0.02,
+        "$description": "-0.02em in code: a share of the font size, which a Figma variable can't hold.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": -0.02 }
+          }
+        }
+      }
+    },
+    "heading-1": {
+      "size": {
+        "$type": "dimension",
+        "$value": { "value": 36, "unit": "px" },
+        "$description": "2.25rem in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": { "value": 48, "unit": "px" } }
+          }
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "$value": 1.1,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 1.1 }
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$value": -0.025,
+        "$description": "-0.025em in code: a share of the font size, which a Figma variable can't hold.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": -0.025 }
+          }
+        }
+      }
+    },
+    "heading": {
+      "weight": {
+        "$type": "fontWeight",
+        "$value": 600,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 600 }
+          }
+        }
+      },
+      "font": {
+        "$type": "fontFamily",
+        "$value": "Geist Variable",
+        "$description": "'Geist Variable', 'Geist Fallback', ui-sans-serif, system-ui, sans-serif in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": "Geist Variable" }
+          }
+        }
+      }
+    },
+    "body": {
+      "weight": {
+        "$type": "fontWeight",
+        "$value": 400,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 400 }
+          }
+        }
+      },
+      "font": {
+        "$type": "fontFamily",
+        "$value": "Geist Variable",
+        "$description": "'Geist Variable', 'Geist Fallback', ui-sans-serif, system-ui, sans-serif in code.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": "Geist Variable" }
+          }
+        }
+      }
+    },
+    "label": {
+      "weight": {
+        "$type": "fontWeight",
+        "$value": 500,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 500 }
+          }
+        }
+      }
+    },
+    "body-strong": {
+      "weight": {
+        "$type": "fontWeight",
+        "$value": 600,
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Phone",
+            "modes": { "Tablet and desktop": 600 }
+          }
+        }
+      }
+    }
+  },
+  "Motion": {
+    "duration": {
+      "fast": {
+        "$type": "duration",
+        "$value": { "value": 150, "unit": "ms" },
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Default",
+            "modes": { "Reduced motion": { "value": 0, "unit": "ms" } }
+          }
+        }
+      },
+      "normal": {
+        "$type": "duration",
+        "$value": { "value": 200, "unit": "ms" },
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Default",
+            "modes": { "Reduced motion": { "value": 0, "unit": "ms" } }
+          }
+        }
+      },
+      "slow": {
+        "$type": "duration",
+        "$value": { "value": 300, "unit": "ms" },
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Default",
+            "modes": { "Reduced motion": { "value": 0, "unit": "ms" } }
+          }
+        }
+      }
+    },
+    "hover": {
+      "duration": {
+        "$type": "duration",
+        "$value": { "value": 150, "unit": "ms" },
+        "$description": "Same as --motion-duration-fast.",
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Default",
+            "modes": { "Reduced motion": { "value": 0, "unit": "ms" } }
+          }
+        }
+      }
+    },
+    "easing": {
+      "default": {
+        "$type": "cubicBezier",
+        "$value": [0.4, 0, 0.2, 1],
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Default",
+            "modes": { "Reduced motion": [0.4, 0, 0.2, 1] }
+          }
+        }
+      },
+      "emphasis": {
+        "$type": "cubicBezier",
+        "$value": [0.34, 1.56, 0.64, 1],
+        "$extensions": {
+          "figma-console-mcp": {
+            "primaryMode": "Default",
+            "modes": { "Reduced motion": [0.34, 1.56, 0.64, 1] }
+          }
+        }
+      }
+    }
+  },
+  "Radius": {
+    "sm": {
+      "$type": "dimension",
+      "$value": { "value": 6, "unit": "px" },
+      "$description": "--radius × 0.6."
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": { "value": 8, "unit": "px" },
+      "$description": "--radius × 0.8."
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": { "value": 10, "unit": "px" },
+      "$description": "Same as --radius."
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": { "value": 14, "unit": "px" },
+      "$description": "--radius × 1.4."
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": { "value": 18, "unit": "px" },
+      "$description": "--radius × 1.8."
+    },
+    "3xl": {
+      "$type": "dimension",
+      "$value": { "value": 22, "unit": "px" },
+      "$description": "--radius × 2.2."
+    },
+    "4xl": {
+      "$type": "dimension",
+      "$value": { "value": 26, "unit": "px" },
+      "$description": "--radius × 2.6."
+    }
+  },
+  "Spacing": {
+    "icon": {
+      "$type": "number",
+      "$value": 1.25,
+      "$description": "1.25em in code: a share of the font size, which a Figma variable can't hold."
+    }
+  },
+  "Breakpoint": {
+    "tablet": {
+      "$type": "dimension",
+      "$value": { "value": 768, "unit": "px" },
+      "$description": "48rem in code."
+    },
+    "desktop": {
+      "$type": "dimension",
+      "$value": { "value": 1024, "unit": "px" },
+      "$description": "64rem in code."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-settings",
+  "type": "registry:item",
+  "title": "Settings templates",
+  "description": "Account settings: a single form page, and side-panel sections you edit in place.",
+  "author": "MetaLab",
+  "registryDependencies": ["templates-parts"],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/Settings.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/Settings.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/Settings.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/Settings.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SettingsPanels.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SettingsPanels.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SettingsPanels.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SettingsPanels.stories.tsx"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

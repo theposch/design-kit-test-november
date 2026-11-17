@@ -1,0 +1,46 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "storybook-static/**"]
+    },
+    "@repo/ui#build": {
+      "inputs": ["$TURBO_DEFAULT$", "!scripts/**", "!**/*.md", "!figma/**"],
+      "outputs": ["storybook-static/**"]
+    },
+    "frontend#build": {
+      "dependsOn": [],
+      "outputs": ["dist/**"]
+    },
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "lint": {
+      "dependsOn": ["transit"]
+    },
+    "typecheck": {
+      "dependsOn": ["transit"]
+    },
+    "test": {
+      "outputLogs": "errors-only"
+    },
+    "@repo/ui#test": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!**/*.md",
+        "!figma/**",
+        "$TURBO_ROOT$/CLAUDE.md"
+      ],
+      "outputLogs": "errors-only"
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "explorations",
+  "type": "registry:item",
+  "title": "Explorations",
+  "description": "A rule-free lane for standalone experiments and prototypes, each published as its own MetaLab Site.",
+  "author": "MetaLab",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "files/.github/workflows/explorations.yml",
+      "type": "registry:file",
+      "target": ".github/workflows/explorations.yml"
+    },
+    {
+      "path": "files/explorations/.templates/blank/index.html",
+      "type": "registry:file",
+      "target": "explorations/.templates/blank/index.html"
+    },
+    {
+      "path": "files/explorations/.templates/blank/package.json.tpl",
+      "type": "registry:file",
+      "target": "explorations/.templates/blank/package.json.tpl"
+    },
+    {
+      "path": "files/explorations/.templates/blank/src/App.tsx",
+      "type": "registry:file",
+      "target": "explorations/.templates/blank/src/App.tsx"
+    },
+    {
+      "path": "files/explorations/.templates/blank/src/index.css",
+      "type": "registry:file",
+      "target": "explorations/.templates/blank/src/index.css"
+    },
+    {
+      "path": "files/explorations/.templates/blank/src/main.tsx",
+      "type": "registry:file",
+      "target": "explorations/.templates/blank/src/main.tsx"
+    },
+    {
+      "path": "files/explorations/.templates/blank/tsconfig.json",
+      "type": "registry:file",
+      "target": "explorations/.templates/blank/tsconfig.json"
+    },
+    {
+      "path": "files/explorations/.templates/blank/vite.config.ts",
+      "type": "registry:file",
+      "target": "explorations/.templates/blank/vite.config.ts"
+    },
+    {
+      "path": "files/explorations/.templates/with-ui/index.html",
+      "type": "registry:file",
+      "target": "explorations/.templates/with-ui/index.html"
+    },
+    {
+      "path": "files/explorations/.templates/with-ui/package.json.tpl",
+      "type": "registry:file",
+      "target": "explorations/.templates/with-ui/package.json.tpl"
+    },
+    {
+      "path": "files/explorations/.templates/with-ui/src/App.tsx",
+      "type": "registry:file",
+      "target": "explorations/.templates/with-ui/src/App.tsx"
+    },
+    {
+      "path": "files/explorations/.templates/with-ui/src/index.css",
+      "type": "registry:file",
+      "target": "explorations/.templates/with-ui/src/index.css"
+    },
+    {
+      "path": "files/explorations/.templates/with-ui/src/main.tsx",
+      "type": "registry:file",
+      "target": "explorations/.templates/with-ui/src/main.tsx"
+    },
+    {
+      "path": "files/explorations/.templates/with-ui/tsconfig.json",
+      "type": "registry:file",
+      "target": "explorations/.templates/with-ui/tsconfig.json"
+    },
+    {
+      "path": "files/explorations/.templates/with-ui/vite.config.ts",
+      "type": "registry:file",
+      "target": "explorations/.templates/with-ui/vite.config.ts"
+    },
+    {
+      "path": "files/explorations/README.md",
+      "type": "registry:file",
+      "target": "explorations/README.md"
+    },
+    {
+      "path": "files/scripts/explorations/ci-deploy.mjs",
+      "type": "registry:file",
+      "target": "scripts/explorations/ci-deploy.mjs"
+    },
+    {
+      "path": "files/scripts/explorations/lib.mjs",
+      "type": "registry:file",
+      "target": "scripts/explorations/lib.mjs"
+    },
+    {
+      "path": "files/scripts/explorations/new.mjs",
+      "type": "registry:file",
+      "target": "scripts/explorations/new.mjs"
+    },
+    {
+      "path": "files/scripts/explorations/publish.mjs",
+      "type": "registry:file",
+      "target": "scripts/explorations/publish.mjs"
+    }
+  ],
+  "meta": {
+    "version": "1.1.0",
+    "owner": "Christian Poschmann",
+    "packageJson": [
+      {
+        "file": "package.json",
+        "scripts": {
+          "new-exploration": "node scripts/explorations/new.mjs",
+          "publish-exploration": "node scripts/explorations/publish.mjs"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "file": "pnpm-workspace.yaml",
+        "after": "  - packages/*",
+        "comment": "#",
+        "content": "  - explorations/*"
+      },
+      {
+        "file": ".prettierignore",
+        "comment": "#",
+        "content": "# Explorations are convention-exempt (docs/adr/0007).\nexplorations/"
+      },
+      {
+        "file": "CLAUDE.md",
+        "comment": "html",
+        "content": "## Explorations (`explorations/`)\n\nA convention-free lane for standalone experiments, each deployed as its own Metalab Site (`docs/adr/0007`). Everything else in this file describes the library and does **not** apply inside `explorations/`: no tiers, no token contract, no story requirement, no string rules \u2014 Prettier, ESLint, and the main CI pipeline all skip the folder. Commit messages still follow Conventional Commits.\n\nThe one contract an exploration must honor: it is a workspace package whose `build` writes static output to `dist/` (overridable via a `\"sites\"` package.json field: `{\"dist\": \"out\", \"spaFallback\": true}`), and its folder name doubles as its site name (`^[a-z0-9-]+$`).\n\n- `pnpm new-exploration <name>` \u2014 scaffold (blank Vite+React+TS; `--with-ui` pre-wires `@repo/ui` + tokens).\n- `pnpm publish-exploration <name>` \u2014 build and publish a per-person draft site.\n- Merging to main deploys the canonical site via CI. Deleting an exploration requires manual `sites delete` cleanup \u2014 see `explorations/README.md`."
+      }
+    ]
+  }
+}

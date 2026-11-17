@@ -1,0 +1,20 @@
+{
+  "files": {
+    "design": null,
+    "library": null
+  },
+  "direction": "figma-first",
+  "storybookUrl": "http://localhost:6006",
+  "tokens": {
+    "Background/Primary": "--primary",
+    "Content/Primary Foreground": "--primary-foreground"
+  },
+  "textStyles": {
+    "Body/Extra Small": "type-body-xs",
+    "Body/Small": "type-body-sm",
+    "Body/Base": "type-body-base",
+    "Label/Extra Small": "type-label-xs",
+    "Label/Small": "type-label-sm",
+    "Label/Base": "type-label-base"
+  }
+}

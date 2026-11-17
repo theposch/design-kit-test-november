@@ -1,0 +1,11 @@
+/* Desktop V.1: the flow as desktop screens, with fully rounded buttons */
+
+/* landing: round tiles, a floating tab bar */
+html[data-set="v1"] .tile-img { border-radius: 50%; }
+html[data-set="v1"] .tile { align-items: center; }
+html[data-set="v1"] .tabbar { left: 20px !important; right: 20px !important; bottom: 22px !important; height: 64px !important; padding-top: 12px !important;
+  border-radius: 32px; border: 0 !important; box-shadow: 0 10px 30px rgba(0, 0, 0, .3); }
+
+/* buttons: fully rounded — circles in the header and gallery, pills for "View all" and the tags */
+html[data-set="v1"] .a-save, html[data-set="v1"] .a-close, html[data-set="v1"] .a-more, html[data-set="v1"] .fs-close { border-radius: 50% !important; }
+html[data-set="v1"] .view-all, html[data-set="v1"] .tags .sk { border-radius: 999px !important; }

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "figma-to-code",
+  "type": "registry:item",
+  "title": "Figma to code",
+  "description": "A Claude skill that builds components from their Figma design and proves they match, with a tracker of what was built, snapped and skipped.",
+  "author": "MetaLab",
+  "registryDependencies": ["figma-check"],
+  "files": [
+    {
+      "path": "files/.claude/skills/figma-to-code/SKILL.md",
+      "type": "registry:file",
+      "target": ".claude/skills/figma-to-code/SKILL.md"
+    },
+    {
+      "path": "files/.claude/skills/figma-to-code/screens.md",
+      "type": "registry:file",
+      "target": ".claude/skills/figma-to-code/screens.md"
+    },
+    {
+      "path": "files/packages/ui/FIGMA.md",
+      "type": "registry:file",
+      "target": "packages/ui/FIGMA.md",
+      "project": true
+    }
+  ],
+  "meta": {
+    "version": "1.3.0",
+    "owner": "Christian Poschmann",
+    "blocks": [
+      {
+        "file": "CLAUDE.md",
+        "comment": "html",
+        "content": "## Figma to code\n\nComponents designed in Figma are built with the `figma-to-code` skill, which loads `figma-check` for its tools. Load it whenever someone shares a Figma link to build from, or asks whether a component matches its design.\n\n- A port is done when `pnpm figma:audit <slug>` shows no failing or unaccounted rows in light and dark, and the table and the side-by-side picture are pasted in the report.\n- `CLAUDE.md` wins over the Figma layer tree: tokens only, Base UI, strings through props, `size` on controls only. A Figma value with no token is snapped and recorded, or becomes a new token.\n- `packages/ui/FIGMA.md` tracks what was built, snapped, skipped and left open. `figma.json` holds the project's Figma file, direction and token names.\n- A whole screen follows `.claude/skills/figma-to-code/screens.md`: check the file's health and grid once per project, build from the design's intent (never its layer tree), make it work at every phone width, and pass `pnpm figma:screen <slug>`.\n- Every Figma skill works through the figma-console MCP. If its tools are missing, set it up first (`.claude/skills/figma-check/setup.md`): Claude adds it after asking; the person restarts Claude and adds its plugin in Figma. No Figma access key is needed.\n- Never write into the client's Figma file.\n"
+      }
+    ]
+  }
+}

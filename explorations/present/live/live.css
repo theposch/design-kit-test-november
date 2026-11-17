@@ -1,0 +1,118 @@
+/* The live prototype fills the phone's screen. */
+#screen .live-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: transparent;
+}
+
+/* Skip Intro belongs to Marcus's sample app. Labels and the pointer show
+   when the prototype has some (prototype.json). */
+.set-row:has(.skip-switch:not(.client-switch)),
+html:not(.present-labels) .notes-switch,
+html:not(.present-hints) .pointer-switch {
+  display: none !important;
+}
+
+/* Stand-ins for the prototype's parts, measured by the labels and the pointer. */
+.live-stand-ins { position: absolute; inset: 0; pointer-events: none; opacity: 0; }
+.live-stand-ins i { position: absolute; }
+
+/* Nothing to show: a quiet note in the middle of the screen. */
+.live-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  padding: 32px;
+  text-align: center;
+}
+.live-empty b { font-size: 17px; font-weight: 700; }
+.live-empty small { font-size: 13px; line-height: 1.4; opacity: .55; }
+
+/* The Prototypes panel: a round's name over its prototypes. */
+.set-round {
+  padding: 14px 14px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .45);
+}
+body.page-light .set-round { color: rgba(0, 0, 0, .45); }
+.set-round:first-child { padding-top: 2px; }
+.set-round [contenteditable] { outline: none; border-radius: 4px; cursor: text; }
+.set-round [contenteditable]:hover,
+.set-round [contenteditable]:focus { box-shadow: 0 0 0 4px rgba(255, 255, 255, .08); background: rgba(255, 255, 255, .08); }
+body.page-light .set-round [contenteditable]:hover,
+body.page-light .set-round [contenteditable]:focus { box-shadow: 0 0 0 4px rgba(0, 0, 0, .05); background: rgba(0, 0, 0, .05); }
+
+/* Staff: drag a row by its grip (or arrow keys on it) to reorder, or under another round. */
+/* (the grip sits in a zero-wide first column, over the row's left padding:
+   the rows stay unpositioned, as Marcus's panel measures them) */
+.set-editing .set-wrap { grid-template-columns: 0 1fr auto; column-gap: 0; }
+.set-editing .set-eye { margin-left: 4px; }
+.set-grip {
+  z-index: 1; align-self: stretch; width: 14px;
+  display: grid; place-items: center;
+  color: rgba(255, 255, 255, .4); cursor: grab; opacity: 0; transition: opacity .2s;
+}
+body.page-light .set-grip { color: rgba(0, 0, 0, .35); }
+.set-wrap:hover .set-grip, .set-grip:focus-visible { opacity: 1; }
+.set-wrap.dragging { opacity: .35; }
+.set-add {
+  margin: 8px 14px 0; padding: 7px 12px; align-self: flex-start;
+  border-radius: 999px; font-size: 12px; font-weight: 600;
+  color: rgba(255, 255, 255, .6); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14);
+  transition: background .2s, color .2s;
+}
+.set-add span { margin-right: 2px; }
+.set-add:hover { background: rgba(255, 255, 255, .08); color: #fff; }
+body.page-light .set-add { color: rgba(0, 0, 0, .55); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
+body.page-light .set-add:hover { background: rgba(0, 0, 0, .05); color: #111317; }
+
+/* Staff: each row carries a show-to-client switch, styled as the panel's arrows. */
+.set-wrap { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px; }
+.set-wrap[hidden] { display: none; }
+.set-eye {
+  width: 28px; height: 28px; margin-right: 8px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: rgba(255, 255, 255, .5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14);
+  transition: background .2s, color .2s, opacity .2s;
+}
+.set-eye:hover:not(:disabled) { background: rgba(255, 255, 255, .08); }
+.set-eye[aria-pressed="true"] { background: #6d4aff; color: #fff; box-shadow: none; }
+.set-eye:disabled { opacity: .4; }
+body.page-light .set-eye { color: rgba(0, 0, 0, .45); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
+body.page-light .set-eye:hover:not(:disabled) { background: rgba(0, 0, 0, .05); }
+body.page-light .set-eye[aria-pressed="true"] { background: #6d4aff; color: #fff; box-shadow: none; }
+
+/* Settings: Client View, on Skip Intro's switch (eye off / eye in place of play / skip). */
+.client-switch svg { position: relative; transition: color .3s; }
+.set-row .client-switch:not([aria-checked="true"]) svg:first-of-type,
+.set-row .client-switch[aria-checked="true"] svg:last-of-type { color: #fff; }
+@media (max-width: 500px) { .set-row .client-switch { display: flex; } }
+
+/* The chosen row is lit across its switch too. */
+.set-wrap:has(.set-eye) .set-item { background: none !important; }
+.set-wrap:has(.set-eye) { border-radius: 12px; transition: background .2s; }
+.set-wrap:has(.set-eye):hover { background: rgba(255, 255, 255, .05); }
+.set-wrap:has(.set-eye):has(.set-item[aria-current="true"]) { background: rgba(255, 255, 255, .07); }
+body.page-light .set-wrap:has(.set-eye):hover { background: rgba(0, 0, 0, .04); }
+body.page-light .set-wrap:has(.set-eye):has(.set-item[aria-current="true"]) { background: rgba(0, 0, 0, .06); }
+
+/* On its side: the prototype is laid out wide (as Marcus's landscape layer is)
+   and turned back against the phone's rotation, so it reads upright. */
+body.rotated #screen .live-frame {
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  width: var(--h);
+  height: var(--w);
+  transform: translate(-50%, -50%) rotate(calc(-1 * var(--rot, 0deg)));
+}

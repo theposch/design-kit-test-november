@@ -1,0 +1,202 @@
+@theme inline {
+  --text-body-xs: var(--body-xs-size);
+  --text-body-sm: var(--body-sm-size);
+  --text-body-base: var(--body-base-size);
+  --text-body-lg: var(--body-lg-size);
+  --text-label-xs: var(--label-xs-size);
+  --text-label-sm: var(--label-sm-size);
+  --text-label-base: var(--label-base-size);
+  --text-heading-4: var(--heading-4-size);
+  --text-heading-3: var(--heading-3-size);
+  --text-heading-2: var(--heading-2-size);
+  --text-heading-1: var(--heading-1-size);
+}
+
+@layer base {
+  :root {
+    --body-xs-size: 0.75rem;
+    --body-sm-size: 0.875rem;
+    --body-base-size: 1rem;
+    --body-lg-size: 1.125rem;
+
+    --label-xs-size: 0.75rem;
+    --label-sm-size: 0.875rem;
+    --label-base-size: 1rem;
+
+    --heading-4-size: 1.125rem;
+    --heading-3-size: 1.5rem;
+    --heading-2-size: 2.25rem;
+    --heading-1-size: 3rem;
+
+    /*
+     * Line height as a share of the size, so it follows a phone step-down or a
+     * brand font's sizes. Tight for display, open for reading: each lands on
+     * the 4px grid at the default size.
+     */
+    --body-xs-leading: 1.3333;
+    --body-sm-leading: 1.4286;
+    --body-base-leading: 1.5;
+    --body-lg-leading: 1.5556;
+    --label-xs-leading: 1.3333;
+    --label-sm-leading: 1.4286;
+    --label-base-leading: 1.5;
+    --heading-4-leading: 1.3333;
+    --heading-3-leading: 1.25;
+    --heading-2-leading: 1.15;
+    --heading-1-leading: 1.1;
+
+    /*
+     * One tracking rung per style, in `em` so it scales with the size a brand
+     * pass sets. Body and label sit at 0 for Geist; a font that runs tight at
+     * small sizes opens them here. Deliberately unregistered: a public
+     * `tracking-*` class would let a call site override the composite, which
+     * is what docs/adr/0004 exists to prevent.
+     */
+    --body-xs-tracking: 0;
+    --body-sm-tracking: 0;
+    --body-base-tracking: 0;
+    --body-lg-tracking: 0;
+    --label-xs-tracking: 0;
+    --label-sm-tracking: 0;
+    --label-base-tracking: 0;
+    --heading-1-tracking: -0.025em;
+    --heading-2-tracking: -0.02em;
+    --heading-3-tracking: -0.01em;
+    --heading-4-tracking: 0;
+
+    /* Weight is a per-register axis a brand pass tunes in one place. */
+    --heading-weight: 600;
+    --body-weight: 400;
+    --label-weight: 500;
+    --body-strong-weight: 600;
+  }
+
+  /* The two largest headings step down on phones, so a title fits in a line or two. */
+  @media (width < 48rem) {
+    :root {
+      --heading-1-size: 2.25rem;
+      --heading-2-size: 1.875rem;
+    }
+  }
+}
+
+/*
+ * The composites read the underlying vars directly rather than routing through
+ * the `@theme inline` registrations above, which stay as the public token
+ * surface. `@apply` cannot take a variable, so it cannot pick up a tunable
+ * weight, and `--font-*` and `--font-weight-*` both compile to `font-<name>`,
+ * so a register cannot own both axes under one name. See docs/adr/0004.
+ */
+
+@utility type-body-xs {
+  font-family: var(--body-font);
+  font-size: var(--body-xs-size);
+  line-height: var(--body-xs-leading);
+  font-weight: var(--type-weight, var(--body-weight));
+  letter-spacing: var(--body-xs-tracking);
+}
+
+@utility type-body-sm {
+  font-family: var(--body-font);
+  font-size: var(--body-sm-size);
+  line-height: var(--body-sm-leading);
+  font-weight: var(--type-weight, var(--body-weight));
+  letter-spacing: var(--body-sm-tracking);
+}
+
+@utility type-body-base {
+  font-family: var(--body-font);
+  font-size: var(--body-base-size);
+  line-height: var(--body-base-leading);
+  font-weight: var(--type-weight, var(--body-weight));
+  letter-spacing: var(--body-base-tracking);
+}
+
+@utility type-body-lg {
+  font-family: var(--body-font);
+  font-size: var(--body-lg-size);
+  line-height: var(--body-lg-leading);
+  font-weight: var(--type-weight, var(--body-weight));
+  letter-spacing: var(--body-lg-tracking);
+}
+
+/*
+ * Labels: text a person presses (buttons, tabs, toggles) or that names a
+ * control or a small item (field labels, group labels, badges, list and
+ * toast titles). Body sizes, one weight up, so controls read as controls.
+ */
+
+@utility type-label-xs {
+  font-family: var(--body-font);
+  font-size: var(--label-xs-size);
+  line-height: var(--label-xs-leading);
+  font-weight: var(--type-weight, var(--label-weight));
+  letter-spacing: var(--label-xs-tracking);
+}
+
+@utility type-label-sm {
+  font-family: var(--body-font);
+  font-size: var(--label-sm-size);
+  line-height: var(--label-sm-leading);
+  font-weight: var(--type-weight, var(--label-weight));
+  letter-spacing: var(--label-sm-tracking);
+}
+
+@utility type-label-base {
+  font-family: var(--body-font);
+  font-size: var(--label-base-size);
+  line-height: var(--label-base-leading);
+  font-weight: var(--type-weight, var(--label-weight));
+  letter-spacing: var(--label-base-tracking);
+}
+
+/*
+ * Emphasis within a body composite, for prices and figures: same size, the
+ * strong weight. It sets a variable the composites read rather than
+ * font-weight itself, so it wins whatever order the classes land in.
+ */
+/* Uninherited, so strong text never makes the type styles nested inside it strong too. */
+@property --type-weight {
+  syntax: '*';
+  inherits: false;
+}
+
+@utility type-strong {
+  --type-weight: var(--body-strong-weight);
+}
+
+@utility type-heading-4 {
+  font-family: var(--heading-font);
+  font-size: var(--heading-4-size);
+  line-height: var(--heading-4-leading);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-4-tracking);
+  text-wrap: balance;
+}
+
+@utility type-heading-3 {
+  font-family: var(--heading-font);
+  font-size: var(--heading-3-size);
+  line-height: var(--heading-3-leading);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-3-tracking);
+  text-wrap: balance;
+}
+
+@utility type-heading-2 {
+  font-family: var(--heading-font);
+  font-size: var(--heading-2-size);
+  line-height: var(--heading-2-leading);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-2-tracking);
+  text-wrap: balance;
+}
+
+@utility type-heading-1 {
+  font-family: var(--heading-font);
+  font-size: var(--heading-1-size);
+  line-height: var(--heading-1-leading);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-1-tracking);
+  text-wrap: balance;
+}

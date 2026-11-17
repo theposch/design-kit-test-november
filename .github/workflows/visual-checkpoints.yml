@@ -1,0 +1,74 @@
+name: Visual checkpoints
+
+# Photographs every story on the branch a pull request targets, then again on
+# the pull request, and attaches the before/after report. Both sets come from
+# the same runner, so font rendering never shows up as a difference.
+#
+# Never a required check: designers restyle components on purpose, so this
+# shows what moved and leaves the judgement to the reviewer.
+on:
+  pull_request:
+    paths: ['packages/ui/**']
+
+concurrency:
+  group: visual-checkpoints-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  look:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm --filter @repo/ui exec playwright install chromium --with-deps
+
+      # A target branch from before this workflow existed has no camera, so
+      # there is nothing to compare against: the run ends quietly.
+      - id: before
+        continue-on-error: true
+        run: pnpm look:save
+
+      # `clean: false` keeps the git-ignored .look/ folder, where the "before"
+      # photos live, across the switch to the pull request's code.
+      - if: steps.before.outcome == 'success'
+        uses: actions/checkout@v7
+        with:
+          clean: false
+
+      - if: steps.before.outcome == 'success'
+        run: pnpm install --frozen-lockfile
+
+      - if: steps.before.outcome == 'success'
+        run: |
+          pnpm -s look:compare | tee look.txt
+          {
+            echo '## Visual checkpoints'
+            echo
+            echo '```'
+            cat look.txt
+            echo '```'
+            echo
+            echo 'For the before/after pictures, download the **visual-checkpoints** file below and open `report.html`.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - if: steps.before.outcome == 'success'
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-checkpoints
+          path: |
+            packages/ui/.look/report.html
+            packages/ui/.look/checkpoint
+            packages/ui/.look/latest
+            packages/ui/.look/diff
+          retention-days: 14

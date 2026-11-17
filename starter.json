@@ -1,0 +1,18 @@
+{
+  "projectOwned": [
+    "project.json",
+    "figma.json",
+    "sites.json",
+    "claude-design.json",
+    "addons.lock.json",
+    "starter.lock.json",
+    "pnpm-lock.yaml",
+    "README.md",
+    "packages/ui/FIGMA.md",
+    "packages/ui/figma/**",
+    "packages/ui/design.tokens.json",
+    "apps/**",
+    "explorations/**",
+    "docs/plans/**"
+  ]
+}

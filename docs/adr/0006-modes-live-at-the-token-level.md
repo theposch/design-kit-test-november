@@ -1,0 +1,5 @@
+# Modes live at the token level; components are mode-blind
+
+The library ships light and dark as two resolutions of the same semantic tokens: light values on `:root`, dark overrides under the `.dark` class, registered once via `@theme inline`. Components never branch on mode — the `dark:` variant is lint-banned in `src/**` — so every component supports both modes with zero per-component work, and a mode bug is a palette bug fixed in one file. The `.dark` block is element-agnostic, so a subtree can be re-moded, not just `<html>`; the demo app's toggle and Storybook's theme switcher both just move the class.
+
+The discipline this buys is that accessibility becomes a property of token _pairs_, not call sites: a fill and its foreground must clear contrast in both modes, and when one mode needs a different foreground, the token flips rather than the component (see `--destructive-foreground` in `palette.css` — near-white on light mode's dark red, near-black on dark mode's lighter red). A single-mode engagement deletes the `.dark` block and loses nothing; the ban on `dark:` stays either way.

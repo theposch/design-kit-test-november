@@ -1,0 +1,75 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "visual-checkpoints",
+  "type": "registry:item",
+  "title": "Visual checkpoints",
+  "description": "Photograph every story in light and dark, then compare before and after a change to see exactly what moved.",
+  "author": "MetaLab",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "files/.github/workflows/visual-checkpoints.yml",
+      "type": "registry:file",
+      "target": ".github/workflows/visual-checkpoints.yml"
+    },
+    {
+      "path": "files/.claude/skills/visual-checkpoint/SKILL.md",
+      "type": "registry:file",
+      "target": ".claude/skills/visual-checkpoint/SKILL.md"
+    },
+    {
+      "path": "files/packages/ui/scripts/look.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/look.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/look-kind.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/look-kind.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/look-kind.test.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/look-kind.test.mjs"
+    }
+  ],
+  "meta": {
+    "version": "1.3.0",
+    "owner": "Christian Poschmann",
+    "packageJson": [
+      {
+        "file": "package.json",
+        "scripts": {
+          "look:save": "pnpm --filter @repo/ui look:save",
+          "look:compare": "pnpm --filter @repo/ui look:compare",
+          "look:accept": "pnpm --filter @repo/ui look:accept"
+        }
+      },
+      {
+        "file": "packages/ui/package.json",
+        "scripts": {
+          "look:save": "node scripts/look.mjs save",
+          "look:compare": "node scripts/look.mjs compare",
+          "look:accept": "node scripts/look.mjs accept"
+        },
+        "devDependencies": {
+          "pixelmatch": "^8.0.0",
+          "pngjs": "^7.0.0"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "file": ".gitignore",
+        "comment": "#",
+        "content": ".look/"
+      },
+      {
+        "file": "CLAUDE.md",
+        "after": "pnpm format      # prettier --write (owns ALL formatting, .tsx included)",
+        "comment": "#",
+        "content": "pnpm look:save     # photograph every story (light + dark) as a visual checkpoint\npnpm look:compare  # photograph again and open a before/after report of what changed\npnpm look:accept   # make the latest photos the new checkpoint (--colour-only: just the colour-only changes)\n"
+      }
+    ]
+  }
+}

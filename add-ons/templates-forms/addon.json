@@ -1,0 +1,55 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-forms",
+  "type": "registry:item",
+  "title": "Form templates",
+  "description": "Form pages: contact, two-column, setup wizard and a wizard in a dialog.",
+  "author": "MetaLab",
+  "registryDependencies": ["templates-parts"],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/ContactForm.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/ContactForm.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/ContactForm.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/ContactForm.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/TwoColumnForm.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/TwoColumnForm.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/TwoColumnForm.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/TwoColumnForm.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SetupWizard.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SetupWizard.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SetupWizard.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SetupWizard.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/DialogWizard.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/DialogWizard.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/DialogWizard.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/DialogWizard.stories.tsx"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

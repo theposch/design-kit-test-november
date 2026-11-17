@@ -1,0 +1,26 @@
+{
+  "extends": "@repo/typescript-config/react.json",
+  "compilerOptions": {
+    // The unit-test Vitest project runs in node, so node builtins must
+    // typecheck alongside the DOM code.
+    "types": ["vite/client", "node"],
+    // TS resolves `#` subpath imports via these paths — it won't extension-probe
+    // the wildcard targets in package.json `imports` (`./src/lib/*`) to find
+    // .ts/.tsx the way Vite/Node do. package.json `imports` stays the source of
+    // truth for runtime/consumer resolution; these mirror it for the
+    // type-checker.
+    "paths": {
+      "#lib/*": ["./src/lib/*"],
+      "#components/*": ["./src/components/*"],
+      "#hooks/*": ["./src/hooks/*"],
+      "#storybook/*": ["./.storybook/*"],
+      "#fixtures/*": ["./src/fixtures/*"]
+    }
+  },
+  "include": [
+    "src",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
+    "vite.config.ts"
+  ]
+}

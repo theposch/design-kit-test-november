@@ -1,0 +1,4 @@
+/* Icons scale with the text around them. */
+@theme {
+  --spacing-icon: 1.25em;
+}

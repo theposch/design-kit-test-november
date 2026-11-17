@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "code-to-figma",
+  "type": "registry:item",
+  "title": "Code to Figma",
+  "description": "A Claude skill that moves library components into a hand-built Figma library, one at a time or in a loop.",
+  "author": "MetaLab",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "files/.claude/skills/code-to-figma/SKILL.md",
+      "type": "registry:file",
+      "target": ".claude/skills/code-to-figma/SKILL.md"
+    },
+    {
+      "path": "files/.claude/skills/code-to-figma/component-loop.md",
+      "type": "registry:file",
+      "target": ".claude/skills/code-to-figma/component-loop.md"
+    },
+    {
+      "path": "files/.claude/skills/code-to-figma/figma-gotchas.md",
+      "type": "registry:file",
+      "target": ".claude/skills/code-to-figma/figma-gotchas.md"
+    }
+  ],
+  "meta": {
+    "version": "1.1.0",
+    "owner": "Christian Poschmann"
+  }
+}

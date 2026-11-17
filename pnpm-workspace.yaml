@@ -1,0 +1,29 @@
+packages:
+  - apps/*
+  - packages/*
+  # addon:explorations
+  - explorations/*
+  # /addon:explorations
+
+# Single source for versions used by more than one workspace package. The
+# exploration templates (`.tpl`) reference the catalog too, so a freshly
+# stamped exploration tracks the workspace instead of freezing at whatever
+# the template pinned when it was written.
+catalog:
+  '@tailwindcss/vite': ^4.3.4
+  '@types/react': ^19.3.0
+  '@types/react-dom': ^19.3.0
+  '@vitejs/plugin-react': ^6.2.1
+  eslint: ^10.14.0
+  react: ^19.3.1
+  react-dom: ^19.3.1
+  tailwindcss: ^4.3.4
+  typescript: ^6.0.3
+  vite: ^8.3.6
+
+minimumReleaseAge: 10080
+
+# esbuild's install script only relocates the binary already shipped via
+# optionalDependencies; approving it silences pnpm's ignored-build warning.
+onlyBuiltDependencies:
+  - esbuild

@@ -1,0 +1,16 @@
+{
+  "name": "@explorations/present",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test 'live/shell/*.test.mjs'"
+  },
+  "dependencies": {
+    "elkjs": "0.12.1"
+  },
+  "sites": {
+    "rebuildOnAnyChange": true
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-shells",
+  "type": "registry:item",
+  "title": "App shell templates",
+  "description": "The frame around an app: side nav, top nav, top and side nav, and messaging.",
+  "author": "MetaLab",
+  "registryDependencies": ["templates-parts"],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/SideNavShell.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SideNavShell.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SideNavShell.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SideNavShell.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/TopNavShell.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/TopNavShell.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/TopNavShell.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/TopNavShell.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/WorkspaceShell.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/WorkspaceShell.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/WorkspaceShell.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/WorkspaceShell.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/MessagingShell.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/MessagingShell.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/MessagingShell.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/MessagingShell.stories.tsx"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

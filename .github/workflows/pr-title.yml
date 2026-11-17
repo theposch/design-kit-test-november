@@ -1,0 +1,31 @@
+name: PR title
+
+# Squash merge (the only method the ruleset allows) uses the PR title as
+# main's commit subject, so titles must satisfy the same commitlint config
+# as local commits. `edited` re-runs the check when the title changes.
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  pr-title:
+    # Dependabot subjects exceed the 50-char cap by design (dependabot.yml);
+    # a skipped job still satisfies the required check.
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+
+      # The title goes through an env var so it can't inject into the shell.
+      - env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: printf '%s\n' "$TITLE" | pnpm exec commitlint

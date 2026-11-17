@@ -1,0 +1,8 @@
+@import '@repo/ui/styles/globals';
+
+/*
+ * The ui package ships source-only behind a workspace symlink, which
+ * Tailwind's automatic content detection does not follow — without this
+ * @source, no class used inside @repo/ui components gets compiled.
+ */
+@source '../../../packages/ui/src';

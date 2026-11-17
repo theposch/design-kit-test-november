@@ -1,0 +1,27 @@
+# A copy made from a folder on this computer keeps that folder as its "origin",
+# so a plain `git push` would write straight into the starter. Refuse pushes to
+# any remote that is a local path; the setup skill renames such an origin to
+# `starter` and asks for the project's own address.
+url="$2"
+case "$url" in
+  /* | ~* | file://* | .* ) local=1 ;;
+  *:*) local= ;;
+  *) local=1 ;;
+esac
+if [ -n "$local" ]; then
+  echo "Refusing to push to '$1' ($url): it is a folder on this computer, not the project's repository."
+  echo "Run the engagement-setup skill, or: git remote rename $1 starter && git remote add origin <project address>"
+  exit 1
+fi
+
+# A copy made from GitHub keeps the starter as its origin until setup re-points
+# it. Once the package is renamed it is a project, so a push to the starter's
+# repository would land client work there.
+starter=$(node -e "try{const r=require('./addons.lock.json').source?.repo??'';console.log(r.replace(/^.*[/:]([^/:]+\/[^/]+?)(\.git)?\/?$/,'\$1').toLowerCase())}catch{}")
+target=$(printf '%s' "$url" | sed -E 's#^.*[/:]([^/:]+/[^/]+)$#\1#; s#\.git/?$##' | tr 'A-Z' 'a-z')
+name=$(node -p "require('./package.json').name")
+if [ -n "$starter" ] && [ "$target" = "$starter" ] && [ "$name" != "${starter#*/}" ]; then
+  echo "Refusing to push to '$1' ($url): that is the starter's repository, and this project is '$name'."
+  echo "Run the engagement-setup skill, or: git remote rename $1 starter && git remote add origin <project address>"
+  exit 1
+fi

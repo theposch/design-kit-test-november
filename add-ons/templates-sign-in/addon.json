@@ -1,0 +1,55 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-sign-in",
+  "type": "registry:item",
+  "title": "Sign-in templates",
+  "description": "Sign-in pages: simple, split with a picture, card, and single sign-on.",
+  "author": "MetaLab",
+  "registryDependencies": ["templates-parts"],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/SignInSimple.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SignInSimple.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SignInSimple.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SignInSimple.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SignInSplit.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SignInSplit.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SignInSplit.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SignInSplit.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SignInCard.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SignInCard.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SignInCard.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SignInCard.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SignInSso.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SignInSso.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SignInSso.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SignInSso.stories.tsx"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

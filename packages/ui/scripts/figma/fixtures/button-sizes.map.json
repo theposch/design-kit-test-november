@@ -1,0 +1,28 @@
+{
+  "story": "components-atoms-button--sizes",
+  "tree": "nodes.0",
+  "nodes": {
+    "root": "#storybook-root > div",
+    "root/Small": "button:nth-child(1)",
+    "root/Small/Label": {
+      "selector": "button:nth-child(1)",
+      "skip": {
+        "box.h": "the text sits in the button itself, so its box is the button's"
+      }
+    },
+    "root/Medium": "button:nth-child(2)",
+    "root/Medium/Label": {
+      "selector": "button:nth-child(2)",
+      "skip": {
+        "box.h": "the text sits in the button itself, so its box is the button's"
+      }
+    },
+    "root/Large": "button:nth-child(3)",
+    "root/Large/Label": {
+      "selector": "button:nth-child(3)",
+      "skip": {
+        "box.h": "the text sits in the button itself, so its box is the button's"
+      }
+    }
+  }
+}

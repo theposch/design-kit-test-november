@@ -1,0 +1,10 @@
+/*
+ * Three screen sizes: phone, tablet and desktop. Styles are written for
+ * phones first; `tablet:` and `desktop:` apply from that width up. Storybook's
+ * viewport toolbar and the visual checkpoint use the same three sizes.
+ */
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 48rem;
+  --breakpoint-desktop: 64rem;
+}

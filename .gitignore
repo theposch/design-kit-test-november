@@ -1,0 +1,23 @@
+node_modules/
+dist/
+storybook-static/
+.turbo/
+*.tsbuildinfo
+*.local.md
+.DS_Store
+
+# addon:claude-design
+.claude-design/
+# /addon:claude-design
+
+# addon:figma-check
+.figma/
+# /addon:figma-check
+
+# addon:taste-review
+.taste/
+# /addon:taste-review
+
+# addon:visual-checkpoints
+.look/
+# /addon:visual-checkpoints

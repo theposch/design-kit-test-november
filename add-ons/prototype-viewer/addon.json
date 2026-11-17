@@ -1,0 +1,321 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prototype-viewer",
+  "type": "registry:item",
+  "title": "Prototype viewer",
+  "description": "Present clickable prototypes to clients in a phone or desktop frame, with rounds and a show-to-client switch per prototype. Based on Marcus Brown's prototype template.",
+  "author": "MetaLab",
+  "registryDependencies": ["explorations"],
+  "files": [
+    {
+      "path": "files/.claude/skills/prototype-viewer/SKILL.md",
+      "type": "registry:file",
+      "target": ".claude/skills/prototype-viewer/SKILL.md"
+    },
+    {
+      "path": "files/explorations/.templates/prototype/prototype.json",
+      "type": "registry:file",
+      "target": "explorations/.templates/prototype/prototype.json"
+    },
+    {
+      "path": "files/explorations/.templates/prototype/src/App.tsx",
+      "type": "registry:file",
+      "target": "explorations/.templates/prototype/src/App.tsx"
+    },
+    {
+      "path": "files/explorations/.templates/prototype/src/useScreen.ts",
+      "type": "registry:file",
+      "target": "explorations/.templates/prototype/src/useScreen.ts"
+    },
+    {
+      "path": "files/explorations/.templates/prototype/tsconfig.json",
+      "type": "registry:file",
+      "target": "explorations/.templates/prototype/tsconfig.json"
+    },
+    {
+      "path": "files/explorations/present/build.mjs",
+      "type": "registry:file",
+      "target": "explorations/present/build.mjs"
+    },
+    {
+      "path": "files/explorations/present/live/choices.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/choices.js"
+    },
+    {
+      "path": "files/explorations/present/live/comments.css",
+      "type": "registry:file",
+      "target": "explorations/present/live/comments.css"
+    },
+    {
+      "path": "files/explorations/present/live/comments.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/comments.js"
+    },
+    {
+      "path": "files/explorations/present/live/frame.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/frame.js"
+    },
+    {
+      "path": "files/explorations/present/live/live.css",
+      "type": "registry:file",
+      "target": "explorations/present/live/live.css"
+    },
+    {
+      "path": "files/explorations/present/live/live.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/live.js"
+    },
+    {
+      "path": "files/explorations/present/live/sets.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/sets.js"
+    },
+    {
+      "path": "files/explorations/present/marcus/css/app.css",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/css/app.css"
+    },
+    {
+      "path": "files/explorations/present/marcus/index.html",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/index.html"
+    },
+    {
+      "path": "files/explorations/present/marcus/js/app.js",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/js/app.js"
+    },
+    {
+      "path": "files/explorations/present/marcus/js/articles.js",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/js/articles.js"
+    },
+    {
+      "path": "files/explorations/present/marcus/js/components.js",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/js/components.js"
+    },
+    {
+      "path": "files/explorations/present/marcus/js/guides.js",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/js/guides.js"
+    },
+    {
+      "path": "files/explorations/present/marcus/js/pointer.js",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/js/pointer.js"
+    },
+    {
+      "path": "files/explorations/present/marcus/js/rotate.js",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/js/rotate.js"
+    },
+    {
+      "path": "files/explorations/present/marcus/js/sets.js",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/js/sets.js"
+    },
+    {
+      "path": "files/explorations/present/marcus/sets/v1.css",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/sets/v1.css"
+    },
+    {
+      "path": "files/explorations/present/marcus/sets/v2.css",
+      "type": "registry:file",
+      "target": "explorations/present/marcus/sets/v2.css"
+    },
+    {
+      "path": "files/explorations/present/package.json",
+      "type": "registry:file",
+      "target": "explorations/present/package.json"
+    },
+    {
+      "path": "files/explorations/present/README.md",
+      "type": "registry:file",
+      "target": "explorations/present/README.md"
+    },
+    {
+      "path": "files/scripts/prototypes/new.mjs",
+      "type": "registry:file",
+      "target": "scripts/prototypes/new.mjs"
+    },
+    {
+      "path": "files/scripts/prototypes/present.mjs",
+      "type": "registry:file",
+      "target": "scripts/prototypes/present.mjs"
+    },
+    {
+      "path": "files/explorations/present/live/escape.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/escape.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell.css",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell.css"
+    },
+    {
+      "path": "files/explorations/present/live/shell/actions.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/actions.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/comments-panel.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/comments-panel.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/dom.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/dom.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/engine.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/engine.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/flow-layout.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/flow-layout.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/flow-view.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/flow-view.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/icons.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/icons.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/index.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/index.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/labels.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/labels.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/model.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/model.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/model.test.mjs",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/model.test.mjs"
+    },
+    {
+      "path": "files/explorations/present/live/shell/panzoom.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/panzoom.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/parts.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/parts.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/popover.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/popover.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/prototype-picker.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/prototype-picker.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/screen-card.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/screen-card.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/screen-picker.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/screen-picker.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/screens-view.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/screens-view.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/settings.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/settings.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/share.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/share.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/store.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/store.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/thumb.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/thumb.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/topbar.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/topbar.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/tap-targets.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/tap-targets.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/menu.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/menu.js"
+    },
+    {
+      "path": "files/explorations/present/live/shell/elk.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/elk.js"
+    },
+    {
+      "path": "files/explorations/present/test/large-prototype.mjs",
+      "type": "registry:file",
+      "target": "explorations/present/test/large-prototype.mjs"
+    },
+    {
+      "path": "files/explorations/present/live/shell/samples.js",
+      "type": "registry:file",
+      "target": "explorations/present/live/shell/samples.js"
+    }
+  ],
+  "meta": {
+    "version": "3.0.1",
+    "owner": "Christian Poschmann",
+    "packageJson": [
+      {
+        "file": "package.json",
+        "scripts": {
+          "new-prototype": "node scripts/prototypes/new.mjs",
+          "present": "node scripts/prototypes/present.mjs"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "file": "CLAUDE.md",
+        "comment": "html",
+        "content": "## Prototype viewer (`explorations/present/`)\n\nPrototypes are explorations with a `prototype.json` (title, description, device, screens); the viewer shows them all to clients at `sites.metalab.com/<project>/present/`. Load the `prototype-viewer` skill before making a prototype or changing what a client sees.\n\n- `pnpm new-prototype <name>` — a new prototype, one screen per `#id` in `prototype.json`.\n- `pnpm present` — build every prototype and the viewer, and show them at http://localhost:4400.\n- A new prototype starts hidden from the client. Staff switch it on in the viewer's Prototypes panel, or Claude does through the Sites connection (the `present` site's `choices` collection).\n- `explorations/present/marcus/` is Marcus Brown's template, kept unchanged; viewer changes go in `explorations/present/live/`."
+      }
+    ]
+  }
+}

@@ -1,0 +1,1234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0f14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Cpath d='M10 7.5l14 8.2-6.1 1.4-2.7 6z' fill='%23fff'/%3E%3C/svg%3E">
+<script>(() => { if (new URLSearchParams(location.search).get('theme') === 'dark') document.documentElement.classList.add('pre-dark'); })();</script>
+<title>WIP Prototype Template</title>
+<script>if (/[?&]embed\b/.test(location.search)) document.documentElement.classList.add('embed');</script>
+<script src="js/sets.js?v=19"></script>
+<link rel="stylesheet" href="css/app.css?v=343">
+</head>
+<body>
+<div id="boot" aria-hidden="true"><div class="boot-ring"><svg viewBox="0 0 120 120" width="120" height="120"><circle class="br-track" cx="60" cy="60" r="58"/><circle class="br-arc" cx="60" cy="60" r="58" pathLength="100"/></svg><svg class="boot-mark" width="26" height="26" viewBox="0 0 184 184" fill="currentColor" aria-label="Metalab"><path d="M130.964 53.0361L184 70.4775V113.521L130.964 130.964L113.521 184H92L114.769 114.769L184 92L114.769 69.2314L92 0L69.2314 69.2314L0 92L69.2314 114.769L92 184H70.4785L53.0361 130.964L0 113.521V70.4775L53.0361 53.0361L70.4785 0H113.521L130.964 53.0361Z"/></svg></div></div>
+<script>
+  // a quick ring round the Metalab mark before anything else appears
+  (() => {
+    const done = () => { document.body.classList.add("booted"); setTimeout(() => document.getElementById("boot")?.remove(), 700); };
+    // the ring fills (CSS, ~0.95s), and once the page is ready it retracts out, then everything appears
+    const t0 = performance.now(), MIN = 1000;
+    const out = () => { document.getElementById("boot")?.classList.add("br-out"); setTimeout(done, 560); };
+    const go = () => setTimeout(out, Math.max(0, MIN - (performance.now() - t0)));
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => document.readyState === "complete" ? go() : addEventListener("load", go));
+  })();
+</script>
+
+<div class="top-left">
+  <button class="notes-switch" role="switch" aria-checked="false" aria-label="Labels" title="Labels — hold for screen notes"><svg class="ns-ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16.5" pathLength="100"/></svg><svg class="ns-ic ns-labels" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg><svg class="ns-ic ns-screen" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h5"/></svg></button>
+  <button class="pointer-switch" role="switch" aria-checked="false" aria-label="Cursor" title="Cursor"><svg width="13" height="13" viewBox="-.3 -1.1 24 24" fill="currentColor"><path d="M5 3.2l13.6 7.9-5.9 1.4-2.6 5.8z"/></svg></button>
+</div>
+<div class="settings-scrim sets-scrim"></div>
+<div class="settings sets">
+  <div class="sm-body">
+    <header class="sets-head"><b>Prototypes</b><span class="sets-nav"><button class="sets-prev" aria-label="Previous set"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button class="sets-next" aria-label="Next set"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></span></header>
+    <div class="sets-list"></div>
+  </div>
+  <button class="settings-btn sets-btn project" aria-expanded="false" aria-label="Prototypes"><span class="sb-ic pj-ic"><svg class="ic-layers" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5" stroke-linecap="round"/></svg><svg class="ic-x" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="pj-k">Project Name</span><span class="pj-n"></span></button>
+</div>
+<nav class="steps" aria-label="Jump to screen">
+  <span class="steps-chip" aria-hidden="true"><i class="sc-ico"></i><span class="sc-labels"></span></span>
+  <i class="steps-hover" aria-hidden="true"></i><i class="steps-pill" aria-hidden="true"></i><button data-step="loader">Intro</button><button data-step="start">Landing</button><button data-step="article">Page</button><button data-step="full">Gallery</button><button data-step="menu">List</button><span class="steps-sep"></span><button data-zoom class="step-full step-zoom" aria-label="All screens" title="All screens"><svg width="15" height="14" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="1.5" y="5" width="5" height="14" rx="1.6"/><rect x="10.5" y="5" width="5" height="14" rx="1.6"/><rect x="19.5" y="5" width="5" height="14" rx="1.6"/></svg></button>
+</nav>
+<div class="settings-scrim"></div>
+<div class="settings">
+  <div class="sm-body">
+    <header class="sets-head settings-head"><b>Settings</b></header>
+    <div class="set-row"><div><span>Skip Intro</span><small>Go straight to the page</small></div><button class="skip-switch" role="switch" aria-checked="false" aria-label="Skip intro" title="Skip the intro"><i></i><svg class="ic-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5.5v13l11-6.5z"/></svg><svg class="ic-skip" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4 5.5v13l8.5-6.5zM12.5 5.5v13l8.5-6.5z"/></svg></button></div>
+    <div class="set-row bg-row"><div><span>Page Background</span><small>The color around the phone</small></div><span class="bg-swatches" role="radiogroup" aria-label="Page background"><button data-bg="auto" aria-label="Auto"></button><button data-bg="#050608" aria-label="Black" style="--c:#050608"></button><button data-bg="#1a1c21" aria-label="Charcoal" style="--c:#1a1c21"></button><button data-bg="#3a3d44" aria-label="Graphite" style="--c:#3a3d44"></button><button data-bg="#8a8f99" aria-label="Grey" style="--c:#8a8f99"></button><button data-bg="#e6e8ec" aria-label="Mist" style="--c:#e6e8ec"></button><button data-bg="#ffffff" aria-label="White" style="--c:#ffffff"></button><button data-bg="#6d4aff" aria-label="Purple" style="--c:#6d4aff"></button><input class="bg-custom" type="color" value="#6d4aff" aria-label="Any color"></span><span class="bg-box"><label class="bg-pick"><i class="bg-sw"></i><span class="bg-hex">Auto</span><input type="color" value="#101217" aria-label="Page background color"></label><button class="bg-reset" aria-label="Back to the theme color" title="Back to the theme color"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></div>
+    <div class="set-row"><div><span>Device</span><small>The frame around the screen</small></div><div class="dd"><button class="dd-btn" aria-haspopup="listbox"><span>iPhone 18 Pro</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="dd-menu" role="listbox"><button data-dev="iphone" role="option">iPhone 18 Pro<svg class="tick" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button><button data-dev="android" role="option">Android<svg class="tick" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button><button data-dev="none" role="option">No frame<svg class="tick" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></div></div></div>
+    <div class="set-row size-row"><div><span>Screen size</span><small>The screen the design is shown on</small></div><div class="dd dd-size"><button class="dd-btn" aria-haspopup="listbox"><span>Fit to window</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="dd-menu" role="listbox"><button data-size="fit" role="option">Fit to window<svg class="tick" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button><button data-size="1440" role="option">1440px<svg class="tick" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button><button data-size="1920" role="option">1920px<svg class="tick" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button><button data-size="2560" role="option">2560px<svg class="tick" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></div></div></div>
+  </div>
+  <button class="settings-btn" aria-expanded="false" aria-label="Settings"><span>Settings</span><span class="sb-ic"><svg class="ic-gear" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg><svg class="ic-x" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></button>
+</div>
+<button class="theme-switch" role="switch" aria-checked="false" aria-label="Light mode" title="Dark / light"><i></i></button>
+<div id="device">
+  <div id="screen">
+      <div class="modes-screen" aria-hidden="true">
+        <div class="ms-top"><span class="sk" style="width:36px;height:36px;border-radius:50%"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:70px;height:9px;"></span><span class="sk" style="width:130px;height:14px;"></span></span><span class="sk" style="width:36px;height:36px;border-radius:50%"></span></div>
+        <div class="ms-bar"><span class="sk" style="width:100%;height:44px;border-radius:22px"></span></div>
+        <div class="ms-body">
+          <section class="ms-state" data-m="m-default"><span class="sk" style="width:96px;height:12px;"></span><div class="ms-rows"><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div></div></section>
+          <section class="ms-state" data-m="m-loading"><span class="ms-spin"></span><div class="ms-rows ms-pulse"><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div><div class="ms-row"><span class="sk ms-th"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px;"></span><span class="sk" style="width:46%;height:9px;"></span></span><span class="sk" style="width:22px;height:22px;border-radius:50%"></span></div></div></section>
+          <section class="ms-state" data-m="m-empty"><div class="ms-center"><span class="ms-ic "><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 7l2-3h12l2 3"/><path d="M10 12h4"/></svg></span><span class="sk-lines ms-copy"><span class="sk" style="width:58%;height:14px;margin:0 auto"></span><span class="sk" style="width:80%;height:10px;margin:0 auto"></span><span class="sk" style="width:64%;height:10px;margin:0 auto"></span></span><span class="ms-btn"><span class="sk" style="width:70px;height:10px;"></span></span></div></section>
+          <section class="ms-state" data-m="m-error"><div class="ms-center"><span class="ms-ic ms-warn"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4"/><path d="M12 17.5v.5"/></svg></span><span class="sk-lines ms-copy"><span class="sk" style="width:58%;height:14px;margin:0 auto"></span><span class="sk" style="width:80%;height:10px;margin:0 auto"></span><span class="sk" style="width:64%;height:10px;margin:0 auto"></span></span><span class="ms-btn"><span class="sk" style="width:70px;height:10px;"></span></span></div></section>
+          <section class="ms-state" data-m="m-success"><div class="ms-center"><span class="ms-ic ms-ok"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="sk-lines ms-copy"><span class="sk" style="width:58%;height:14px;margin:0 auto"></span><span class="sk" style="width:80%;height:10px;margin:0 auto"></span><span class="sk" style="width:64%;height:10px;margin:0 auto"></span></span><span class="ms-btn"><span class="sk" style="width:70px;height:10px;"></span></span></div></section>
+        </div>
+      </div>
+      <div class="land" aria-hidden="true">
+        <section class="ld ld-start">
+          <div class="ld-col">
+            <div class="ld-top"><span class="sk sk-c" style="width:36px;height:36px"></span><span class="sk-lines"><span class="sk" style="width:70px;height:8px"></span><span class="sk" style="width:120px;height:12px"></span></span></div>
+            <div class="sk sk-pill" style="height:40px;margin-top:18px"></div>
+            <div class="ld-tiles"><span class="sk"></span><span class="sk"></span><span class="sk"></span></div>
+          </div>
+          <div class="ld-col"><span class="sk" style="width:90px;height:12px"></span><div class="ld-rows"><div class="ld-row"><span class="sk ld-th" style="width:44px;height:44px"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:70%;height:10px"></span><span class="sk" style="width:45%;height:8px"></span></span></div><div class="ld-row"><span class="sk ld-th" style="width:44px;height:44px"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:70%;height:10px"></span><span class="sk" style="width:45%;height:8px"></span></span></div><div class="ld-row"><span class="sk ld-th" style="width:44px;height:44px"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:70%;height:10px"></span><span class="sk" style="width:45%;height:8px"></span></span></div></div>
+            <div class="ld-cta"><span class="sk" style="width:110px;height:11px"></span><i></i></div>
+          </div>
+        </section>
+        <section class="ld ld-loader"><span class="ld-ring"><i class="rl-comet"></i><svg viewBox="0 0 88 88" width="150" height="150"><circle class="rl-track" cx="44" cy="44" r="40"/><circle class="rl-arc" cx="44" cy="44" r="40" pathLength="100"/></svg><b class="ld-pct">0</b></span></section>
+        <section class="ld ld-article">
+          <div class="ld-hero"><svg width="54" height="42" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></div>
+          <div class="ld-text"><span class="sk" style="width:60px;height:8px"></span><span class="sk-lines" style="margin-top:12px"><span class="sk" style="width:92%;height:18px"></span><span class="sk" style="width:70%;height:18px"></span></span><span class="sk-lines" style="margin-top:14px"><span class="sk" style="width:100%;height:10px"></span><span class="sk" style="width:84%;height:10px"></span></span><span class="sk-lines" style="margin-top:18px"><span class="sk" style="width:100%;height:9px"></span><span class="sk" style="width:97%;height:9px"></span><span class="sk" style="width:100%;height:9px"></span><span class="sk" style="width:90%;height:9px"></span><span class="sk" style="width:60%;height:9px"></span></span></div>
+        </section>
+        <section class="ld ld-full"><div class="ld-track"><span class="ld-slide" style="--sh:.12"><svg width="54" height="42" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></span><span class="ld-slide" style="--sh:.22"><svg width="54" height="42" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></span><span class="ld-slide" style="--sh:.32"><svg width="54" height="42" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></span><span class="ld-slide" style="--sh:.18"><svg width="54" height="42" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></span></div><div class="ld-dots"><i class="on"></i><i></i><i></i><i></i></div></section>
+        <section class="ld ld-menu"><div class="ld-head"><span class="sk" style="width:120px;height:14px"></span><span class="sk" style="width:180px;height:8px"></span></div><div class="ld-grid"><div class="ld-card"><span class="ld-cimg"></span><span class="sk" style="width:80%;height:9px"></span><span class="sk" style="width:55%;height:8px"></span></div><div class="ld-card"><span class="ld-cimg"></span><span class="sk" style="width:80%;height:9px"></span><span class="sk" style="width:55%;height:8px"></span></div><div class="ld-card"><span class="ld-cimg"></span><span class="sk" style="width:80%;height:9px"></span><span class="sk" style="width:55%;height:8px"></span></div><div class="ld-card"><span class="ld-cimg"></span><span class="sk" style="width:80%;height:9px"></span><span class="sk" style="width:55%;height:8px"></span></div><div class="ld-card"><span class="ld-cimg"></span><span class="sk" style="width:80%;height:9px"></span><span class="sk" style="width:55%;height:8px"></span></div><div class="ld-card"><span class="ld-cimg"></span><span class="sk" style="width:80%;height:9px"></span><span class="sk" style="width:55%;height:8px"></span></div><div class="ld-card"><span class="ld-cimg"></span><span class="sk" style="width:80%;height:9px"></span><span class="sk" style="width:55%;height:8px"></span></div><div class="ld-card"><span class="ld-cimg"></span><span class="sk" style="width:80%;height:9px"></span><span class="sk" style="width:55%;height:8px"></span></div></div></section>
+      </div>
+    <header class="status" aria-hidden="true">
+      <span class="time">9:41</span>
+      <span class="island"></span>
+      <span class="icons">
+        <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor"><path d="M0.58 3.48A11.2 11.2 0 0 1 16.42 3.48L14.79 5.11A8.9 8.9 0 0 0 2.21 5.11ZM3.20 6.10A7.5 7.5 0 0 1 13.80 6.10L12.18 7.72A5.2 5.2 0 0 0 4.82 7.72ZM8.5 11.4L5.95 8.85A3.6 3.6 0 0 1 11.05 8.85Z" stroke="currentColor" stroke-width=".6" stroke-linejoin="round"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="23" height="12" rx="3.8" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2.4" fill="currentColor"/><path d="M25.3 4.5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".4"/></svg>
+      </span>
+    </header>
+
+    <!-- ── home ─────────────────────────────────────────────── -->
+    <main id="home">
+      <div class="top">
+        <span class="sk sk-c" style="width:40px;height:40px"></span>
+        <span class="sk-lines g-head"><span class="sk" style="width:68px;height:9px"></span><span class="sk" style="width:128px;height:14px"></span></span>
+        <span class="sk-fill"></span>
+        <span class="top-nav wide-only"><span class="sk" style="width:56px;height:10px"></span><span class="sk" style="width:72px;height:10px"></span><span class="sk" style="width:48px;height:10px"></span><span class="sk" style="width:64px;height:10px"></span></span><span class="sk sk-c" style="width:40px;height:40px"></span>
+      </div>
+      <div class="search sk sk-pill"></div>
+      <section class="wide-hero wide-only"><div class="wh-text"><span class="sk" style="width:30%;height:10px"></span><span class="sk-lines" style="margin-top:18px"><span class="sk" style="width:88%;height:30px"></span><span class="sk" style="width:64%;height:30px"></span></span><span class="sk-lines" style="margin-top:20px"><span class="sk" style="width:92%;height:11px"></span><span class="sk" style="width:80%;height:11px"></span><span class="sk" style="width:55%;height:11px"></span></span></div><div class="wh-img"><svg width="64" height="50" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.5)" stroke-width="2.5" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></div></section>
+      <h2><span class="sk" style="width:96px;height:13px"></span></h2>
+      <div class="tiles"><div class="tile"><span class="sk tile-img"></span><span class="sk" style="width:70%;height:9px"></span></div><div class="tile"><span class="sk tile-img"></span><span class="sk" style="width:70%;height:9px"></span></div><div class="tile"><span class="sk tile-img"></span><span class="sk" style="width:70%;height:9px"></span></div><div class="tile"><span class="sk tile-img"></span><span class="sk" style="width:70%;height:9px"></span></div></div>
+
+      <!-- the entry point: its stroke becomes the loader -->
+      <button class="brief" aria-label="Open">
+        <span class="stroke"></span><span class="stroke glint"></span>
+        <span class="globe"></span>
+        <span class="b-text"><span class="sk" style="width:120px;height:12px"></span></span><span class="b-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </button>
+
+      <h2 class="list-h"><span class="sk" style="width:84px;height:13px"></span></h2>
+      <div class="list"><div class="row"><span class="sk row-img"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:46%;height:9px"></span></span><span class="sk sk-c" style="width:28px;height:28px"></span></div><div class="row"><span class="sk row-img"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:46%;height:9px"></span></span><span class="sk sk-c" style="width:28px;height:28px"></span></div><div class="row"><span class="sk row-img"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:46%;height:9px"></span></span><span class="sk sk-c" style="width:28px;height:28px"></span></div><div class="row"><span class="sk row-img"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:46%;height:9px"></span></span><span class="sk sk-c" style="width:28px;height:28px"></span></div><div class="row"><span class="sk row-img"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:46%;height:9px"></span></span><span class="sk sk-c" style="width:28px;height:28px"></span></div><div class="row"><span class="sk row-img"></span><span class="sk-lines" style="flex:1"><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:46%;height:9px"></span></span><span class="sk sk-c" style="width:28px;height:28px"></span></div></div>
+      <button class="view-all" aria-label="View all"><span class="sk" style="width:64px;height:10px"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <h2 class="wf-h wide-only"><span class="sk" style="width:110px;height:13px"></span></h2>
+      <section class="wide-feat wide-only"><div class="wf-big"><span class="wf-img"></span><span class="sk-lines"><span class="sk" style="width:26%;height:9px"></span><span class="sk" style="width:84%;height:20px"></span><span class="sk" style="width:58%;height:20px"></span><span class="sk" style="width:90%;height:10px"></span></span></div><div class="wf-side"><div class="wf-card"><span class="wf-img"></span><span class="sk-lines"><span class="sk" style="width:34%;height:8px"></span><span class="sk" style="width:92%;height:12px"></span><span class="sk" style="width:64%;height:12px"></span></span></div><div class="wf-card"><span class="wf-img"></span><span class="sk-lines"><span class="sk" style="width:34%;height:8px"></span><span class="sk" style="width:92%;height:12px"></span><span class="sk" style="width:64%;height:12px"></span></span></div></div></section>
+      <section class="wide-news wide-only"><span class="sk-lines"><span class="sk" style="width:200px;height:16px"></span><span class="sk" style="width:280px;height:10px"></span></span><span class="wn-form"><span class="wn-input"></span><span class="wn-btn"></span></span></section>
+      <footer class="wide-foot wide-only"><div class="sk-lines"><span class="sk" style="width:70px;height:11px"></span><span class="sk" style="width:96px;height:8px"></span><span class="sk" style="width:80px;height:8px"></span><span class="sk" style="width:88px;height:8px"></span></div><div class="sk-lines"><span class="sk" style="width:70px;height:11px"></span><span class="sk" style="width:96px;height:8px"></span><span class="sk" style="width:80px;height:8px"></span><span class="sk" style="width:88px;height:8px"></span></div><div class="sk-lines"><span class="sk" style="width:70px;height:11px"></span><span class="sk" style="width:96px;height:8px"></span><span class="sk" style="width:80px;height:8px"></span><span class="sk" style="width:88px;height:8px"></span></div><div class="sk-lines"><span class="sk" style="width:70px;height:11px"></span><span class="sk" style="width:96px;height:8px"></span><span class="sk" style="width:80px;height:8px"></span><span class="sk" style="width:88px;height:8px"></span></div></footer>
+    </main>
+
+    <nav class="tabbar" id="tabbar"><a class="on"><span class="sk sk-c" style="width:24px;height:24px"></span><span class="sk" style="width:36px;height:8px"></span></a><a><span class="sk sk-c" style="width:24px;height:24px"></span><span class="sk" style="width:36px;height:8px"></span></a><a><span class="sk sk-c" style="width:24px;height:24px"></span><span class="sk" style="width:36px;height:8px"></span></a><a><span class="sk sk-c" style="width:24px;height:24px"></span><span class="sk" style="width:36px;height:8px"></span></a></nav>
+
+    <!-- ── loader ───────────────────────────────────────────── -->
+    <div id="loader" aria-live="polite">
+      <div class="morph"><img class="m-img" alt=""><span class="stroke"></span><span class="stroke comet"></span><span class="globe spin"></span><span class="ring-loader"><svg viewBox="0 0 88 88" width="88" height="88"><circle class="rl-track" cx="44" cy="44" r="40"/><circle class="rl-arc" cx="44" cy="44" r="40" pathLength="100"/></svg><i class="rl-comet"></i><b class="rl-pct">0</b></span></div>
+      <div class="l-text">
+        <div class="eyebrow"><span class="cat">Step one</span></div>
+        <p>Loading content...</p>
+      </div>
+    </div>
+
+    <!-- ── articles ────────────────────────────────────────── -->
+    <section id="article">
+      <div class="pages"></div>
+      <!-- overview: the brief as a sideways menu, after "all caught up" -->
+      <div id="overview"><div class="ov-head"><span class="sk" style="width:120px;height:18px"></span><span class="sk" style="width:190px;height:9px"></span></div><div class="ov-track"></div><div class="ov-dots" aria-hidden="true"></div></div>
+      <div class="flyer"><img alt=""><span class="f-edge"></span><span class="f-text"><span class="ov-meta"></span><span class="ov-title"></span></span></div>
+
+      <div class="fs-view" aria-hidden="true">
+        <i class="fs-anchor" aria-hidden="true"></i><div class="fs-media"><div class="fs-track"><span class="fs-slide" style="--sh:.10"><svg width="64" height="50" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></span><span class="fs-slide" style="--sh:.2"><svg width="64" height="50" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></span><span class="fs-slide" style="--sh:.3"><svg width="64" height="50" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></span><span class="fs-slide" style="--sh:.16"><svg width="64" height="50" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></span><span class="fs-slide" style="--sh:.10"><svg width="64" height="50" viewBox="0 0 60 46" fill="none" stroke="rgba(160,166,178,.55)" stroke-width="3" stroke-linejoin="round"><rect x="0" y="0" width="60" height="46" rx="6"/><circle cx="18" cy="16" r="5"/><path d="M4 42l16-16 12 10 8-6 16 12"/></svg></span></div></div>
+        <button class="fs-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <div class="fs-cap sk-lines"><span class="sk" style="width:62%;height:12px"></span><span class="sk" style="width:40%;height:9px"></span></div>
+        <div class="fs-thumbs wide-only"><i class="on"></i><i></i><i></i><i></i></div><div class="fs-dots"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+      <header class="a-top">
+        <button class="a-save" aria-label="Save"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M6 3.5h12v17l-6-4.2-6 4.2z"/></svg></button><span class="a-brand"><span class="ab-name"><span class="sk" style="width:112px;height:11px"></span></span><span class="ab-date"><span class="sk" style="width:64px;height:8px"></span></span></span><i class="a-read" aria-hidden="true"></i>
+        <span class="a-actions"><button class="a-more" aria-label="More"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/></svg></button>
+        <button class="a-close" aria-label="Back"><svg class="dash" viewBox="0 0 44 44" width="44" height="44"></svg><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button></span>
+      </header>
+
+    </section>
+
+    <div class="home-bar" aria-hidden="true"></div>
+  </div>
+</div>
+
+<script src="js/articles.js?v=16"></script>
+<script src="js/app.js?v=108"></script>
+<script src="js/guides.js?v=57"></script>
+<script src="js/pointer.js?v=8"></script>
+<script src="js/rotate.js?v=18"></script>
+<script>
+  // pagination. Collapsed, one pill in the middle shows the current screen
+  // (its label crossfades as you step through; it never moves). Hover and
+  // that pill slides onto the current step while the other steps slide out
+  // from the centre; leave and they gather back into it.
+  (() => {
+    const nav = document.querySelector('.steps');
+    const pill = nav.querySelector('.steps-pill'), ghost = nav.querySelector('.steps-hover');
+    const chip = nav.querySelector('.steps-chip'), labels = chip.querySelector('.sc-labels');
+    const btns = [...nav.querySelectorAll('button[data-step]')], items = [...nav.querySelectorAll('button, .steps-sep')];
+    let at = null, pending = null, pendingT = 0, closeT = 0, chipW = 0, hovT = 0;
+    const isOpen = () => nav.classList.contains('open');
+    const cur = () => btns.find(b => b.getAttribute('aria-current') === 'true');
+    // the pill: on the current step when open, the chip's shape when closed
+    const placePill = () => {
+      const c = cur(); if (!c) return;
+      const shift = nav.classList.contains('closing') ? parseFloat(nav.style.getPropertyValue('--open-shift')) || 0 : 0;
+      const x = isOpen() ? c.offsetLeft : (nav.offsetWidth - chipW) / 2 - shift, w = isOpen() ? c.offsetWidth : chipW;
+      pill.style.transform = `translateX(${x}px)`; pill.style.width = w + 'px';
+    };
+    // every step's offset from the centre: closed, they sit there, gathered
+    const gather = () => {
+      const c0 = cur(), mid = c0 ? c0.offsetLeft + c0.offsetWidth / 2 : nav.offsetWidth / 2, ci = btns.indexOf(c0);   // they fold into the current step
+      items.forEach(el => {
+        const i = btns.includes(el) ? btns.indexOf(el) : btns.length;
+        el.style.setProperty('--dx', (mid - (el.offsetLeft + el.offsetWidth / 2)) * .72 + 'px');
+        el.style.setProperty('--d', `${Math.abs(i - ci) * 35}ms`);
+      });
+    };
+    // opening: the bar is anchored so the current step lands exactly where the chip was
+    // (under the pointer) — the others unfold round it, and nothing new slides under the cursor
+    // (the open bar stays centred on the screen; the hover delay keeps a step that slides under the pointer from lighting up at once)
+    const anchor = () => nav.style.setProperty('--open-shift', '0px');
+    const open = () => { clearTimeout(closeT); if (isOpen() || innerWidth <= 500) return; clearTimeout(unshiftT); nav.classList.remove('closing'); anchor(); gather(); nav.classList.add('open'); placePill(); };   // (on a phone the label is just a label: the arrows step)
+    let unshiftT = 0;
+    const close = () => { clearTimeout(closeT); closeT = setTimeout(() => {
+      clearTimeout(hovT);
+      nav.classList.add('closing'); nav.classList.remove('open'); ghost.classList.remove('on'); btns.forEach(x => x.classList.remove('hov')); placePill();
+      // once folded, the bar returns to centre in one frame (the pill with it, so it doesn't move on screen)
+      clearTimeout(unshiftT); unshiftT = setTimeout(() => { if (isOpen()) return; pill.style.transition = 'none'; nav.classList.remove('closing'); placePill(); pill.offsetWidth; pill.style.transition = ''; }, 480);
+    }, 140); };
+    chip.addEventListener('pointerenter', open);
+    nav.addEventListener('pointerenter', () => isOpen() && open());
+    nav.addEventListener('pointerleave', close);
+    nav.addEventListener('focusin', open);
+    nav.addEventListener('focusout', e => { if (!nav.contains(e.relatedTarget)) close(); });
+
+    const place = (el, b) => { el.style.transform = `translateX(${b.offsetLeft}px)`; el.style.width = b.offsetWidth + 'px'; };
+    btns.forEach(b => {
+      // the pill moves the moment you click; the screen catches up
+      b.addEventListener('click', () => { pending = b.dataset.step; pendingT = performance.now(); show(pending); window.proto.step(pending); });
+      // the hover highlight waits a moment before moving, so passing across the steps doesn't flicker
+      b.addEventListener('pointerenter', () => {
+        clearTimeout(hovT);
+        hovT = setTimeout(() => {
+          if (!isOpen()) return;
+          if (!ghost.classList.contains('on')) { ghost.style.transition = 'none'; place(ghost, b); ghost.offsetWidth; ghost.style.transition = ''; }
+          place(ghost, b); ghost.classList.add('on');
+          btns.forEach(x => x.classList.toggle('hov', x === b));
+        }, ghost.classList.contains('on') ? 90 : 160);
+      });
+      b.addEventListener('pointerleave', () => clearTimeout(hovT));
+    });
+
+    // the chip's label crossfades; its width (and the pill under it) eases to fit
+    const setChip = (text, instant) => {
+      const old = labels.querySelector('.sc-l.cur');
+      if (old && old.textContent === text) return;
+      labels.querySelectorAll('.sc-l:not(.cur)').forEach(x => x.remove());
+      const el = document.createElement('span'); el.className = 'sc-l'; el.textContent = text;
+      labels.appendChild(el);
+      const w = el.offsetWidth;
+      chipW = w + 28;                                   // padding 14 either side
+      if (instant || !old) { labels.style.transition = pill.style.transition = 'none'; }
+      labels.style.width = w + 'px';
+      if (!isOpen()) placePill();
+      if (instant || !old) { labels.offsetWidth; labels.style.transition = pill.style.transition = ''; }
+      el.offsetWidth; el.classList.add('cur');
+      if (old) { old.classList.remove('cur'); old.classList.add('out'); setTimeout(() => old.remove(), 400); }
+    };
+
+    const show = (step, instant) => {
+      const c = btns.find(b => b.dataset.step === step);
+      if (!c) return false;                            // (a step the bar doesn't hold right now, e.g. mid-swap to modes)
+      btns.forEach(b => b.setAttribute('aria-current', b === c));
+      if (!document.body.classList.contains('zoom-open')) setChip(c.textContent, instant);
+      if (isOpen()) placePill();
+      return true;
+    };
+    const sync = () => {
+      const now = window.proto.at();
+      // hold a clicked step until the prototype gets there (or 4s pass)
+      if (pending) { if (now === pending || performance.now() - pendingT > 4000) pending = null; else return; }
+      if (now === at) return;
+      const first = at === null;
+      if (show(now, first) !== false) at = now;        // (not yet on the bar — mid-swap of sets — so it's tried again next time)
+    };
+    setInterval(sync, 150); sync(); gather();
+    // the bar changes width when Skip intro hides the Intro step: re-centre the pill (no slide) and re-gather
+    let wasSkip = document.body.classList.contains('skip-loader');
+    new MutationObserver(() => {
+      const sk = document.body.classList.contains('skip-loader');
+      if (sk === wasSkip) return; wasSkip = sk;
+      pill.style.transition = 'none'; gather(); placePill(); pill.offsetWidth; pill.style.transition = '';
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    addEventListener('resize', () => { pill.style.transition = 'none'; gather(); placePill(); pill.offsetWidth; pill.style.transition = ''; });
+    // zoomed out to every screen: the chip reads "All"
+    let wasZ = false;
+    new MutationObserver(() => {
+      const z = document.body.classList.contains('zoom-open');
+      if (z === wasZ) return; wasZ = z;
+      setChip(z ? 'All' : (cur()?.textContent || ''));
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    document.fonts && document.fonts.ready.then(() => { const a = at; at = null; labels.innerHTML = ''; if (a) show(a, true); sync(); gather(); });
+  })();
+</script>
+<script>
+  // settings: the button grows into the panel (and folds back into it)
+  (() => {
+    const wrap = document.querySelector('.settings:not(.sets)'), btn = wrap.querySelector('.settings-btn'), scrim = document.querySelector('.settings-scrim:not(.sets-scrim)');
+    const label = btn.querySelector('span');
+    // --bw: the button's width (the panel grows out of it); --slide: how far
+    // the label travels to sit on the panel's left edge while it is open
+    const size = () => {
+      wrap.style.setProperty('--bw', btn.offsetWidth + 'px');
+      const w = wrap.getBoundingClientRect(), l = label.getBoundingClientRect(), t = label.style.transform;
+      wrap.style.setProperty('--slide', (w.left + 18 - (l.left - (wrap.classList.contains('open') ? parseFloat(getComputedStyle(wrap).getPropertyValue('--slide')) || 0 : 0))) + 'px');
+    };
+    const set = on => { size(); wrap.classList.toggle('open', on); scrim.classList.toggle('open', on); btn.setAttribute('aria-expanded', on); };
+    btn.addEventListener('click', () => set(!wrap.classList.contains('open')));
+    scrim.addEventListener('click', () => set(false));
+    addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+    size(); document.fonts && document.fonts.ready.then(size);
+  })();
+</script>
+<script>
+  // settings: page background and device frame, remembered between visits
+  (() => {
+    const store = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
+    const read = k => { try { return localStorage.getItem(k); } catch { return null; } };
+
+    // background: one slider, black to white through cool greys; double-click resets to the theme's.
+    // The page's own tone (light or dark) sets the chrome round the phone (body.page-light).
+    // "Dark mode": changes the page too, or only the design (the page stays light).
+    const box = document.querySelector('.bg-box'), pick = box.querySelector('input'), sw = box.querySelector('.bg-sw'), hex = box.querySelector('.bg-hex');
+    const scopeSw = document.querySelector('.scope-switch');
+    const body = document.body;
+    const THEME = { dark: '#101217', light: '#e6e8ec' };   // the page around the phone, per theme
+    const lum = h => { const n = parseInt(h.slice(1), 16), c = [n >> 16, n >> 8 & 255, n & 255].map(v => { v /= 255; return v <= .04 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; };
+    let picked = null, designOnly = false;   // (the page always follows dark mode)
+    const apply = () => {
+      const auto = designOnly || !body.classList.contains('light') ? (designOnly ? THEME.light : THEME.dark) : THEME.light;
+      // a picked colour is for light mode only: dark mode keeps its own page (the pick is kept for next time)
+      const bg = body.classList.contains('light') ? picked : null;
+      const c = bg || auto;
+      body.classList.toggle('page-light', lum(c) > .3);
+      body.style.background = bg ? bg : designOnly ? THEME.light : '';
+      body.classList.toggle('custom-bg', !!bg);   // (a picked colour outranks the theme's own page colour, on a phone too)
+      sw.style.background = c; pick.value = c;
+      hex.textContent = bg ? bg.toUpperCase() : 'Auto';
+      box.classList.toggle('custom', !!bg);
+      const swList = [...document.querySelectorAll('.bg-swatches button')];
+      swList.forEach(b => b.setAttribute('aria-checked', b.dataset.bg === 'auto' ? !bg : (bg || '').toLowerCase() === b.dataset.bg));
+      document.querySelector('.bg-custom')?.classList.toggle('on', !!bg && !swList.some(b => (bg || '').toLowerCase() === b.dataset.bg));
+      scopeSw?.setAttribute('aria-checked', designOnly);
+    };
+    const setBg = v => { picked = v; store('proto-bg', v || ''); apply(); };
+    pick.addEventListener('input', () => setBg(pick.value));
+    // phone: swatches instead of the picker (it doesn't open reliably on every phone)
+    const sws = [...document.querySelectorAll('.bg-swatches button')];
+    const markSw = () => sws.forEach(b => b.setAttribute('aria-checked', (b.dataset.bg === 'auto' ? !picked : (picked || '').toLowerCase() === b.dataset.bg)));
+    sws.forEach(b => b.addEventListener('click', () => { setBg(b.dataset.bg === 'auto' ? null : b.dataset.bg); markSw(); }));
+    // …and a real color input, tapped directly (phones open their own picker for it): any color
+    const custom = document.querySelector('.bg-custom');
+    custom.addEventListener('input', () => { setBg(custom.value); markSw(); custom.classList.add('on'); });
+    custom.addEventListener('change', () => { setBg(custom.value); markSw(); });
+    box.querySelector('.bg-reset').addEventListener('click', () => setBg(null));
+    scopeSw?.addEventListener('click', () => { designOnly = !designOnly; store('proto-theme-scope', designOnly ? 'design' : 'page'); setBg(null); });
+    picked = /^#[0-9a-f]{6}$/i.test(read('proto-bg') || '') ? read('proto-bg') : null;
+    // switching dark / light: dark mode shows its own page, light mode the colour picked for it
+    let wasLight = body.classList.contains('light');
+    new MutationObserver(() => {
+      const now = body.classList.contains('light');
+      if (now === wasLight) return;
+      wasLight = now;
+      apply();
+    }).observe(body, { attributes: true, attributeFilter: ['class'] });
+    apply();
+
+    // device: a dropdown
+    const dd = document.querySelector('.dd'), ddBtn = dd.querySelector('.dd-btn'), opts = [...dd.querySelectorAll('[data-dev]')];
+    window.protoSetDev = v => setDev(v);
+    const setDev = v => {
+      ['iphone', 'android', 'ipad', 'desktop', 'none'].forEach(d => document.body.classList.toggle('dev-' + d, d === v));
+      if (v === 'ipad' || v === 'desktop') { document.body.classList.remove('rotated'); document.querySelector('#device').style.setProperty('--rot', '0deg'); }
+      document.querySelector('.zoom-view')?.querySelectorAll('.zv-card').forEach(c => c._ok = false);   // the small copies follow the device
+      const o = opts.find(x => x.dataset.dev === v) || opts[0];
+      opts.forEach(x => x.setAttribute('aria-selected', x === o));
+      ddBtn.firstElementChild.textContent = o.textContent;
+      store('proto-device-2', v);
+      dispatchEvent(new Event('resize'));
+    };
+    ddBtn.addEventListener('click', e => { e.stopPropagation(); dd.classList.toggle('open'); });
+    opts.forEach(o => o.addEventListener('click', e => { e.stopPropagation(); setDev(o.dataset.dev); dd.classList.remove('open'); }));
+    addEventListener('click', e => { if (!e.target.closest('.dd')) dd.classList.remove('open'); });
+    const chosen = () => ['iphone', 'android', 'none'].includes(read('proto-device-2')) ? read('proto-device-2') : 'iphone';
+    // V.1 is desktop screens: the browser window frame, whatever device is set (the setting comes back for the others)
+    const frameFor = () => document.documentElement.classList.contains('proto-desktop') ? 'desktop' : chosen();
+    const setFrame = () => { const keep = read('proto-device-2'); setDev(frameFor()); if (frameFor() === 'desktop') { try { keep ? localStorage.setItem('proto-device-2', keep) : localStorage.removeItem('proto-device-2'); } catch {} } };
+    setFrame();
+    addEventListener('proto-set', () => requestAnimationFrame(setFrame));
+
+    // screen size (desktop screens only): the width the design lays out at. The window keeps its
+    // place and size on the page; the design is drawn at that width and scaled evenly to fit it
+    const sd = document.querySelector('.dd-size'), sBtn = sd.querySelector('.dd-btn'), sOpts = [...sd.querySelectorAll('[data-size]')];
+    const setSize = v => {
+      const o = sOpts.find(x => x.dataset.size === v) || sOpts[0];
+      sOpts.forEach(x => x.setAttribute('aria-selected', x === o));
+      sBtn.firstElementChild.textContent = o.textContent;
+      document.documentElement.dataset.screen = o.dataset.size;
+      store('proto-screen', o.dataset.size);
+      dispatchEvent(new Event('resize'));
+    };
+    sBtn.addEventListener('click', e => { e.stopPropagation(); dd.classList.remove('open'); sd.classList.toggle('open'); });
+    sOpts.forEach(o => o.addEventListener('click', e => { e.stopPropagation(); setSize(o.dataset.size); sd.classList.remove('open'); }));
+    addEventListener('click', e => { if (!e.target.closest('.dd-size')) sd.classList.remove('open'); });
+    setSize(read('proto-screen') || 'fit');
+  })();
+</script>
+<script>
+  // the loader step: a completion ring — it fills 0 → 100 with the count,
+  // then retracts out (its tail running round to meet its head) just before
+  // the page is revealed
+  (() => {
+    const b = document.body, ring = document.querySelector('.ring-loader'), arc = ring.querySelector('.rl-arc'), pct = document.querySelector('.rl-pct');
+    const FILL = 2100;                                   // within app.js' LOAD_MS (2800), leaving time to retract
+    const hold = /[?&]hold\b/.test(location.search);    // a thumbnail stays full
+    let raf = 0, t0 = 0;
+    const set = p => { arc.style.strokeDasharray = `${p} 100`; pct.textContent = Math.round(p); };
+    const reset = () => { ring.classList.remove('rl-done'); arc.style.transition = 'none'; arc.style.strokeDashoffset = '0'; arc.offsetWidth; arc.style.transition = ''; set(0); };
+    const tick = t => {
+      const k = Math.min(1, (t - t0) / FILL);
+      set((1 - Math.pow(1 - k, 2.4)) * 100);
+      if (k >= 1) { if (!hold) { arc.style.strokeDasharray = '100 100'; ring.classList.add('rl-done'); } return; }
+      if (b.classList.contains('brief-ready') && !b.classList.contains('brief-reveal')) raf = requestAnimationFrame(tick);
+    };
+    let was = false;
+    new MutationObserver(() => {
+      const ready = b.classList.contains('brief-ready') && !b.classList.contains('brief-reveal');
+      if (ready && !was) { cancelAnimationFrame(raf); reset(); t0 = performance.now(); raf = requestAnimationFrame(tick); }
+      if (!b.classList.contains('brief-open')) { cancelAnimationFrame(raf); reset(); }
+      was = ready;
+    }).observe(b, { attributes: true, attributeFilter: ['class'] });
+    reset();
+  })();
+</script>
+<div class="zoom-view" aria-hidden="true"><div class="zv-row"></div></div>
+<script>
+  // zoom out: every screen side by side as a small phone; pick one to go there.
+  // Each is the prototype itself in an iframe (?embed), sent to its step.
+  (() => {
+    if (document.documentElement.classList.contains('embed')) return;
+    const view = document.querySelector('.zoom-view'), row = view.querySelector('.zv-row');
+    const btn = document.querySelector('[data-zoom]');
+    const steps = [...document.querySelectorAll('.steps [data-step]')].map(b => [b.dataset.step, b.textContent]);
+    row.innerHTML = steps.map(([k, label], i) => `<button class="zv-card" data-go="${k}" style="--i:${i}"><span class="zv-phone"><span class="zv-dev"><span class="zv-scr"><iframe tabindex="-1" title="${label}"></iframe></span></span></span><span class="zv-label">${label}</span></button>`).join('');
+    const cards = [...row.children];
+    const BUILD = Date.now().toString(36);
+    // each small phone is the real device, frame and all, drawn at full size
+    // and scaled down — so it matches the big one exactly when it flies up
+    const device = document.querySelector('#device'), screenEl = document.querySelector('#screen');
+    let DW = 422, DH = 894, realDH = 894, realSH = 874;
+    const dress = () => {
+      const ds = getComputedStyle(device), ss = getComputedStyle(screenEl);
+      DW = device.offsetWidth; realDH = DH = device.offsetHeight; realSH = screenEl.offsetHeight;
+      // desktop windows: every thumbnail a 16:9 window (its screen laid out at that height), whatever shape the page gives the real one
+      let SH = realSH;
+      if (document.body.classList.contains('dev-desktop')) { DH = Math.round(DW * 9 / 16); SH = DH - (realDH - realSH); }
+      view.style.setProperty('--dw', DW + 'px'); view.style.setProperty('--dh', DH + 'px');
+      view.style.setProperty('--sh', SH + 'px'); view.style.setProperty('--sw', screenEl.offsetWidth + 'px');
+      view.style.setProperty('--dpad', ds.padding); view.style.setProperty('--dr', ds.borderRadius);
+      view.style.setProperty('--dbg', ds.backgroundColor); view.style.setProperty('--dbgi', ds.backgroundImage); view.style.setProperty('--dshadow', ds.boxShadow);   // (--dbgi: the desktop window's title-bar lights)
+      view.style.setProperty('--sr', ss.borderRadius); view.style.setProperty('--sshadow', ss.boxShadow);
+    };
+    const size = () => {
+      const n = cards.filter(c => c.offsetParent !== null || getComputedStyle(c).display !== 'none').length || cards.length;
+      const desk = document.body.classList.contains('dev-desktop');
+      // desktop windows: two rows (three over two), as big as the page allows; phones: one row, capped
+      const per = desk ? Math.ceil(n / 2) : n, rows = desk ? Math.ceil(n / per) : 1;
+      const w = desk
+        ? Math.min((innerWidth - 160 - 56 * (per - 1)) / per, ((innerHeight - 250 - 44 * (rows - 1)) / rows - 44) / DH * DW)
+        : Math.min(300, (innerWidth * .8 - 56 * (n - 1)) / n, innerHeight * .6 / DH * DW);   // the row at most 80% of the width, the phones 60% of the height
+      view.style.setProperty('--zs', (w / DW).toFixed(4));
+      view.style.setProperty('--row-w', desk ? Math.ceil(per * w + 56 * (per - 1) + 1) + 'px' : 'none');
+    };
+    const open = () => {
+      if (document.documentElement.classList.contains('proto-components')) return;   // (the board has its own overview)
+      document.body.classList.add('zoom-open');   // first, so the notes drop out before anything moves
+      dress(); size();
+      load();
+      document.body.classList.add('zoom-open'); view.setAttribute('aria-hidden', 'false'); btn.classList.add('on');
+      scaleOut();
+    };
+    // load (or reload) the small phones: each waits for its frame to settle,
+    // then all appear together
+    const load = () => {
+      const theme = document.body.classList.contains('light') ? 'light' : 'dark';
+      cards.forEach(c => {
+        const k = c.dataset.go, f = c.querySelector('iframe');
+        const src = `index.html?embed&set=${window.PROTO_SET}${k === 'loader' ? '&hold' : ''}&b=${BUILD}#${k}`;   // (the theme follows live, from the switch)   // b: fresh copies each page load, never a stale cached one
+        c.classList.toggle('cur', k === window.proto.at() && !(k === 'loader' && document.body.classList.contains('skip-loader')));
+        if (f.dataset.src === src && c._ok) return;       // already loaded and settled: keep it
+        // a blank screen until the frame has reached its step and settled
+        c._ok = false; c.classList.remove('ready'); clearInterval(c._w); clearTimeout(c._t); c._t = 0;
+        f.dataset.src = src; f.src = src;
+        const t0 = performance.now();
+        c._w = setInterval(() => {
+          let at = null; try { at = f.contentWindow.proto?.at(); } catch {}
+          const there = at === k;
+          if (there && !c._t) c._t = setTimeout(() => { c._ok = true; c._t = 0; }, k === 'start' ? 250 : 900);
+          if (there || performance.now() - t0 > 6000) { clearInterval(c._w); if (!there) c._ok = true; }
+        }, 120);
+      });
+      // …and they all appear together, once every one is ready
+      clearInterval(view._all);
+      const t1 = performance.now();
+      view._all = setInterval(() => {
+        if (cards.every(c => c._ok) || performance.now() - t1 > 7000) { clearInterval(view._all); cards.forEach(c => c.classList.add('ready')); setTimeout(handover, 480); }
+      }, 80);
+    };
+    // the theme flipped while the phones are up: their frames take the new look too
+    let wasLight = document.body.classList.contains('light');
+    new MutationObserver(() => {
+      const l = document.body.classList.contains('light');
+      if (l === wasLight) return; wasLight = l;
+      if (document.body.classList.contains('zoom-open')) requestAnimationFrame(dress);
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    // a new version picked while the phones are up: they all reload in it
+    window.protoZoomReload = () => { if (!document.body.classList.contains('zoom-open')) return false; dress(); size(); cards.forEach(c => c.classList.remove('ready')); load(); return true; };   // (re-measured: a new set may bring a new frame)
+    // opening: the real phone itself scales down into its spot in the row
+    // (live, so nothing changes under you), and hands over to its small copy
+    // once every copy is ready
+    const scaleOut = () => {
+      const cur = cards.find(c => c.classList.contains('cur'));
+      if (!cur || Math.abs(window.protoRotation?.() || 0) > 45 || document.body.classList.contains('dev-desktop')) return;
+      const ph = cur.querySelector('.zv-phone');
+      document.body.classList.add('zoom-from');
+      // the slot's resting box (the card's own entrance offset left out)
+      cur.style.transition = 'none'; cur.style.transform = 'none'; cur.style.opacity = '1';
+      const r = ph.getBoundingClientRect();
+      cur.style.transition = cur.style.transform = cur.style.opacity = '';
+      if (r.width < 20 || getComputedStyle(cur).display === 'none') { document.body.classList.remove('zoom-from'); return; }   // its phone isn't in the row (e.g. the loader, skipped): just fade
+      cur.classList.add('stand-in');
+      const zs = parseFloat(view.style.getPropertyValue('--zs')) || .4;
+      const dx = r.left + r.width / 2 - innerWidth / 2, dy = r.top + r.height / 2 - innerHeight / 2;
+      device.style.transition = 'transform .7s cubic-bezier(.65, 0, .2, 1)';
+      requestAnimationFrame(() => { device.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(${zs})`; });
+    };
+    const handover = () => {
+      if (!document.body.classList.contains('zoom-from')) return;
+      // one frame: the copy shows (with its shadow) as the real phone goes — never two shadows, never none
+      device.style.transition = 'none';
+      cards.forEach(c => c.classList.remove('stand-in'));
+      document.body.classList.remove('zoom-from');
+      device.style.transform = ''; device.offsetWidth; device.style.transition = '';
+    };
+    const reset = () => {
+      view.classList.remove('leaving', 'landing', 'landed');
+      document.body.classList.remove('zoom-closing', 'zoom-landing', 'zoom-landed');
+      cards.forEach(c => { c.classList.remove('picked', 'grow'); c.style.removeProperty('--dh'); c.style.removeProperty('--sh'); const ph = c.querySelector('.zv-phone'); ph.style.transition = 'none'; ph.style.transform = ph.style.opacity = ph.style.borderRadius = ''; ph.offsetWidth; ph.style.transition = ''; });
+    };
+    const close = () => {
+      if (document.body.classList.contains('zoom-from')) { cards.forEach(x => x.classList.remove('stand-in')); document.body.classList.remove('zoom-from'); device.style.transition = 'none'; device.style.transform = ''; device.offsetWidth; device.style.transition = ''; }
+      document.body.classList.add('zoom-closing');
+      document.body.classList.remove('zoom-open'); view.setAttribute('aria-hidden', 'true'); btn.classList.remove('on');
+      setTimeout(reset, 650);
+    };
+    // picking a phone: the others fade and the picked one grows, in one
+    // smooth move, onto the real screen's spot; the real screen is set up
+    // underneath meanwhile, and once it has arrived the small copy fades off it
+    const pick = c => {
+      if (view.classList.contains('leaving')) return;
+      if (document.body.classList.contains('zoom-from')) { cards.forEach(x => x.classList.remove('stand-in')); document.body.classList.remove('zoom-from'); device.style.transition = 'none'; device.style.transform = ''; device.offsetWidth; device.style.transition = ''; }
+      const k = c.dataset.go, ph = c.querySelector('.zv-phone');
+      // from the 5 phones the phone always comes back upright
+      if (Math.abs(window.protoRotation?.() || 0) > 45) window.protoSetRotation?.(0);
+      const sideways = Math.abs(window.protoRotation?.() || 0) > 45;
+      c.classList.add('picked'); view.classList.add('leaving');
+      document.querySelector(`.steps [data-step="${k}"]`)?.click();
+      if (sideways) {                                  // on its side the shapes don't match: just fade
+        const t0 = performance.now(), w = setInterval(() => { if (window.proto.at() === k || performance.now() - t0 > 2600) { clearInterval(w); setTimeout(close, 200); } }, 60);
+        return;
+      }
+      // where the real screen will sit: centred, at the phone's fitted size
+      const fit = parseFloat(device.style.getPropertyValue('--fit')) || 1;
+      const H = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--h')) || 874;
+      const to = { w: DW * fit, h: DH * fit, cx: innerWidth / 2, cy: innerHeight / 2 };   // the whole device, frame included
+      // freeze the phone exactly where it is (it may be lifted by its hover),
+      // and measure its resting box, so the flight starts and ends true
+      const m = new DOMMatrix(getComputedStyle(ph).transform === 'none' ? undefined : getComputedStyle(ph).transform);
+      ph.style.transition = 'none'; ph.style.transformOrigin = '0 0';
+      ph.style.transform = `translate(${m.e}px, ${m.f}px)`;
+      const seen = ph.getBoundingClientRect();
+      const base = { left: seen.left - m.e, top: seen.top - m.f, width: seen.width };
+      const sc = to.w / base.width;
+      const r = parseFloat(getComputedStyle(document.querySelector('#screen')).borderTopLeftRadius) || 0;
+      ph.offsetWidth; ph.style.transition = '';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        view.classList.add('landing'); document.body.classList.add('zoom-landing');
+        const dr = document.querySelector('#device').getBoundingClientRect();   // the real phone's exact box (it is laid out, just hidden)
+        // a 16:9 desktop thumbnail grows to the real window's height on the way, so it lands exactly on it
+        if (DH !== realDH) { c.classList.add('grow'); c.style.setProperty('--dh', realDH + 'px'); c.style.setProperty('--sh', realSH + 'px'); }
+        ph.style.transform = `translate(${dr.left - base.left}px, ${dr.top - base.top}px) scale(${dr.width / base.width})`;
+        // landed: the real device appears under the copy in the very frame the
+        // copy lets go of its shadow, so there is only ever one shadow
+        setTimeout(() => { view.classList.add('landed'); document.body.classList.add('zoom-landed'); }, 720);
+      }));
+      // landed and the real screen is there: the copy fades off it, the view goes
+      const t0 = performance.now();
+      const w = setInterval(() => {
+        const there = window.proto.at() === k && !document.querySelector('.veil')?.classList.contains('on');
+        if ((there && performance.now() - t0 > 1100) || performance.now() - t0 > 3400) {
+          clearInterval(w);
+          ph.style.opacity = '0';
+          setTimeout(() => {
+            document.body.classList.remove('zoom-open'); view.setAttribute('aria-hidden', 'true'); btn.classList.remove('on');
+            setTimeout(reset, 60);
+          }, 320);
+        }
+      }, 60);
+    };
+    btn.addEventListener('click', () => document.body.classList.contains('zoom-open') ? close() : open());
+    cards.forEach(c => c.addEventListener('click', () => pick(c)));
+    // the step bar (and the side arrows) while zoomed out: fly to that phone rather than changing the screen hidden behind
+    addEventListener('click', e => {
+      if (!document.body.classList.contains('zoom-open') || view.classList.contains('leaving')) return;
+      const b = e.target.closest('.steps [data-step]'), arrow = e.target.closest('.step-arrow');
+      if (!b && !arrow) return;
+      e.stopPropagation(); e.preventDefault();
+      let k = b?.dataset.step;
+      if (arrow) {   // the arrows move the highlight along the row
+        const vis = cards.filter(c => getComputedStyle(c).display !== 'none'), i = vis.findIndex(c => c.classList.contains('cur')), n = vis[(i + (arrow.classList.contains('sa-next') ? 1 : -1) + vis.length) % vis.length];
+        cards.forEach(c => c.classList.toggle('cur', c === n)); return;
+      }
+      const c = cards.find(x => x.dataset.go === k); if (c) pick(c);
+    }, true);
+    // (clicking the background leaves the view as it is: pick a phone, press Esc, or use the all-screens button)
+    // Esc: zoom out to the 5 phones, and back (settings, when open, takes it first)
+    addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        if (document.querySelector('.settings.open') || view.classList.contains('leaving') || document.body.classList.contains('help-on')) return;   // (help takes Esc first)
+        document.body.classList.contains('zoom-open') ? close() : open();
+      }
+      // ← → step through the screens (in the 5 phones too)
+      if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !e.metaKey && !e.ctrlKey && !e.altKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '')) {
+        e.preventDefault();
+        if (document.body.classList.contains('zoom-open')) {
+          const vis = cards.filter(c => getComputedStyle(c).display !== 'none'), i = vis.findIndex(c => c.classList.contains('cur')), n = vis[(i + (e.key === 'ArrowRight' ? 1 : -1) + vis.length) % vis.length];
+          cards.forEach(c => c.classList.toggle('cur', c === n));
+          return;
+        }
+        document.querySelector(e.key === 'ArrowRight' ? '.sa-next' : '.sa-prev')?.click();
+      }
+      if (e.key === 'Enter' && document.body.classList.contains('zoom-open')) { const c = cards.find(c => c.classList.contains('cur')); if (c) { e.preventDefault(); pick(c); } }
+    }, true);
+    addEventListener('resize', size);
+  })();
+  // embedded (a zoom-out thumbnail): go straight to the screen named in the hash
+  (() => {
+    if (!document.documentElement.classList.contains('embed')) return;
+    const k = location.hash.slice(1);
+    const go = () => { if (k && k !== 'start' && window.proto) window.proto.step(k); };
+    // the gallery thumbnail keeps nudging until it is open (timers can be slow in a background frame)
+    if (k === 'full') { const t = setInterval(() => { if (document.body.classList.contains('fs-open')) return clearInterval(t); if (document.body.classList.contains('brief-done')) window.proto.step('full'); }, 400); }
+    document.readyState === 'complete' ? go() : addEventListener('load', go);
+  })();
+</script>
+<script>
+  // a-read progress: a hairline under the page header fills as you read down
+  (() => {
+    const bar = document.querySelector('.a-read'), top = document.querySelector('.a-top');
+    new MutationObserver(() => { if (!document.body.classList.contains('brief-done')) top.classList.remove('solid'); }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    document.querySelector('#article').addEventListener('scroll', e => {
+      const pg = e.target; if (!pg.classList?.contains('cur')) return;
+      bar.style.transform = `scaleX(${Math.min(1, pg.scrollTop / Math.max(1, pg.scrollHeight - pg.clientHeight)).toFixed(3)})`;
+      top.classList.toggle('solid', pg.scrollTop > 290);   // frosted once the hero has scrolled away
+    }, true);
+  })();
+</script>
+<script>
+  // gallery: drag sideways to move between the pictures; it snaps to the
+  // nearest (a flick carries it one along) and the dots follow
+  (() => {
+    const media = document.querySelector('.fs-media'), track = media.querySelector('.fs-track');
+    const dots = [...document.querySelectorAll('.fs-dots i')];
+    const N = dots.length; let W = 402;
+    const fit = () => parseFloat(document.querySelector('#device').style.getPropertyValue('--fit')) || 1;
+    let at = 0, drag = null;
+    const setX = (x, anim) => { track.style.transition = anim ? 'transform .45s cubic-bezier(.22, 1, .36, 1)' : 'none'; track.style.transform = `translateX(${x}px)`; };
+    const go = i => { at = Math.max(0, Math.min(N - 1, i)); setX(-at * W, true); dots.forEach((d, k) => d.classList.toggle('on', k === at)); };
+    // the window changed size (desktop preview): the strip keeps its picture, at the new width
+    addEventListener('proto-fit', () => { W = media.offsetWidth || 402; setX(-at * W, false); });
+    media.addEventListener('pointerdown', e => {
+      W = media.offsetWidth || 402;
+      e.stopPropagation();                           // the page underneath doesn't swipe
+      if (e.button > 0) return;
+      drag = { x: e.clientX, t: e.timeStamp, lastX: e.clientX, lastT: e.timeStamp, v: 0 };
+      try { media.setPointerCapture(e.pointerId); } catch {}
+      media.classList.add('grabbing');
+    });
+    media.addEventListener('pointermove', e => {
+      if (!drag) return;
+      let dx = (e.clientX - drag.x) / fit();
+      if ((at === 0 && dx > 0) || (at === N - 1 && dx < 0)) dx *= .3;   // a little give at either end
+      const dt = e.timeStamp - drag.lastT;
+      if (dt > 0) drag.v = (e.clientX - drag.lastX) / fit() / dt;
+      drag.lastX = e.clientX; drag.lastT = e.timeStamp;
+      setX(-at * W + dx, false);
+    });
+    const end = e => {
+      if (!drag) return;
+      const dx = (e.clientX - drag.x) / fit(), v = drag.v; drag = null;
+      media.classList.remove('grabbing');
+      go(Math.abs(v) > .35 ? at - Math.sign(v) : at - Math.round(dx / W));
+    };
+    media.addEventListener('pointerup', end);
+    media.addEventListener('pointercancel', end);
+    // opening the gallery starts on the first picture
+    new MutationObserver(() => { if (!document.body.classList.contains('fs-open') && at) { at = 0; setX(0, false); dots.forEach((d, k) => d.classList.toggle('on', !k)); } })
+      .observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  })();
+</script>
+<script>
+  // cinema mode: with the pointer resting away from the phone and the
+  // controls for 8s, all the UI fades away and just the phone is left; any
+  // movement brings it back. The spacebar hides it straight away and
+  // keeps it hidden — arrow keys and dragging still change screen — until
+  // space (or Esc) brings it back.
+  (() => {
+    if (document.documentElement.classList.contains('embed')) return;
+    const b = document.body, UI = '.top-left, .project, .steps, .settings, .theme-switch, .step-arrow, .guide-tip, .dd-menu';
+    let t = 0, over = null, backT = 0, pinned = false;
+    const busy = () => b.classList.contains('zoom-open') || b.classList.contains('help-on') || document.querySelector('.settings.open, .dd.open') || over?.closest?.(UI) || over?.closest?.('#device');
+    const hide = () => { if (innerWidth > 500) b.classList.add('ui-idle'); };   // (auto-hide never on a phone: no pointer to bring it back)
+    const show = () => {
+      if (!b.classList.contains('ui-idle')) return;
+      b.classList.remove('ui-idle'); b.classList.add('ui-back');
+      clearTimeout(backT); backT = setTimeout(() => b.classList.remove('ui-back'), 400);
+    };
+    const arm = () => { clearTimeout(t); if (!pinned) t = setTimeout(() => { if (!busy()) hide(); else arm(); }, 8000); };
+    const toggle = () => {
+      if (b.classList.contains('zoom-open') || b.classList.contains('zoom-closing') || innerWidth <= 500) return;   // not from the all screens view, nor on a phone
+      window.protoBeforePreview?.();                  // the desktop window notes where it is, to zoom from there
+      if (b.classList.contains('ui-idle')) { pinned = false; b.classList.remove('ui-pinned'); show(); arm(); window.protoToast?.('Preview off'); }
+      else { pinned = true; clearTimeout(t); b.classList.add('ui-idle', 'ui-pinned'); window.protoToast?.('Preview on'); }
+    };
+    window.protoToggleUI = toggle;
+    addEventListener('pointermove', e => { over = e.target; if (pinned) return; show(); arm(); }, { passive: true });   // hidden by key: the mouse doesn't bring it back
+    addEventListener('pointerdown', () => { if (pinned) return; show(); arm(); }, { passive: true });              // …nor does a drag (it still changes screen)
+    addEventListener('keydown', e => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === 'Escape' && pinned) { toggle(); return; }
+      if (pinned) return;                              // arrow keys etc. work behind the scenes, UI stays hidden
+      show(); arm();
+    });
+    document.documentElement.addEventListener('pointerleave', () => { over = null; arm(); });
+    arm();
+  })();
+</script>
+<script>
+  // design sets, bottom left: the button opens like settings; pick a set, or
+  // step back and forth with the arrows (or [ and ])
+  (() => {
+    if (document.documentElement.classList.contains('embed')) return;
+    const wrap = document.querySelector('.settings.sets'), btn = wrap.querySelector('.sets-btn'), scrim = document.querySelector('.sets-scrim');
+    const list = wrap.querySelector('.sets-list'), nameEl = btn.querySelector('.pj-n');
+    const prev = wrap.querySelector('.sets-prev'), next = wrap.querySelector('.sets-next');
+    const link = document.getElementById('set-css'), device = document.querySelector('#device');
+    list.innerHTML = SETS.map(s => `<button class="set-item" data-id="${s.id}"><i></i><span><b>${s.name}</b><small>${s.note}</small></span></button>`).join('');
+    const items = [...list.children];
+    // the chosen version is always shown whole: scrolled clear of the fade at the list's foot (or its top)
+    const FADE = 26;
+    const reveal = smooth => {
+      const el = list.querySelector('[aria-current="true"]');
+      if (!el || list.scrollHeight <= list.clientHeight) return;
+      const top = el.offsetTop, bot = top + el.offsetHeight;
+      let to = list.scrollTop;
+      if (bot > to + list.clientHeight - FADE) to = bot - list.clientHeight + FADE;
+      if (top < to) to = top;
+      if (to !== list.scrollTop) list.scrollTo({ top: to, behavior: smooth ? 'smooth' : 'auto' });
+    };
+    // the fade only while there's more below
+    const edge = () => list.classList.toggle('at-end', list.scrollTop + list.clientHeight >= list.scrollHeight - 2);
+    list.addEventListener('scroll', edge, { passive: true });
+    const paint = () => {
+      const i = SETS.findIndex(s => s.id === window.PROTO_SET);
+      nameEl.textContent = SETS[i].name;
+      items.forEach(el => el.setAttribute('aria-current', el.dataset.id === window.PROTO_SET));
+      prev.disabled = i <= 0; next.disabled = i >= SETS.length - 1;
+      wrap.style.setProperty('--bw', btn.offsetWidth + 'px');
+      reveal(wrap.classList.contains('open')); edge();
+    };
+    const use = id => {
+      if (id === window.PROTO_SET || !SETS.some(s => s.id === id)) return;
+      const set = SETS.find(s => s.id === id);
+      window.PROTO_SET = id;
+      paint();
+      // the set itself: its styles, its kind (phone, desktop window, modes) and the frame that goes with it
+      const apply = () => {
+        const root = document.documentElement;
+        root.dataset.set = id;
+        root.classList.toggle('proto-modes', set.kind === 'modes');
+        root.classList.toggle('proto-desktop', set.kind === 'desktop');
+        root.classList.toggle('proto-components', set.kind === 'components');
+        dispatchEvent(new CustomEvent('proto-set', { detail: set }));   // (the step bar swaps between screens and modes; the frame changes)
+      };
+      // zoomed out: just the small phones change (the one being viewed stays put)
+      if (document.body.classList.contains('zoom-open')) {
+        apply();
+        if (set.css) link.href = set.css + '?v=8'; else link.removeAttribute('href');
+        requestAnimationFrame(() => requestAnimationFrame(() => window.protoZoomReload?.()));   // once the new frame is on
+        return;
+      }
+      // the design fades right out first; only then does anything change (styles, frame, size) —
+      // so nothing flashes — and once the new one has settled it fades back in
+      clearTimeout(use.t); use.fade?.cancel();
+      use.fade = device.animate([{ opacity: getComputedStyle(device).opacity }, { opacity: 0 }], { duration: 280, easing: 'ease', fill: 'forwards' });
+      use.t = setTimeout(() => {
+        let fin = false; const done = () => {
+          if (fin) return; fin = true; dispatchEvent(new Event('resize'));
+          // a new round plays from the top: back to the loader, from 0
+          const go = k => document.querySelector(`.steps [data-step="${k}"]`)?.click();
+          const twice = set.kind !== 'modes' && set.kind !== 'components' && window.proto.at() === 'loader';
+          if (set.kind === 'components') window.protoBoard?.top();   // the board: back to its first component
+          else if (set.kind === 'modes') go('m-default');           // a single screen: back to its default state
+          else if (twice) { go('start'); setTimeout(() => go('loader'), 520); } else go('loader');
+          use.t = setTimeout(() => {
+            use.fade?.cancel();
+            use.fade = device.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 480, easing: 'ease' });
+          }, twice ? 900 : 420);
+        };
+        apply();
+        if (set.css) { link.onload = done; link.href = set.css + '?v=8'; setTimeout(done, 800); } else { link.removeAttribute('href'); done(); }
+      }, 300);
+    };
+    const other = document.querySelector('.settings:not(.sets)');
+    const set = on => {
+      wrap.style.setProperty('--bw', btn.offsetWidth + 'px');
+      // open, the version name floats out to the panel's right edge (as the settings label does to its left)
+      // measured from where the name sits at rest (whatever it's mid-way through), to 18px in from the panel's right edge
+      const w = wrap.getBoundingClientRect(), n = nameEl.getBoundingClientRect(), tx = new DOMMatrix(getComputedStyle(nameEl).transform === 'none' ? undefined : getComputedStyle(nameEl).transform).m41;
+      wrap.style.setProperty('--slide-r', Math.max(0, w.right - 18 - (n.right - tx)) + 'px');
+      if (on && other.classList.contains('open')) other.querySelector('.settings-btn').click();   // one panel at a time
+      wrap.classList.toggle('open', on); scrim.classList.toggle('open', on); btn.setAttribute('aria-expanded', on);
+    };
+    // opening settings closes this one
+    other.querySelector('.settings-btn').addEventListener('click', () => { if (wrap.classList.contains('open')) set(false); }, true);
+    btn.addEventListener('click', () => { set(!wrap.classList.contains('open')); reveal(false); edge(); });
+    scrim.addEventListener('click', () => set(false));
+    items.forEach(el => el.addEventListener('click', () => { use(el.dataset.id); if (innerWidth <= 500) set(false); }));   // (on a phone the panel covers the design: picking one closes it)
+    const step = d => { const i = SETS.findIndex(s => s.id === window.PROTO_SET); if (SETS[i + d]) use(SETS[i + d].id); };
+    prev.addEventListener('click', () => step(-1)); next.addEventListener('click', () => step(1));
+    addEventListener('keydown', e => {
+      if (e.key === 'Escape' && wrap.classList.contains('open')) set(false);
+      if (e.key === '[' ) step(-1);
+      if (e.key === ']') step(1);
+    });
+    // the prototypes panel is exactly as tall as the settings panel; its list scrolls within
+    const sBody = document.querySelector('.settings:not(.sets) .sm-body'), pBody = wrap.querySelector('.sm-body');
+    // both panels share one height: whichever needs more (so every version fits without scrolling)
+    const match = () => {
+      pBody.style.height = sBody.style.minHeight = '';
+      if (innerWidth <= 500) return;                  // on a phone each panel is full screen
+      const list = wrap.querySelector('.sets-list'), head = wrap.querySelector('.sets-head');
+      const cs = getComputedStyle(pBody), hs = getComputedStyle(head);
+      const need = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + head.offsetHeight + parseFloat(hs.marginBottom) + list.scrollHeight;
+      // measured with every row in (V.1 hides the device row), so both panels keep one height on every set
+      const sh = sBody.offsetHeight;                    // (the device row and the screen size row take turns, so it's the same on every set)
+      // tall enough for the first two versions in full (the fade only ever over the one peeking below); the list scrolls for more
+      const two = items[1] ? items[1].offsetTop + items[1].offsetHeight + FADE : 0;
+      const h = Math.max(sh, Math.ceil(parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + head.offsetHeight + parseFloat(hs.marginBottom) + two));
+      pBody.style.height = h + 'px'; sBody.style.minHeight = h + 'px';
+    };
+    paint(); match(); document.fonts && document.fonts.ready.then(() => { paint(); match(); }); addEventListener('resize', match);
+    addEventListener('proto-set', () => requestAnimationFrame(() => requestAnimationFrame(match)));
+  })();
+</script>
+<script>
+  // drag sideways (on the phone or anywhere on the page) to step through the design (as the side
+  // arrows do): the screen follows the pointer a little, and past a short
+  // distance (or with a flick) it moves to the next or previous screen.
+  // The gallery keeps its own drag, and the tiles row its own scroll.
+  (() => {
+    if (document.documentElement.classList.contains('embed')) return;
+    const screen = document.querySelector('#screen'), dev = document.querySelector('#device');
+    let d = null;
+    // anywhere on the page, not just the phone — bar the controls, the panels,
+    // the notes, the 5-phones view, and the gallery's and tiles' own drags
+    addEventListener('pointerdown', e => {
+      if (e.button > 0 || !e.target.closest || document.body.classList.contains('zoom-open') || innerWidth <= 500 || document.documentElement.classList.contains('proto-components')) return;   // (on a phone the arrows step instead; the board scrolls)
+      if (e.target.closest('.fs-media, .tiles, .settings, .settings-scrim, .top-left, .steps, .step-arrow, .theme-switch, .guide-tip, .rot-grip, .zoom-view, .toast, button, input, a, label')) {
+        if (!e.target.closest('#screen') || e.target.closest('.fs-media, .tiles')) return;   // inside the screen, its own buttons still start a swipe
+      }
+      d = { x: e.clientX, y: e.clientY, t: e.timeStamp, id: e.pointerId, on: false };
+    });
+    addEventListener('pointermove', e => {
+      if (!d || e.pointerId !== d.id) return;
+      const dx = e.clientX - d.x, dy = e.clientY - d.y;
+      if (!d.on) {
+        if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { d = null; return; }   // a scroll, not a swipe
+        if (Math.abs(dx) < 10) return;
+        d.on = true; screen.classList.add('swiping'); document.body.classList.add('page-drag');
+      }
+      dev.style.transition = 'none'; dev.style.translate = `${dx * .18}px 0`;   // the whole phone follows the drag a little
+    });
+    const end = e => {
+      if (!d || e.pointerId !== d.id) return;
+      const g = d; d = null;
+      if (!g.on) return;
+      const dx = e.clientX - g.x, v = dx / Math.max(1, e.timeStamp - g.t);
+      screen.classList.remove('swiping'); document.body.classList.remove('page-drag');
+      dev.style.transition = 'translate .5s cubic-bezier(.22, 1, .36, 1)'; dev.style.translate = '';   // …and springs back
+      setTimeout(() => { if (!d) dev.style.transition = ''; }, 520);
+      if (Math.abs(dx) > 70 || Math.abs(v) > .5) document.querySelector(dx < 0 ? '.sa-next' : '.sa-prev')?.click();
+      // the click that ends a drag does nothing
+      const swallow = ev => { ev.stopPropagation(); ev.preventDefault(); };
+      addEventListener('click', swallow, { capture: true, once: true });
+      setTimeout(() => removeEventListener('click', swallow, { capture: true }), 60);
+    };
+    addEventListener('pointerup', end); addEventListener('pointercancel', end);
+  })();
+</script>
+<script>
+  // on its side: the landscape layout of whichever screen is up
+  (() => {
+    const land = document.querySelector('.land'); if (!land) return;
+    const pct = document.querySelector('.rl-pct'), lp = land.querySelector('.ld-pct');
+    let at = '';
+    setInterval(() => {
+      const k = window.proto?.at?.() || 'start';
+      if (k !== at) { at = k; land.dataset.at = k; }
+      if (at === 'loader') { lp.textContent = pct.textContent; const m = document.querySelector('.ring-loader .rl-arc'), l = land.querySelector('.ld-ring .rl-arc'); l.style.strokeDasharray = m.style.strokeDasharray; land.querySelector('.ld-ring').classList.toggle('rl-done', document.querySelector('.ring-loader').classList.contains('rl-done')); }
+    }, 100);
+    // the landscape gallery drags sideways like the portrait one
+    const full = land.querySelector('.ld-full'), track = full.querySelector('.ld-track'), dots = [...full.querySelectorAll('.ld-dots i')];
+    let i = 0, d = null;
+    const go = n => { i = Math.max(0, Math.min(dots.length - 1, n)); track.style.transform = `translateX(${-i * 100}%)`; dots.forEach((x, k) => x.classList.toggle('on', k === i)); };
+    full.addEventListener('pointerdown', e => { e.stopPropagation(); d = { x: e.clientX }; try { full.setPointerCapture(e.pointerId); } catch {} });
+    full.addEventListener('pointerup', e => { if (!d) return; const dx = e.clientX - d.x; d = null; if (Math.abs(dx) > 30) go(i + (dx < 0 ? 1 : -1)); });
+    full.style.pointerEvents = 'auto';
+  })();
+</script>
+<script>
+  // the list's entrance, row by row from the top: each row is held hidden the
+  // moment the list is shown (so none flashes first), then fades up in turn.
+  // It starts once the screen is uncovered, and skips the row a picture is
+  // flying into.
+  (() => {
+    const b = document.body, head = document.querySelector('.ov-head');
+    const rows = () => [...document.querySelectorAll('#overview .ov-card')];
+    let shown = false, anims = [];
+    const run = () => {
+      anims.forEach(a => a.cancel()); anims = [];
+      const ease = 'cubic-bezier(.22, 1, .36, 1)';
+      const els = [head, ...rows().filter(r => !r.classList.contains('picked'))];
+      // if the screen is still uncovering, wait for it to clear before the first row
+      const start = performance.now() - veilOff < 400 ? 260 : 70;
+      els.forEach((el, i) => anims.push(el.animate(
+        [{ opacity: 0, translate: '0 12px' }, { opacity: 1, translate: '0 0' }],
+        { duration: 440, delay: start + i * 55, easing: ease, fill: 'backwards' })));
+    };
+    let veilOff = 0, veiling = false;
+    document.querySelector('#overview .ov-track').addEventListener('click', () => { anims.forEach(a => a.cancel()); anims = []; }, true);
+    new MutationObserver(() => {
+      const v = b.classList.contains('veiling');
+      if (veiling && !v) veilOff = performance.now();
+      veiling = v;
+      // hidden from the moment the list is shown, even under the veil
+      if (b.classList.contains('ov-open') && v && !anims.length) rows().concat(head).forEach(el => anims.push(el.animate([{ opacity: 0 }, { opacity: 0 }], { duration: 1e6 })));
+      const on = b.classList.contains('ov-open') && !v;
+      if (on && !shown) run();
+      if (!b.classList.contains('ov-open')) { anims.forEach(a => a.cancel()); anims = []; }
+      shown = on;
+    }).observe(b, { attributes: true, attributeFilter: ['class'] });
+  })();
+</script>
+<div class="toast" aria-live="polite"></div>
+<script>
+  // a short label, top centre, when the notes or pointer switch is flipped
+  // (by click or by key): it appears, holds a moment, and fades away
+  (() => {
+    if (document.documentElement.classList.contains('embed')) return;
+    const toast = document.querySelector('.toast');
+    let t = 0;
+    const say = text => {
+      toast.textContent = text;
+      toast.classList.remove('on', 'out'); toast.offsetWidth; toast.classList.add('on');   // fades in…
+      clearTimeout(t); t = setTimeout(() => { toast.classList.remove('on'); toast.classList.add('out'); }, 1600);   // …and fades out where it is
+    };
+    window.protoToast = say;
+    [['.notes-switch', 'Labels'], ['.pointer-switch', 'Cursor']].forEach(([sel, name]) => {
+      const el = document.querySelector(sel); if (!el) return;
+      let was = el.getAttribute('aria-checked');
+      new MutationObserver(() => {
+        const now = el.getAttribute('aria-checked');
+        if (now === was) return; was = now;
+        say(`${name} ${now === 'true' ? 'on' : 'off'}`);
+      }).observe(el, { attributes: true, attributeFilter: ['aria-checked'] });
+    });
+  })();
+</script>
+<script>
+  // animated favicon: the pointer on its black square taps now and then —
+  // it glides in, presses (a small ring pops), and eases back. Drawn on a
+  // canvas and swapped in as the tab icon a few times a second.
+  (() => {
+    if (document.documentElement.classList.contains('embed')) return;
+    const link = document.querySelector('link[rel="icon"]'); if (!link) return;
+    const S = 64, c = document.createElement('canvas'); c.width = c.height = S;
+    const g = c.getContext('2d');
+    const arrow = new Path2D('M10 7.5l14 8.2-6.1 1.4-2.7 6z');       // the same arrow, in a 32-unit box
+    const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const LOOP = 2400;
+    const draw = now => {
+      const t = (now % LOOP) / LOOP;
+      // path: rest (0–.35), glide in toward the centre (.35–.55), press (.55–.68), back out (.68–1)
+      let k = 0, press = 0;
+      if (t > .35 && t <= .55) k = ease((t - .35) / .2);
+      else if (t > .55 && t <= .68) { k = 1; press = Math.sin(((t - .55) / .13) * Math.PI); }
+      else if (t > .68) k = 1 - ease((t - .68) / .32);
+      g.clearRect(0, 0, S, S);
+      g.save(); g.scale(S / 32, S / 32);
+      g.fillStyle = '#000'; g.beginPath(); g.roundRect(0, 0, 32, 32, 7); g.fill();
+      // the ring where it taps
+      if (t > .57 && t < .9) {
+        const r = (t - .57) / .33;
+        g.strokeStyle = `rgba(255,255,255,${.55 * (1 - r)})`; g.lineWidth = 1.6;
+        g.beginPath(); g.arc(12.5, 10.5, 2 + r * 8, 0, Math.PI * 2); g.stroke();
+      }
+      g.translate(-2.5 * k, -3 * k);                                 // glides up-left onto the spot
+      g.translate(10, 7.5); g.scale(1 - press * .12, 1 - press * .12); g.translate(-10, -7.5);
+      g.fillStyle = '#fff'; g.fill(arrow);
+      g.restore();
+      link.href = c.toDataURL('image/png');
+    };
+    let last = 0;
+    const loop = now => { if (now - last > 90) { last = now; draw(now); } requestAnimationFrame(loop); };
+    // rAF pauses in a background tab; a slow timer keeps the icon ticking there too
+    requestAnimationFrame(loop);
+    setInterval(() => { if (document.hidden) draw(performance.now()); }, 250);
+  })();
+</script>
+<div class="m-dots" aria-label="Screens"></div>
+<button class="m-full-btn" aria-label="Fullscreen" title="Fullscreen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+<button class="m-exit" aria-label="Exit fullscreen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button>
+<script>
+  // on a phone: pagination dots under the design (tap one, or swipe the
+  // design, to change screen) and a fullscreen mode where the design fills
+  // the phone, with a small button to come back
+  (() => {
+    if (document.documentElement.classList.contains('embed')) return;
+    const b = document.body, dots = document.querySelector('.m-dots');
+    const steps = [...document.querySelectorAll('.steps [data-step]')];
+    dots.innerHTML = steps.map(s => `<button data-go="${s.dataset.step}" aria-label="${s.textContent}"><i></i></button>`).join('');
+    const ds = [...dots.children];
+    ds.forEach(d => d.addEventListener('click', () => document.querySelector(`.steps [data-step="${d.dataset.go}"]`)?.click()));
+    setInterval(() => {
+      const cur = document.querySelector('.steps [data-step][aria-current="true"]')?.dataset.step;
+      ds.forEach(d => { d.classList.toggle('on', d.dataset.go === cur); d.hidden = d.dataset.go === 'loader' && b.classList.contains('skip-loader'); });
+    }, 150);
+    const full = on => {
+      b.classList.toggle('m-full', on);
+      try { on ? document.documentElement.requestFullscreen?.() : document.fullscreenElement && document.exitFullscreen(); } catch {}
+      dispatchEvent(new Event('resize'));
+    };
+    document.querySelector('.m-full-btn').addEventListener('click', () => full(true));
+    document.querySelector('.m-exit').addEventListener('click', () => full(false));
+    addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && b.classList.contains('m-full')) full(false); });
+  })();
+</script>
+<aside class="screen-note" aria-live="polite"><span class="sn-k"></span><b class="sn-t"></b><p class="sn-c"></p></aside>
+<script>
+  // screen notes: an alternative to the per-element labels — one title and one
+  // block of copy for the whole screen, beside the phone (at its foot on a phone).
+  // Press and hold the labels switch to swap between the two; a tap still turns labels on and off.
+  (() => {
+    if (document.documentElement.classList.contains('embed')) return;
+    const b = document.body, note = document.querySelector('.screen-note');
+    const NOTES = {
+      loader:  'Placeholder note goes here.',
+      start:   'Placeholder note goes here.',
+      article: 'Placeholder note goes here.',
+      full:    'Placeholder note goes here.',
+      menu:    'Placeholder note goes here.',
+      'm-default': 'Placeholder note goes here.',
+      'm-loading': 'Placeholder note goes here.',
+      'm-empty':   'Placeholder note goes here.',
+      'm-error':   'Placeholder note goes here.',
+      'm-success': 'Placeholder note goes here.',
+    };
+    const steps = [...document.querySelectorAll('.steps [data-step]')];
+    let at = '';
+    const paint = () => {
+      const cur = document.querySelector('.steps [data-step][aria-current="true"]') || steps[0];
+      const k = cur.dataset.step; if (k === at) return; at = k;
+      const shown = steps.filter(x => !(x.dataset.step === 'loader' && b.classList.contains('skip-loader')));
+      note.classList.remove('in'); void note.offsetWidth;
+      note.querySelector('.sn-k').textContent = `${shown.indexOf(cur) + 1}/${shown.length}`;
+      note.querySelector('.sn-t').textContent = cur.textContent;
+      note.querySelector('.sn-c').textContent = NOTES[k] || '';
+      note.classList.add('in');
+    };
+    // centred in the space between the left arrow and the phone
+    const device = document.querySelector('#device');
+    const place = () => {
+      if (innerWidth <= 500) { note.style.left = note.style.width = ''; return; }
+      // the phone's resting place — not where a drag (or its spring back) has nudged it
+      const nudge = parseFloat((device.style.translate || '0').split(' ')[0]) || 0;
+      const moving = nudge !== 0 || b.classList.contains('page-drag') || getComputedStyle(device).translate !== 'none' && getComputedStyle(device).translate !== '0px';
+      if (moving && note.style.left) return;
+      const d = device.getBoundingClientRect(), from = 70, to = d.left - nudge - 24, space = Math.max(0, to - from);
+      const w = Math.min(260, Math.max(160, space - 48));
+      note.style.width = w + 'px'; note.style.left = Math.round(from + (space - w) / 2) + 'px';
+    };
+    setInterval(() => { paint(); place(); }, 150); paint(); place(); addEventListener('resize', place);
+    let wasShown = false;
+    new MutationObserver(() => { const shown = b.classList.contains('notes-on') && b.classList.contains('notes-screen'); if (shown && !wasShown) { at = ''; paint(); } wasShown = shown; }).observe(b, { attributes: true, attributeFilter: ['class'] });
+
+    // press and hold the labels switch: element labels ⇄ screen notes
+    const sw = document.querySelector('.notes-switch'), toast = document.querySelector('.toast');
+    let t = 0, held = false, allow = false;
+    const say = text => { if (!toast) return; toast.textContent = text; toast.classList.remove('on', 'out'); toast.offsetWidth; toast.classList.add('on'); clearTimeout(toast._t); toast._t = setTimeout(() => { toast.classList.remove('on'); toast.classList.add('out'); }, 1600); };
+    const swap = () => {
+      held = true;
+      const screen = !b.classList.contains('notes-screen');
+      b.classList.toggle('notes-screen', screen);
+      sw.classList.toggle('screen-mode', screen);
+      if (!b.classList.contains('notes-on')) { allow = true; sw.click(); }   // make sure labels are showing
+      at = ''; paint();
+      setTimeout(() => say(screen ? 'Screen notes' : 'Element labels'), 20);
+      navigator.vibrate?.(12);
+    };
+    // holding fills the ring round the button; once it's full the mode swaps
+    // a quick tap shows nothing: the ring only starts once it's clearly a hold (after 280ms)
+    let t0 = 0;
+    sw.addEventListener('pointerdown', e => {
+      if (e.button > 0) return; held = false; clearTimeout(t); clearTimeout(t0);
+      t0 = setTimeout(() => sw.classList.add('holding'), 280);
+      t = setTimeout(() => { sw.classList.remove('holding'); sw.classList.add('filled'); setTimeout(() => sw.classList.remove('filled'), 420); swap(); }, 280 + 550);
+    });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => sw.addEventListener(ev, () => { clearTimeout(t); clearTimeout(t0); sw.classList.remove('holding'); }));
+    sw.addEventListener('contextmenu', e => e.preventDefault());
+    // the tap that ends a hold doesn't also switch labels off
+    sw.addEventListener('click', e => { if (allow) { allow = false; return; } if (held) { held = false; e.stopImmediatePropagation(); e.preventDefault(); } }, true);
+  })();
+</script>
+<script>
+  // UX Design - Modes: one screen whose states the step bar switches between.
+  // In modes the bar's buttons read Default · Loading · Empty · Error · Success,
+  // and the prototype's step / at answer for the state instead of the flow.
+  (() => {
+    if (document.documentElement.classList.contains('embed')) return;
+    const root = document.documentElement, b = document.body;
+    const MODES = [['m-default', 'Mode 1'], ['m-loading', 'Mode 2'], ['m-empty', 'Mode 3'], ['m-error', 'Mode 4'], ['m-success', 'Mode 5']];   // (the states: default, loading, empty, error, success)
+    const btns = [...document.querySelectorAll('.steps [data-step]')];
+    const flowSteps = btns.map(x => [x.dataset.step, x.textContent]);
+    const flow = window.proto;
+    let mode = 'm-default';
+    const on = () => root.classList.contains('proto-modes');
+    const setMode = k => { mode = k; b.dataset.mode = k; };
+    window.proto = {
+      step: name => on() ? (name.startsWith('m-') && setMode(name)) : flow.step(name),
+      at: () => on() ? mode : flow.at(),
+    };
+    const apply = () => {
+      const list = on() ? MODES : flowSteps;
+      btns.forEach((x, i) => { x.dataset.step = list[i][0]; x.textContent = list[i][1]; });
+      if (on()) { flow.step('start'); setMode('m-default'); }
+      dispatchEvent(new Event('resize'));
+    };
+    addEventListener('proto-set', () => requestAnimationFrame(apply));
+    setMode('m-default');
+    if (on()) apply();
+  })();
+</script>
+<script src="js/components.js?v=9"></script>
+<script>
+  // Desktop screens on a phone: the desktop design itself, in a small 16:9 browser window in the
+  // middle — the prototype laid out at desktop width in a frame (1280 × 720) and scaled down to fit.
+  // The step bar and its arrows drive the screens inside it.
+  (() => {
+    const root = document.documentElement, b = document.body;
+    if (root.classList.contains('embed')) return;
+    const W = 1280, H = 720, BAR = 18;
+    const box = document.createElement('div');
+    box.className = 'm-desk'; box.setAttribute('aria-hidden', 'true');
+    box.innerHTML = '<div class="md-win"><iframe title="Desktop screens" tabindex="-1"></iframe></div><div class="md-hit"></div>';
+    b.appendChild(box);
+    const win = box.querySelector('.md-win'), frame = box.querySelector('iframe');
+    const active = () => root.classList.contains('proto-desktop') && innerWidth <= 500;
+    const inner = () => { try { return frame.contentWindow.proto; } catch { return null; } };
+    let pending = null;
+    const flow = window.proto;
+    window.proto = {
+      step: name => { if (!active()) return flow.step(name); const p = inner(); p ? p.step(name) : (pending = name); },
+      at: () => { if (!active()) return flow.at(); const p = inner(); return p ? p.at() : (pending || 'loader'); },
+    };
+    frame.addEventListener('load', () => { if (pending && inner()) { inner().step(pending); pending = null; } });
+    const fit = () => {
+      const on = active();
+      b.classList.toggle('m-desk-on', on);
+      if (!on) { if (frame.src) frame.removeAttribute('src'); return; }
+      if (!frame.getAttribute('src')) { pending = pending || 'loader'; frame.src = `index.html?embed&set=${window.PROTO_SET}&b=${Date.now().toString(36)}#${pending}`; }
+      const r = box.getBoundingClientRect();
+      win.style.setProperty('--mdf', Math.min(r.width / W, (r.height - BAR) / H).toFixed(4));   // (the title bar keeps its own 18px)
+    };
+    addEventListener('resize', fit);
+    addEventListener('proto-set', () => requestAnimationFrame(fit));
+    fit();
+    // swipe sideways over it to change screen (as the arrows do): the window follows a little, then springs back
+    const hit = box.querySelector('.md-hit');
+    let d = null;
+    hit.addEventListener('pointerdown', e => { d = { x: e.clientX, y: e.clientY, t: e.timeStamp, id: e.pointerId }; hit.setPointerCapture(e.pointerId); win.style.transition = 'none'; });
+    hit.addEventListener('pointermove', e => {
+      if (!d || e.pointerId !== d.id) return;
+      const dx = e.clientX - d.x;
+      win.style.translate = `${Math.max(-40, Math.min(40, dx * .35))}px 0`;
+    });
+    const end = e => {
+      if (!d || e.pointerId !== d.id) return;
+      const dx = e.clientX - d.x, dy = e.clientY - d.y, v = dx / Math.max(1, e.timeStamp - d.t);
+      d = null;
+      win.style.transition = 'translate .35s cubic-bezier(.22, 1, .36, 1)'; win.style.translate = '';
+      if (Math.abs(dx) > Math.abs(dy) && (Math.abs(dx) > 50 || Math.abs(v) > .5)) document.querySelector(dx < 0 ? '.sa-next' : '.sa-prev')?.click();
+    };
+    hit.addEventListener('pointerup', end);
+    hit.addEventListener('pointercancel', end);
+  })();
+</script>
+<script>
+  // the spacebar never re-presses the last clicked button (a step, an arrow, a switch);
+  // it hides / shows the UI round the phone instead. Text fields keep it
+  (() => {
+    const keep = el => /INPUT|TEXTAREA|SELECT/.test(el?.tagName || '') || el?.isContentEditable;
+    ['keydown', 'keyup', 'keypress'].forEach(ev => addEventListener(ev, e => {
+      if ((e.key === ' ' || e.code === 'Space') && !keep(document.activeElement)) {
+        e.preventDefault(); e.stopPropagation();
+        // …instead it hides and shows the UI round the phone
+        if (ev === 'keydown' && !e.repeat) window.protoToggleUI?.();
+      }
+    }, true));
+  })();
+</script>
+<script>
+  // desktop gallery: a fixed view, so the wheel (or a touch drag) never scrolls the window behind it
+  (() => {
+    const fs = document.querySelector('.fs-view');
+    const stop = e => { if (document.documentElement.classList.contains('proto-desktop') && document.body.classList.contains('fs-open')) e.preventDefault(); };
+    fs.addEventListener('wheel', stop, { passive: false });
+    fs.addEventListener('touchmove', stop, { passive: false });
+  })();
+</script>
+</body>
+</html>

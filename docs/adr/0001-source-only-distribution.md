@@ -1,0 +1,5 @@
+# Source-only distribution with `#` subpath imports
+
+The library ships raw TypeScript: `exports` points at `src/`, and the consumer's bundler compiles it — which also lets Tailwind v4 scan the actual class names in source. Because there is no build step, internal paths use Node's `#` subpath imports (`#components/*`, `#lib/*`, `#hooks/*`), which resolve via this package's own `package.json` — a bundler alias such as `@/` would resolve against the _consumer's_ bundler config and break. The alternative — publishing a compiled `dist` — was rejected as adding a build/publish pipeline for no benefit while the consumers are apps in the same workspace.
+
+**Consequences:** every import inside `src/` must use `#` aliases. Two corollaries fall out of TypeScript not extension-probing the wildcard `imports` targets the way Vite/Node do: the barrel (`src/index.ts`) uses relative paths, and a consuming app must mirror the `#` aliases in its own tsconfig `paths` (see `apps/frontend/tsconfig.json`). Consumers also add an `@source` directive so Tailwind scans the library source behind the workspace symlink.

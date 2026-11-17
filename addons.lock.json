@@ -1,0 +1,387 @@
+{
+  "source": {
+    "repo": "https://github.com/metalabdesign/zero-design-kit.git",
+    "ref": "main"
+  },
+  "addons": {
+    "claude-design": {
+      "version": "1.1.0",
+      "files": {
+        ".claude/skills/claude-design/SKILL.md": "94f640fa9441979bac83b2cf89472af634f26698ad6dc20fc1e87374ea602c5f",
+        "packages/ui/scripts/claude-design/build.mjs": "2c682d10eefe3b5d3d3f3f63fafcc219e281d986a06b3c89f5346dbe674a9e5d",
+        "packages/ui/scripts/claude-design/cards.mjs": "ebfd6654585c90b3a608b8e15f882bfdcdb994d6cb4993587d0cc36ec8f91130",
+        "packages/ui/scripts/claude-design/cover.html": "8e52a609779ec10e9b030551db8918cd0653afc4510707aec969aaae42532254",
+        "packages/ui/scripts/claude-design/guide.md": "3967976fbf6aed5909899af25ce8bbe679ed46bc17f5bd33d145311b51aa28bc",
+        "packages/ui/scripts/claude-design/shims/jsx.cjs": "e3c75f1183a3c36713c645d1fae0c02af9920b2a933f12223ab24fa7e3503a56",
+        "packages/ui/scripts/claude-design/shims/react-dom.cjs": "da5387a7d840e99b4f6e07af4b5e6c08d3d0048547f13dd78fa2af1a3c4cea89",
+        "packages/ui/scripts/claude-design/shims/react.cjs": "86f97cdea404e7c0ac14c4cf2114c2a3845252cb16732375a5093df1cd590e0e",
+        "packages/ui/scripts/claude-design/vqa.mjs": "21c26034818082ef34dd16f2cead16752fc1c3031c3b656b229f48f0dc0a0e05"
+      },
+      "packageJson": {
+        "package.json": {
+          "scripts": {
+            "design:build": "pnpm --filter @repo/ui design:build",
+            "design:vqa": "pnpm --filter @repo/ui design:vqa"
+          }
+        },
+        "packages/ui/package.json": {
+          "scripts": {
+            "design:build": "node scripts/claude-design/build.mjs",
+            "design:vqa": "node scripts/claude-design/vqa.mjs"
+          }
+        }
+      }
+    },
+    "code-to-figma": {
+      "version": "1.1.0",
+      "files": {
+        ".claude/skills/code-to-figma/SKILL.md": "a8d47856b241f5573f84da7128f335b9c11967f8351928cbf65c2db656d402db",
+        ".claude/skills/code-to-figma/component-loop.md": "2f618dcdb5b033d807cae57871efcf96f9cfe7c63659e86641ce9a791e8f283e",
+        ".claude/skills/code-to-figma/figma-gotchas.md": "4031421b084dffabca417b5b7f0290dd610020dcca6f80bc03b8286240da022a"
+      }
+    },
+    "explorations": {
+      "version": "1.1.0",
+      "files": {
+        ".github/workflows/explorations.yml": "43f622e1bc28440bba53dcb09d4ba00a9197a5e348e44fdf628d64142cba1f81",
+        "explorations/.templates/blank/index.html": "52bb16382450c2cfbcbf85676521acbbc02441a6f9bec297dbf7744ab247f3fc",
+        "explorations/.templates/blank/package.json.tpl": "768614239c1bd9cc30f18b8ac4ef6ca8b4d93a3e28086c9a9df3326273c3b81e",
+        "explorations/.templates/blank/src/App.tsx": "8bd7fcc57e39d85f0dab9987a4e9f233aef7e0de2232d19053e2f3693fbd5a4d",
+        "explorations/.templates/blank/src/index.css": "2d40e7d5ff1f79f56b47afe32cf2b573236a7cea4b856656e4567d44ab4c671b",
+        "explorations/.templates/blank/src/main.tsx": "96e1842cd207b1b33d96ccf5cdacb8df400bc0976fbd6f32c6cfb9b131cb002f",
+        "explorations/.templates/blank/tsconfig.json": "d06fada77fe6b655adcae0b767c06fc5243cb9d8a111f18872f3ff15ba68d36a",
+        "explorations/.templates/blank/vite.config.ts": "2f392c00114799b50c0ab2033d04f1aba08b6a935b9b7fe7ec447aeff16add65",
+        "explorations/.templates/with-ui/index.html": "52bb16382450c2cfbcbf85676521acbbc02441a6f9bec297dbf7744ab247f3fc",
+        "explorations/.templates/with-ui/package.json.tpl": "92770a2acc0796b634b60056c55e0906f69331cb075e57efb13617cfca765223",
+        "explorations/.templates/with-ui/src/App.tsx": "b04ad62ecac80d747f90311510b3c967fe410e4357487a8507700a9885040625",
+        "explorations/.templates/with-ui/src/index.css": "ef714a4d4210b0b5954f2c7d7f9df3cb2e88c14db12127ca24a538f57a03d6ff",
+        "explorations/.templates/with-ui/src/main.tsx": "96e1842cd207b1b33d96ccf5cdacb8df400bc0976fbd6f32c6cfb9b131cb002f",
+        "explorations/.templates/with-ui/tsconfig.json": "bf54e9b8f7ff1536474bc5510a3202c0c394df59da87a19aafc1bf378e9196d3",
+        "explorations/.templates/with-ui/vite.config.ts": "ae9822ca613ae92b20cd33542566d1d1218702423d2b2aaa66d9a4b8b808b4a0",
+        "explorations/README.md": "271e2753938aefab042843b99095a0488c1ad425bad1a858c28dcd3195b1a5ca",
+        "scripts/explorations/ci-deploy.mjs": "6eb8885b45a931a675fd3a9ef8fc442552a3b431c31f5caddc30bea8b1d9e5dc",
+        "scripts/explorations/lib.mjs": "a81ee3a6ff078d53cca3b2c42543661aaedfd62d65816c9ec0534d4b28341daa",
+        "scripts/explorations/new.mjs": "6be9cd0984321875ff579b6ac30fb6df63409b73df34b3190db8b94d1eebce57",
+        "scripts/explorations/publish.mjs": "7d2c70523828bd3a5c37b44809e9ca312765ee3063705abc78f40abc86e45bbb"
+      },
+      "packageJson": {
+        "package.json": {
+          "scripts": {
+            "new-exploration": "node scripts/explorations/new.mjs",
+            "publish-exploration": "node scripts/explorations/publish.mjs"
+          }
+        }
+      }
+    },
+    "figma-check": {
+      "version": "1.4.0",
+      "files": {
+        ".claude/skills/figma-check/SKILL.md": "7db412b5520823d4c0c2e25a4ddfa147003aae14caf602b923e3f186a4ab87c0",
+        ".claude/skills/figma-check/setup.md": "a04a79ea67d8605f7c5f50491891dc7c9d3a7d2a7fd08d5f018c7abbf1bac2ff",
+        ".claude/skills/figma-check/reference.md": "030e494809b0fbdb9faf1fbe4743642d887cba442da411f79ccc14e9db3b5d7c",
+        ".claude/skills/figma-check/extract.js": "83b5e201bc4ec0a156b59159bc7f234d1f7be55aa195b49f5ba8a70d8303f15d",
+        "packages/ui/scripts/figma/lib.mjs": "941bd66ebecc682f00ec5d8ababa3947a62191fb4891ed85fc5175dc13da6ebf",
+        "packages/ui/scripts/figma/audit.mjs": "738c5764d095d29984bcb3192947029b55c9cb1fff64a18951f406409361c21d",
+        "packages/ui/scripts/figma/compare.mjs": "639549bf4c133d86fab969843dae12fcadd95e25958eaa6d6bcba75b6df16b61",
+        "packages/ui/scripts/figma/snapshot.mjs": "4866f5cfd447f5fec554c1994158858a262b7fd50f495e258ec9079d9969c4f9",
+        "packages/ui/scripts/figma/lib.test.mjs": "257deb3a2a34610e05b68d157141cb06357af4d362db1fea427567744f5712c8",
+        "packages/ui/scripts/figma/audit.test.mjs": "65a89bee4e1d2bd7a1a1065e5abcc81f3887a2486bab4f14309bb453f2cd9d04",
+        "packages/ui/scripts/figma/extract.test.mjs": "11dc46512077bbf8cd1f7801aa96c8c1c78464115ec2c3b6b663c313b28583b8",
+        "packages/ui/scripts/figma/fixtures/button-sizes.json": "1206fc9bf23050e9462c44af356c427ada88bd0602591e1bbbc0ac5e7db3e90d",
+        "packages/ui/scripts/figma/fixtures/button-sizes.map.json": "5e5256f7ec04482b1a9e260279694d8901a1815d01636e3404ad799bffed148e",
+        "packages/ui/scripts/figma/fixtures/figma.json": "cce3378a898847b393a7ca8f5e932d14bbadfff005ad3e77709e8be2f60b4486",
+        "packages/ui/scripts/figma/screens.mjs": "c5a49a6a2ab276f30c6e87f83fd47e8d314d7170befc61839dee07f2019e9794",
+        "packages/ui/scripts/figma/screens-lib.mjs": "d9349c34e17bef6821864b25efa2628343711a77566fa768b77784cd710b2352",
+        "packages/ui/scripts/figma/screens-lib.test.mjs": "1902d652ccbaa217c5e5f673ab10d8cc244e99b4141b0e79bdb9189bf40851a2",
+        "figma.json": "58d1ac285182d87471a81d11b91538389c3f1c5e57215b6e89b39e5956e8f2c8"
+      },
+      "packageJson": {
+        "package.json": {
+          "scripts": {
+            "figma:audit": "pnpm --filter @repo/ui figma:audit",
+            "figma:compare": "pnpm --filter @repo/ui figma:compare",
+            "figma:health": "pnpm --filter @repo/ui figma:health",
+            "figma:screen": "pnpm --filter @repo/ui figma:screen",
+            "figma:snapshot": "pnpm --filter @repo/ui figma:snapshot",
+            "figma:survey": "pnpm --filter @repo/ui figma:survey"
+          }
+        },
+        "packages/ui/package.json": {
+          "scripts": {
+            "figma:audit": "node scripts/figma/audit.mjs",
+            "figma:compare": "node scripts/figma/compare.mjs",
+            "figma:snapshot": "node scripts/figma/snapshot.mjs",
+            "test:figma": "node --test 'scripts/figma/*.test.mjs'",
+            "figma:health": "node scripts/figma/screens.mjs health",
+            "figma:screen": "node scripts/figma/screens.mjs check",
+            "figma:survey": "node scripts/figma/screens.mjs survey"
+          },
+          "devDependencies": {
+            "pixelmatch": "^8.0.0",
+            "pngjs": "^7.0.0"
+          }
+        }
+      }
+    },
+    "figma-to-code": {
+      "version": "1.3.0",
+      "files": {
+        ".claude/skills/figma-to-code/SKILL.md": "4aa991fc751e8ce190aa1f1c4ef2b2fb2e74cdcd2c6507b6cc4c1b87504b7d3e",
+        ".claude/skills/figma-to-code/screens.md": "e94bfdcd54d60c45adeb866a51adda9a35911b055e103dedaa6c95f2f5befa4d",
+        "packages/ui/FIGMA.md": "5aa82469fe075bdfed300bf6021bf42b304bc05fca7c4dfccecce600907b43cd"
+      }
+    },
+    "project-notebook": {
+      "version": "1.0.0",
+      "files": {
+        "scripts/notebook/find.mjs": "95655a425b1c3ad1c057026ef093602df27e19a4162598a40eaccb344a9d47d8"
+      },
+      "packageJson": {
+        "package.json": {
+          "scripts": {
+            "notebook": "node scripts/notebook/find.mjs"
+          }
+        }
+      }
+    },
+    "prototype-viewer": {
+      "version": "3.0.1",
+      "files": {
+        ".claude/skills/prototype-viewer/SKILL.md": "726806dba14711a4989227c56f540377b612b5be976f0440a3c081bd6a190469",
+        "explorations/.templates/prototype/prototype.json": "0c386d2ba26dc93b3f7e5b1ddedaa8e3031c6cc32d34a30ca167062120ef3a30",
+        "explorations/.templates/prototype/src/App.tsx": "5394ba0419641539b68579642b8ae3f4007a0c464c582342b8e9fe3959955bf8",
+        "explorations/.templates/prototype/src/useScreen.ts": "5bc4b137f70b33c2683b7100ef65fe6e06021ea942c4b904efb577fbc5c412dc",
+        "explorations/.templates/prototype/tsconfig.json": "d49208a7efc9e11ed9de9ebd384a0203e3a92484d6b26f6f6b90fe3caa436ce6",
+        "explorations/present/build.mjs": "eba2e5d357c96cb1f01daa9636f4f4489a6f10ac0f9917dfe94b8be7662e016f",
+        "explorations/present/live/choices.js": "65ad464d83f1b743588701a622afbebe5134e449709b913bf524b721c837ef16",
+        "explorations/present/live/comments.css": "ec4914bade7c895a2477f10e08dcffd46451f833a86eb3aa2ec2fdc16b0d77e3",
+        "explorations/present/live/comments.js": "c419bcc937f2ed558c102756b604206c8b5c46e6d474006f864322f466b5d19a",
+        "explorations/present/live/frame.js": "2e8741ba6c3caffab9a0a7ec2ba674fc033a384c05794ae8d104f9eeec0cc8d5",
+        "explorations/present/live/live.css": "e4c8fb3e1d634daa7a4ac4bc8669fcaa2c3de9e53c79ffaedd2f58877fcbf26f",
+        "explorations/present/live/live.js": "d7a0316105588c96f21fc450e01165c641fee8e35711a24e7f4188d2573b69f9",
+        "explorations/present/live/sets.js": "4a8538eeb94679d1931883600bded05f28087459f8dc2b05b5bc15b0937aaef0",
+        "explorations/present/marcus/css/app.css": "9fd64c69da57f93a04d94c5bcb5fb2605b20408078e4b81b0a21ff348f69bd44",
+        "explorations/present/marcus/index.html": "d74be8d000d6531491e40f67443f7c8bb3b3a73d5e658e37bba34eb79afbc809",
+        "explorations/present/marcus/js/app.js": "6a902f3a76b5fd71533b636e8501fe12c210d8dfb3b90fb0585cf31c6eb6ca83",
+        "explorations/present/marcus/js/articles.js": "495e17937874d8cfa715e325fb75c48fe9619952ff67e7d776a08691e6825db7",
+        "explorations/present/marcus/js/components.js": "b92e83318001bd0f8b9c9006bb7be0c707c2a71de92e63c9e8fa54e05a44f043",
+        "explorations/present/marcus/js/guides.js": "dea1bedefdd24bc33e7794169b7dad71bd3ed878b3a39b11385cb946198a98e7",
+        "explorations/present/marcus/js/pointer.js": "b1197f104fe3483b215e8bff9432feab647c075cf0e0117cad1000c70486e301",
+        "explorations/present/marcus/js/rotate.js": "27f4a74e8bdf6c8cc1418e616dea81e6119a9ef47d6357f66d51a3391b33a2a6",
+        "explorations/present/marcus/js/sets.js": "8d67dbdc2fbc77a83af50e7aee110f81748cd0e9a4a08972e528c9cbb1218334",
+        "explorations/present/marcus/sets/v1.css": "07aa44a16687910d8ef6da6bac2a239c1cf2dd4f335ffe821b92cbe70ac0f384",
+        "explorations/present/marcus/sets/v2.css": "460cbd95ef79b8a0aebb098d87f15ec90154500eb95fa6fa8d6354f5e6a6291c",
+        "explorations/present/package.json": "5a7aba732b24caa56ab85c24c4802719d2aba6c68bd7c67ce8eaf661e2ba1436",
+        "explorations/present/README.md": "3ed0d2514d47feece4b7421b59c1ee677687cc744b49d703c280e8c60fb9433d",
+        "scripts/prototypes/new.mjs": "902a10e4c2a254642c2115d313263d9f5ab9683897c818df2b0e94efea7c99dd",
+        "scripts/prototypes/present.mjs": "db4353944f82ad44f008d81940289e40cb037890abad9499e609d7f212beb83a",
+        "explorations/present/live/escape.js": "4f8b9ac813014be28f484639d2a0f69163eb82f45e7ad1748dbc607b9700c9c4",
+        "explorations/present/live/shell.css": "516a0b40b22ffac93d94578a0ab8d00563efd27ae15b6f6d0105d904bb17a596",
+        "explorations/present/live/shell/actions.js": "563ffcbedb11ad8c47797b12ca2f2d0272eac9e1c9aedc6aff1a580af282e5a2",
+        "explorations/present/live/shell/comments-panel.js": "589eb8a5a1d75198b70b584d50c0375ef914a5182e90dfbb704f0fab423b36c1",
+        "explorations/present/live/shell/dom.js": "3d262fce9e4929be5a36c2559be348445c2cae4f2193b1149af3c9bfcf5fd27f",
+        "explorations/present/live/shell/engine.js": "b7d4d038743b681a40daae1eb4345cea70c0b93c931f01d697364d863d91e9ae",
+        "explorations/present/live/shell/flow-layout.js": "68456787e1f7a7d72d9aaf1713bf10a3fb4172ad7686dd2c4c856ccaa1359b39",
+        "explorations/present/live/shell/flow-view.js": "b78fb8dc54d7e632e22205e91d9cc99cd30e65f758843813688a5b50b031a04b",
+        "explorations/present/live/shell/icons.js": "d4c13ccbd78ea53880e83b4e90a49fc2569f6057175ca90c0c8ce9a778bdf221",
+        "explorations/present/live/shell/index.js": "4438a7bbd2d5dd675c43b8376078b92b64a6d459020b22f4ba3ad3266b183dee",
+        "explorations/present/live/shell/labels.js": "44a0aaab5319f735d40821b00ae9d4236cb0aff031dc7a993d19046341ddd832",
+        "explorations/present/live/shell/model.js": "ef29117c2d35c1c298487eefb58610300544c3051448f78ed77023c77052e7eb",
+        "explorations/present/live/shell/model.test.mjs": "d526c043931cdd11e0c2199a4c5143e4b99bde2bf60c3e614a8cfc325dabc1c3",
+        "explorations/present/live/shell/panzoom.js": "74cab83131ae35e4d3063c480d814e90b2f8194668299545339aa1635e008221",
+        "explorations/present/live/shell/parts.js": "b930ad557c787008d4b1fb34a9969491f8fba71b7286f879a40d9ba576a7200f",
+        "explorations/present/live/shell/popover.js": "f90fce0f5bf53100346181e9d5a3f83c4d34e6546407a91432e31f2e469ade78",
+        "explorations/present/live/shell/prototype-picker.js": "c44464c4db3342858b215c4d80e0284933f412cd71c53469f4597c39336c93e5",
+        "explorations/present/live/shell/screen-card.js": "7a156dc6130053ed8bcd1128622ecab0bb488c9bf6c95ddd80accbe34a3cab1e",
+        "explorations/present/live/shell/screen-picker.js": "391eb13e7a40a68569f6c576e64b4797d7b508173860c81e9f94b8c7613f806e",
+        "explorations/present/live/shell/screens-view.js": "9fda9a42fa070000779ead9793a9969249c295618769cfd7a8777e9e2e65f2ea",
+        "explorations/present/live/shell/settings.js": "70026f6b98a721ae204de46ed39841c3e4912215e90c4ef2abca425967359e8d",
+        "explorations/present/live/shell/share.js": "0bd110b5457f1a54ca7be5dcb0f98ae6cb04870a0f60829c2a9e25e8ca28bf66",
+        "explorations/present/live/shell/store.js": "74f585f4f5dbba0c987acf8c384da669916be5be62f4732c2f4981b474d89483",
+        "explorations/present/live/shell/thumb.js": "98809c79dd935e1d68beb5d80a676b30f2130c61066b1d5b4dd17adb6cf2c705",
+        "explorations/present/live/shell/topbar.js": "677cbc6aef7f323af4fe8a5d4507630d515692463851ee61db598003d50e2ade",
+        "explorations/present/live/shell/tap-targets.js": "7c413d8836d96ab72beb40cb7bbb16ba1a855b86b809dbfba479c18450d69fc2",
+        "explorations/present/live/shell/menu.js": "2c90f047e42cdcf43612c28b134b0d61889dc640c840981da9da955efc85036b",
+        "explorations/present/live/shell/elk.js": "b885c3b072220857ae1233c230fd52cd2f59d61a67cc7b135d0c3eccbd81dcbd",
+        "explorations/present/test/large-prototype.mjs": "b12210aa1865c3c448611f34db478197b63986b397b18862d4071e853f957126",
+        "explorations/present/live/shell/samples.js": "1d15bf3d66b4470348cbbb0c3383442e2b821e0afaf19642d6696e2b578f7332"
+      },
+      "packageJson": {
+        "package.json": {
+          "scripts": {
+            "new-prototype": "node scripts/prototypes/new.mjs",
+            "present": "node scripts/prototypes/present.mjs"
+          }
+        }
+      }
+    },
+    "screencast": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/screencast/SKILL.md": "488ab07af6d5b7a8126de70b7501d8bc5252f405a33f1d64f7fc1902799423f1",
+        ".claude/skills/screencast/assets/film-helpers.mjs": "6379b6697045fd422df93639dade9f55af399d6e3716985d552a069d1eaa7e23",
+        ".claude/skills/screencast/assets/terminal.html": "f1cf71634dea0c558a21003d5f320a78c0efc9be9afffaf8d0357aa1c19c4436"
+      }
+    },
+    "taste-review": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/taste-review/SKILL.md": "05c977fc55de0ce416b936b8ae5b8b27fd8430a32341791e00234b520ed94440",
+        ".claude/skills/taste-review/rubric.md": "ddabfaba3757bacd9389b9b900c63eaeacdb56fd18218f291c19484fef6efb65",
+        "packages/ui/scripts/taste.mjs": "ae4af2bde88ff70bfcd93ddf2b1b2f196972a37213fabdf45e1b6ab311e99e81",
+        "packages/ui/scripts/taste.test.mjs": "81107ab70b3adda67755bb575c487d05c6849c06a4d16e1da4d251a5fe2cee4f"
+      },
+      "packageJson": {
+        "package.json": {
+          "scripts": {
+            "taste:shots": "pnpm --filter @repo/ui taste:shots"
+          }
+        },
+        "packages/ui/package.json": {
+          "scripts": {
+            "taste:shots": "node scripts/taste.mjs"
+          }
+        }
+      }
+    },
+    "templates-commerce": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/Checkout.tsx": "ab09bf74571025a575d8231c1db46307d8bea44f8bb0acf8dd22c5932ee03bd8",
+        "packages/ui/src/templates/Checkout.stories.tsx": "c3fdb4d31ea27b63486c38d526a654151d90deafbfeac1c53e58860b70fd1421",
+        "packages/ui/src/templates/ProductDetail.tsx": "7e94b47dde1716b72c35244aff918aa6033ea0500cc5bea5b0637487a68863af",
+        "packages/ui/src/templates/ProductDetail.stories.tsx": "00ec55d03afef15ba030c16522665d8ab75168f1d0eab6be2196501d106d8e72"
+      }
+    },
+    "templates-content": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/DocsHome.tsx": "c0baaf7a36959d6911108d8616cb3098e9cf72ee2973976ff2bc1c3b0ddcc71b",
+        "packages/ui/src/templates/DocsHome.stories.tsx": "ad43a47e7e50b41f91ef12720756abac8e90245b1c2ccd63543d6ce99e442615",
+        "packages/ui/src/templates/Library.tsx": "7917e0b555523577e3fc3658f36072d1e52e3d1558dde0d56fa4682af42524ac",
+        "packages/ui/src/templates/Library.stories.tsx": "3d6d31e31e12b84ae9a39be6bf2d43b624f64cbfe89bcf7cd0fc1edc62ed2a1d"
+      }
+    },
+    "templates-details": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/OrderDetail.tsx": "3cef60c2faced8f94e7d325798189522d2c8a05b6591a44a361490d82e7660e3",
+        "packages/ui/src/templates/OrderDetail.stories.tsx": "f1da9f837bae51a6b1b8316fc53188901a6ade2ff43932644e4481b27abf110f",
+        "packages/ui/src/templates/WorkItem.tsx": "8ac7118b8a06eb0e7fc57e85b1da56309b7690605cbb3271ec4366ce3d98bade",
+        "packages/ui/src/templates/WorkItem.stories.tsx": "32c9c3ec39cad8877a546852f555856a0e1b5a1d490f86d1a8e17a7908c19432"
+      }
+    },
+    "templates-forms": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/ContactForm.tsx": "6334140d82acc879af8f09bc2363d34c0eb83e83fa4b6da94b1ea0de7bc89193",
+        "packages/ui/src/templates/ContactForm.stories.tsx": "70941e85667fc387d343137c9f9301b7f813e8ceec3ece8b31be989d382cdd0f",
+        "packages/ui/src/templates/TwoColumnForm.tsx": "3d21eb77170bf0675415caf8aa6b305a1bb542b7c1167f55436cc08abc67fe06",
+        "packages/ui/src/templates/TwoColumnForm.stories.tsx": "1911eaa955230477671ff2c5262ba4d3a4e6e4d10cfcf7b6b8cb5fed247036d7",
+        "packages/ui/src/templates/SetupWizard.tsx": "ca5f61398d29eed122ced2e9d5e8a96b5bc6308bd2a80a013742248e70c0a4c7",
+        "packages/ui/src/templates/SetupWizard.stories.tsx": "ad51fab130cfaa38cdc7bfa2d42a7d261bc05cec91bf7eae73ce91aad804ddbd",
+        "packages/ui/src/templates/DialogWizard.tsx": "f74a412c624a269af6b2c7c1274c5f85d6c8495c8746d5d6770bca0c140c3715",
+        "packages/ui/src/templates/DialogWizard.stories.tsx": "017dbdf41c7b12cb9b95748312b0251503417a0b915d528095b0fb6c6ca57f7e"
+      }
+    },
+    "templates-galleries": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/ClassicGallery.tsx": "81f876bb2cf6732eb4447d2d46bf6ace4c79d4c86de250d1b600b5f17c593ced",
+        "packages/ui/src/templates/ClassicGallery.stories.tsx": "040ff2a557ffca735df702647ed35540b43a532cc29e709ae1ee957b594e1adc",
+        "packages/ui/src/templates/MixedGallery.tsx": "faf623a223f209e27428b1f6f92609990f86f810214c40b709e3e83d3dec1385",
+        "packages/ui/src/templates/MixedGallery.stories.tsx": "c608ca09ee5a3725b57ae65929a14216af58e5a48a155a25e09e326d90a298b8",
+        "packages/ui/src/templates/ProductGallery.tsx": "9ffc25a6f0a617b9ce42da5ba3fef6d43d7cde4fe903547ab74e71a09452680e",
+        "packages/ui/src/templates/ProductGallery.stories.tsx": "98d9d17ac4708cba1a3c25af0b977952c7e838d9ed91ec4dff4f41428fe7bf91",
+        "packages/ui/src/templates/SideGallery.tsx": "e23a6dc9728b2cfef1c29b7c38e0b9d51c5b45f0e4977a1b0946cee94567b5af",
+        "packages/ui/src/templates/SideGallery.stories.tsx": "e5631fe61f5924f1104d4a30c14324ac26460ff5742213852937029a3bfde520"
+      }
+    },
+    "templates-marketing": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/CenteredHero.tsx": "ba094e6a1163b5d3ec5d3f63b9e9735c6017e18091dc6191ef934e9f7b507640",
+        "packages/ui/src/templates/CenteredHero.stories.tsx": "a1debee70444284040ffd9c55401ba3b3cb75ee27d0a03e1310f3b2168fb3228",
+        "packages/ui/src/templates/GalleryHero.tsx": "cd2b85ade3a8b9d701b1a6cf322958d8a8cb09e06830c0472f1459c146eb53d4",
+        "packages/ui/src/templates/GalleryHero.stories.tsx": "8a940dd98255856c9e90be8adaa9723df239b7f631fccbf69eda371013dbdc72"
+      }
+    },
+    "templates-parts": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/parts/DemoImage.tsx": "12d84f40075473a0c2ae19075dd37b5c27cd5e2628b9b4ceb50d69d85c04f8c8",
+        "packages/ui/src/templates/parts/FormFields.tsx": "68d917bf6cf1b28a0fc2d472e5b43cd3886b1dad5cfa5e7b5b31b1fffc96b490",
+        "packages/ui/src/templates/parts/OrDivider.tsx": "bb32e0b70d952692a4ec11afc2bbbe600b59d873bceb19b5bab13cc7eef24df3",
+        "packages/ui/src/templates/parts/catalogue.ts": "a7e488aab0456eebf1296ab39f4c08b541654234b82e51bafa38859093a11d7c",
+        "packages/ui/src/templates/parts/formData.ts": "d386ee211293a181cd7f41c11a1285591a5aa74e8ed9fc5cf73147013d688085",
+        "packages/ui/src/templates/parts/useShortcut.ts": "5f4dd6060e659adc85659812541bb9ebddb0c520dc679aaa1bcdd315be797345",
+        "packages/ui/src/templates/parts/useWideScreen.ts": "032c1e2cd3a2dafcbf7e140badc8521e84b49ceb90706d4ccbeae3cc42edf8b9"
+      }
+    },
+    "templates-settings": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/Settings.tsx": "15c2b5742a9d0104a33483182c70c22025f05e2b317dbf04e094fc5ecf5e32c7",
+        "packages/ui/src/templates/Settings.stories.tsx": "708e6c56b1b172fea39aa97b0238882776e54ad20f0e63c559f0ebde6b43ac14",
+        "packages/ui/src/templates/SettingsPanels.tsx": "9f4614e05296b8823fd3c99568a0dbfed0aecd75e7b015d757d04e1b8d8a3414",
+        "packages/ui/src/templates/SettingsPanels.stories.tsx": "7d3e5de3257f94399afada4239356d6209eda74583dcd16cc2412de8a505773c"
+      }
+    },
+    "templates-shells": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/SideNavShell.tsx": "433f7252ce861ae35c2a3f021aec5a3e4b3cef60f46c9ae7b3b16f69f460f6f4",
+        "packages/ui/src/templates/SideNavShell.stories.tsx": "2510f20cb6841dbc27ed499e715035514a88d24ac31013a011d9425463b2b8f8",
+        "packages/ui/src/templates/TopNavShell.tsx": "4c41c4fcd615c5ec80252b8d8a21df7aac463c24dce801397403da9cd25984cd",
+        "packages/ui/src/templates/TopNavShell.stories.tsx": "bb7fab6666ae98738ed81b3d6c1fd909143a76fb293aae040312316776a1576f",
+        "packages/ui/src/templates/WorkspaceShell.tsx": "4defb8a9da2b9f43d482cbb3ce257ff5f2c7312afce4cefaa4aa47feb0e9cbe4",
+        "packages/ui/src/templates/WorkspaceShell.stories.tsx": "e7b29aefbc50b5a16db183237e2291d9db9099d42bee00a8589d6c3c03c9dfef",
+        "packages/ui/src/templates/MessagingShell.tsx": "f5c9818176d94665c6d11751ed2ba7a4877833996af165fab335947fc6be2fa2",
+        "packages/ui/src/templates/MessagingShell.stories.tsx": "0495fc8d9e310c276733cd2eb47b41d9c9d4de6554548222a1901900efe17b58"
+      }
+    },
+    "templates-sign-in": {
+      "version": "1.0.0",
+      "files": {
+        "packages/ui/src/templates/SignInSimple.tsx": "2473654dcaafe1f6259a672622c806f6e2bec7337b96190656a16b86520270e0",
+        "packages/ui/src/templates/SignInSimple.stories.tsx": "0f27de853337d9e89a21034b2e6ceb6789e9e6d3ef9f435b179a3a384b61e744",
+        "packages/ui/src/templates/SignInSplit.tsx": "09d9dfc7b4a1ecf6bb71e2e1332e64af70de26133416eec73807d283ce0d82b8",
+        "packages/ui/src/templates/SignInSplit.stories.tsx": "b66a1920a6e8361644d0ba373ea41fab0dfe2782ac8fe14d7a2edbc1d50eeb81",
+        "packages/ui/src/templates/SignInCard.tsx": "09733466ef0b9454bff8c3c2a57e5e8bd5f31ad0fc187e0b781dba6adb00a993",
+        "packages/ui/src/templates/SignInCard.stories.tsx": "d266ef5879a9d6225a648813eef21648f8508e31967ee1d870a957ff6e193d80",
+        "packages/ui/src/templates/SignInSso.tsx": "f9d6b4a38db062c1e7dc5b1b48f18ebec8aa93b247058eaa83b1f5cc8843c469",
+        "packages/ui/src/templates/SignInSso.stories.tsx": "d959d1302b3f7ffcf27e950e25a8740c49fa9bfc7547326bd00e24a5b1f5d261"
+      }
+    },
+    "visual-checkpoints": {
+      "version": "1.3.0",
+      "files": {
+        ".github/workflows/visual-checkpoints.yml": "3b1b6b0267b6736a975dd02630d33a8f6863a91a8dc54688bfd5d0581372c569",
+        ".claude/skills/visual-checkpoint/SKILL.md": "1c37d58a451cd64660e94c259dd1ca8758b6026389e1a7e35868b74b685f89a2",
+        "packages/ui/scripts/look.mjs": "c4d56bd24669d04f958a50d7d8883286ecfdff18e4bd3ddb0aa59976e4042d33",
+        "packages/ui/scripts/look-kind.mjs": "7309cd18cc0a9d55724a4614c906b552c96796a3c6ca7c2ec114532ee1575da3",
+        "packages/ui/scripts/look-kind.test.mjs": "a3f0d60763a36736983b4451dc43a32707c65a6b99f4a5e57e8cbfa2edb13b32"
+      },
+      "packageJson": {
+        "package.json": {
+          "scripts": {
+            "look:save": "pnpm --filter @repo/ui look:save",
+            "look:compare": "pnpm --filter @repo/ui look:compare",
+            "look:accept": "pnpm --filter @repo/ui look:accept"
+          }
+        },
+        "packages/ui/package.json": {
+          "scripts": {
+            "look:save": "node scripts/look.mjs save",
+            "look:compare": "node scripts/look.mjs compare",
+            "look:accept": "node scripts/look.mjs accept"
+          },
+          "devDependencies": {
+            "pixelmatch": "^8.0.0",
+            "pngjs": "^7.0.0"
+          }
+        }
+      }
+    }
+  }
+}

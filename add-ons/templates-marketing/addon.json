@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-marketing",
+  "type": "registry:item",
+  "title": "Marketing templates",
+  "description": "Landing-page heroes: centred, and with a picture gallery.",
+  "author": "MetaLab",
+  "registryDependencies": ["templates-parts"],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/CenteredHero.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/CenteredHero.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/CenteredHero.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/CenteredHero.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/GalleryHero.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/GalleryHero.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/GalleryHero.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/GalleryHero.stories.tsx"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

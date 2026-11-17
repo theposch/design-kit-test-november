@@ -1,0 +1,29 @@
+{
+  "title": "__NAME__",
+  "description": "One line on what this prototype shows.",
+  "device": "phone",
+  "screens": [
+    {
+      "id": "start",
+      "title": "Start",
+      "note": "One line about this screen, shown beside the phone. Delete it if not needed.",
+      "next": [
+        {
+          "to": "next",
+          "label": "Continue"
+        }
+      ]
+    },
+    {
+      "id": "next",
+      "title": "Next",
+      "next": [
+        {
+          "to": "start",
+          "label": "Back",
+          "back": true
+        }
+      ]
+    }
+  ]
+}

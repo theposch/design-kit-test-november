@@ -1,0 +1,44 @@
+# Version updates only — Dependabot alerts and security-fix PRs are repo
+# settings, flipped per-engagement (README: "Enable Dependabot security PRs").
+version: 2
+updates:
+  # One entry at the root covers the whole pnpm workspace, catalog included —
+  # explorations/* ride along; Dependabot has no per-directory exclude.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # Mirrors minimumReleaseAge (7 days) in pnpm-workspace.yaml: anything
+    # younger fails pnpm's own resolution, so the two must move together.
+    cooldown:
+      default-days: 7
+    # Bot subjects may exceed the 50-char cap; that overflow is accepted —
+    # the pr-title check skips dependabot[bot].
+    commit-message:
+      prefix: chore(deps)
+    ignore:
+      # @types/node majors track the Node runtime major — bump them by hand
+      # alongside the devEngines/CI Node pin, never independently.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
+    groups:
+      # Majors belong to no group, so each arrives as its own PR.
+      minor-and-patch:
+        applies-to: version-updates
+        patterns: ['*']
+        update-types: [minor, patch]
+      security:
+        applies-to: security-updates
+        patterns: ['*']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci(deps)
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        patterns: ['*']
+        update-types: [minor, patch]

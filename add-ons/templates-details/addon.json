@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-details",
+  "type": "registry:item",
+  "title": "Detail templates",
+  "description": "Record pages: an order, and a work item with its checklist and comments.",
+  "author": "MetaLab",
+  "registryDependencies": ["templates-parts"],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/OrderDetail.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/OrderDetail.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/OrderDetail.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/OrderDetail.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/WorkItem.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/WorkItem.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/WorkItem.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/WorkItem.stories.tsx"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

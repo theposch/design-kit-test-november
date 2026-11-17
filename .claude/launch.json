@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "prototype-viewer",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["present"],
+      "port": 4400
+    },
+    {
+      "name": "storybook",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["storybook"],
+      "port": 6006
+    }
+  ]
+}

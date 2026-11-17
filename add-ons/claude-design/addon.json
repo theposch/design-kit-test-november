@@ -1,0 +1,94 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "claude-design",
+  "type": "registry:item",
+  "title": "Claude Design",
+  "description": "Publish the real components to Claude Design as the project's design system, so screens designed on Claude's canvas use the same parts as the product.",
+  "author": "MetaLab",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "files/.claude/skills/claude-design/SKILL.md",
+      "type": "registry:file",
+      "target": ".claude/skills/claude-design/SKILL.md"
+    },
+    {
+      "path": "files/packages/ui/scripts/claude-design/build.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/claude-design/build.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/claude-design/cards.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/claude-design/cards.mjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/claude-design/cover.html",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/claude-design/cover.html"
+    },
+    {
+      "path": "files/packages/ui/scripts/claude-design/guide.md",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/claude-design/guide.md"
+    },
+    {
+      "path": "files/packages/ui/scripts/claude-design/shims/jsx.cjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/claude-design/shims/jsx.cjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/claude-design/shims/react-dom.cjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/claude-design/shims/react-dom.cjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/claude-design/shims/react.cjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/claude-design/shims/react.cjs"
+    },
+    {
+      "path": "files/packages/ui/scripts/claude-design/vqa.mjs",
+      "type": "registry:file",
+      "target": "packages/ui/scripts/claude-design/vqa.mjs"
+    }
+  ],
+  "meta": {
+    "version": "1.1.0",
+    "owner": "Christian Poschmann",
+    "packageJson": [
+      {
+        "file": "package.json",
+        "scripts": {
+          "design:build": "pnpm --filter @repo/ui design:build",
+          "design:vqa": "pnpm --filter @repo/ui design:vqa"
+        }
+      },
+      {
+        "file": "packages/ui/package.json",
+        "scripts": {
+          "design:build": "node scripts/claude-design/build.mjs",
+          "design:vqa": "node scripts/claude-design/vqa.mjs"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "file": ".gitignore",
+        "comment": "#",
+        "content": ".claude-design/"
+      },
+      {
+        "file": "CLAUDE.md",
+        "after": "pnpm format      # prettier --write (owns ALL formatting, .tsx included)",
+        "comment": "#",
+        "content": "pnpm design:build  # pack the library for Claude Design (then Claude publishes it)\npnpm design:vqa <folder>  # render a Claude Design canvas and check it for visual errors\n"
+      },
+      {
+        "file": "CLAUDE.md",
+        "comment": "html",
+        "content": "## Claude Design\n\nThe library is published to Claude Design as the project's design system, so screens designed on Claude's canvas use the real components. Load the `claude-design` skill before publishing it or designing on a canvas.\n\n- `pnpm design:build` packs the components, stylesheet, tokens, guide and preview cards into `.claude-design/project/`; Claude publishes that folder to the url in `claude-design.json`.\n- The design system there is read-only: change the code, rebuild, republish.\n- The guide it shows comes from `packages/ui/scripts/claude-design/guide.md`, its preview cards from `cards.mjs` beside it.\n- After every round of canvas work, run `pnpm design:vqa` on the canvas folder, fix what it lists, and look at the pictures before reporting."
+      }
+    ]
+  }
+}

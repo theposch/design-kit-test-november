@@ -1,0 +1,55 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "templates-galleries",
+  "type": "registry:item",
+  "title": "Gallery templates",
+  "description": "Picture and product galleries: classic, mixed, side-by-side and product grids.",
+  "author": "MetaLab",
+  "registryDependencies": ["templates-parts"],
+  "files": [
+    {
+      "path": "files/packages/ui/src/templates/ClassicGallery.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/ClassicGallery.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/ClassicGallery.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/ClassicGallery.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/MixedGallery.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/MixedGallery.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/MixedGallery.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/MixedGallery.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/ProductGallery.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/ProductGallery.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/ProductGallery.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/ProductGallery.stories.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SideGallery.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SideGallery.tsx"
+    },
+    {
+      "path": "files/packages/ui/src/templates/SideGallery.stories.tsx",
+      "type": "registry:file",
+      "target": "packages/ui/src/templates/SideGallery.stories.tsx"
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "owner": "Christian Poschmann"
+  }
+}

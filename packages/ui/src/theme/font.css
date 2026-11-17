@@ -1,0 +1,44 @@
+@theme inline {
+  --font-heading: var(--heading-font);
+  --font-body: var(--body-font);
+}
+
+@layer base {
+  :root {
+    --heading-font:
+      'Geist Variable', 'Geist Fallback', ui-sans-serif, system-ui, sans-serif;
+    --body-font:
+      'Geist Variable', 'Geist Fallback', ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+/*
+ * Arial (or Arimo or Liberation Sans, which share its widths on Linux)
+ * reshaped to Geist's width and line box, shown until Geist loads, so
+ * text doesn't reflow when it swaps in. A brand font needs its own: measure
+ * its width against Arial for size-adjust, then divide its ascender and
+ * descender (as a share of the em) by that.
+ */
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial'), local('Arimo'), local('Liberation Sans');
+  size-adjust: 102.68%;
+  ascent-override: 97.88%;
+  descent-override: 28.73%;
+  line-gap-override: 0%;
+}
+
+/*
+ * The project's own fonts: put the files in ./fonts and add one rule per
+ * weight and style, then point --heading-font / --body-font at the family
+ * and replace Geist Fallback with one tuned to it.
+ * When Geist is no longer used, remove its import from globals.css.
+ *
+ * @font-face {
+ *   font-family: 'Brand Sans';
+ *   src: url('./fonts/BrandSans-Regular.woff2') format('woff2');
+ *   font-weight: 400;
+ *   font-style: normal;
+ *   font-display: swap;
+ * }
+ */
